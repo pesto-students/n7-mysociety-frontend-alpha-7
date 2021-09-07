@@ -3,7 +3,6 @@ import { ThemeProvider } from "@material-ui/core/styles";
 import "./App.css";
 import theme from "./theme";
 function App() {
-  dispatch(registerUser());
   return (
     <ThemeProvider theme={theme}>
       <div className="App">
