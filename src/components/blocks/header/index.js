@@ -1,25 +1,24 @@
 import React from "react";
 import "./header.scss";
-import { ReactComponent as DashboardIcon } from "../../../svgs/dashboard.svg";
-const Header = () => {
+import { menus } from "../../../modals/page";
+import { NavLink } from "react-router-dom";
+const Header = (props) => {
     return (
         <header className="headerWrap">
             <div className="societyWrap">
                 <div className="name">Bayview Hill Gardens Society</div>
             </div>
             <div className="menuWrap">
-                <div className="singleMenu">
-                    <div className="iconWrap">
-                        <DashboardIcon />
-                    </div>
-                    <div className="name">Dashboard</div>
-                </div>
-                <div className="singleMenu">
-                    <div className="iconWrap">
-                        <DashboardIcon />
-                    </div>
-                    <div className="name">Dashboard</div>
-                </div>
+                {menus.map((menu) => {
+                    return (
+                        <NavLink key={menu.name} to={menu.path}>
+                            <div className="singleMenu">
+                                <div className="iconWrap">{menu.icon}</div>
+                                <div className="name">{menu.name}</div>
+                            </div>
+                        </NavLink>
+                    );
+                })}
             </div>
         </header>
     );

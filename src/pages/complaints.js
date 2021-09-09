@@ -1,12 +1,12 @@
 import React from "react";
 import DefaultLayout from "../components/layout/defaultLayout";
 
-const Dashboard = (props) => {
+const Complaints = (props) => {
     return (
         <div className="wrapper">
-            <DefaultLayout>Dashboard View call here...</DefaultLayout>
+            <DefaultLayout>Complaints View call here...</DefaultLayout>
         </div>
     );
 };
 
-export default Dashboard;
+export default Complaints;

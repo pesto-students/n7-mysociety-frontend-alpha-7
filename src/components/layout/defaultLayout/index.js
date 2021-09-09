@@ -1,12 +1,18 @@
 import React from "react";
-import Header from "../../blocks/header/index";
+import Header from "../../blocks/header";
+import Footer from "../../blocks/footer";
+import { Container } from "@material-ui/core";
+import "./defaultLayout.scss";
 
 const DefaultLayout = ({ children }) => {
     return (
-        <div>
+        <>
             <Header />
-            <div>{children}</div>
-        </div>
+            <Container maxWidth="lg" className="container">
+                <div>{children}</div>
+            </Container>
+            <Footer />
+        </>
     );
 };
 
