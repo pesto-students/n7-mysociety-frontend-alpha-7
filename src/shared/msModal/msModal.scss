@@ -1,0 +1,17 @@
+.ms-modal-title {
+  display: flex;
+  flex-direction: row;
+  color: var(--primary-color);
+  & div:first-of-type {
+    flex: 95%;
+  }
+  & div:last-of-type {
+    flex: 5%;
+  }
+  padding-bottom: 5px;
+  border-bottom: 1px solid var(--primary-color);
+
+  .close_icon {
+    cursor: pointer;
+  }
+}

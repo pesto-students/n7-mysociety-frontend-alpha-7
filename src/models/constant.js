@@ -4,3 +4,16 @@ export const ActionStatus = {
   success: "Success",
   error: "Error",
 };
+
+export const AlertTypes = {
+  success: "success",
+  error: "error",
+  info: "info",
+  warning: "warning",
+};
+
+export const ModalTypes = {
+  complain: "COMPLAIN",
+  announcement: "ANNOUNCEMENT",
+  event: "EVENT",
+};
