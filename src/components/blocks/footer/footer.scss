@@ -1,0 +1,15 @@
+.footerWrap {
+    background-color: var(--background-color);
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    padding: 8px 0px;
+    .text {
+        font-size: 20px;
+        line-height: 135.94%;
+        text-align: center;
+        color: var(--primary-font-color);
+    }
+}

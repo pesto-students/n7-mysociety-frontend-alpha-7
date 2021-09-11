@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Righteous&family=Roboto&display=swap");
+
 .App {
     text-align: center;
 }
@@ -38,9 +40,10 @@
 }
 
 :root {
-    --background-color: rgb(255, 0, 0);
-    --font-color: black;
-    --header-color: #9fcdfe;
-    --danger-color: red;
-    --primary-color: rgb(4, 136, 37);
+    --background-color: #eae7dc;
+    --body-background-color: #f9f9f9;
+    --primary-font-color: #8e8d8a;
+    --secondary-font-color: #e98074;
+    --primary-color: #e85a4f;
+    --font-white: #ffffff;
 }

@@ -5,12 +5,15 @@ import theme from "./theme";
 import { ComplainPopup } from "./components";
 import * as MODAL_ACTION from "./store/actions/modal.action";
 import { useSelector, useDispatch } from "react-redux";
-import { ModalTypes } from "./models/constant";
+import { ModalTypes } from "./modals/constant";
 import {
   InputVarientContext,
   ButtonVarientContext,
 } from "./contexts/variant.context";
-import React, { useState } from "react";
+import React from "react";
+
+import { BrowserRouter as Router } from "react-router-dom";
+import Routing from "./routing/routing";
 function App() {
   const isModalOpened = useSelector(showModal);
   const dispatch = useDispatch();
@@ -37,6 +40,9 @@ function App() {
               open modal
             </button>
           </div>
+          <Router>
+            <Routing></Routing>
+          </Router>
         </ButtonVarientContext.Provider>
       </InputVarientContext.Provider>
     </ThemeProvider>
