@@ -82,7 +82,7 @@ function ComplainPopup({ item }) {
   const actionBtns = () => {
     return (
       <div className="action-btn">
-        <Button variant={buttonVarient}>Cancel</Button>
+        <Button variant="outlined">Cancel</Button>
         <Button color="primary" variant={buttonVarient}>
           Complain
         </Button>

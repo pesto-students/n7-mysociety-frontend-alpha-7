@@ -1,7 +1,14 @@
+.responsive_width {
+  width: 30%;
+  @media screen and (max-width: 768px) {
+    width: 90% !important;
+  }
+}
 .ms-modal-title {
   display: flex;
   flex-direction: row;
   color: var(--primary-color);
+  font-weight: bolder;
   & div:first-of-type {
     flex: 95%;
   }

@@ -1,5 +1,5 @@
 import * as AUTHENTICATION_ACTION from "../actions/authentication.action";
-import { ActionStatus } from "../../models/constant";
+import { ActionStatus } from "../../modals/constant";
 const initialState = {
   register: ActionStatus.None,
   login: ActionStatus.None,

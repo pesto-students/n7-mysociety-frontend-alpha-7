@@ -1,27 +1,31 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./header.scss";
 import { menus } from "../../../modals/page";
-import { NavLink } from "react-router-dom";
+import DeskTopMenu from "./desktopMenu";
+import MobileSideBarMenu from "./mobileMenu";
+const mediaQuery = "screen and (min-width: 768px)";
+
 const Header = (props) => {
-    return (
-        <header className="headerWrap">
-            <div className="societyWrap">
-                <div className="name">Bayview Hill Gardens Society</div>
-            </div>
-            <div className="menuWrap">
-                {menus.map((menu) => {
-                    return (
-                        <NavLink key={menu.name} to={menu.path}>
-                            <div className="singleMenu">
-                                <div className="iconWrap">{menu.icon}</div>
-                                <div className="name">{menu.name}</div>
-                            </div>
-                        </NavLink>
-                    );
-                })}
-            </div>
-        </header>
-    );
+  const mql = window.matchMedia(mediaQuery);
+  const [showDesktopMenu, setShowDesktopMenu] = useState(mql.matches);
+
+  useEffect(() => {
+    const handleMediaChange = function (cMediaQuery) {
+      setShowDesktopMenu(cMediaQuery.matches);
+    };
+    mql.addEventListener("change", handleMediaChange);
+    setShowDesktopMenu(mql.matches);
+
+    return () => {
+      mql.removeEventListener("change", handleMediaChange);
+    };
+  }, [mql]);
+
+  return showDesktopMenu ? (
+    <DeskTopMenu menus={menus} />
+  ) : (
+    <MobileSideBarMenu menus={menus} />
+  );
 };
 
 export default Header;
