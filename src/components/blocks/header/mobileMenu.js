@@ -61,7 +61,7 @@ export default function MobileSideBarMenu({ menus }) {
         return (
             <Drawer
                 container={container}
-                variant="seconday"
+                variant="temporary"
                 anchor="left"
                 open={mobileOpen}
                 onClose={handleDrawerToggle}
@@ -71,6 +71,7 @@ export default function MobileSideBarMenu({ menus }) {
                 ModalProps={{
                     keepMounted: true // Better open performance on mobile.
                 }}
+                elevation={0}
             >
                 <React.Fragment>
                     <div className="personal-details">
@@ -88,7 +89,7 @@ export default function MobileSideBarMenu({ menus }) {
 
     const appBar = () => {
         return (
-            <AppBar position="fixed" className={classes.appBar}>
+            <AppBar position="fixed" className={classes.appBar} elevation={0}>
                 <ToolBar>
                     <IconButton
                         color="inherit"
