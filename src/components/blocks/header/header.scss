@@ -1,132 +1,145 @@
 .baseMenuWrap {
-  .menuWrap {
-    background: #0000ff00;
-    display: flex;
-    justify-content: center;
-    margin-top: -53px;
-    a {
-      text-decoration: none;
-      &.active,
-      &:hover {
-        .singleMenu {
-          .iconWrap {
-            svg {
-              path {
-                fill: var(--primary-color);
-              }
+    .menuWrap {
+        background: #0000ff00;
+        display: flex;
+        justify-content: center;
+        margin-top: -53px;
+        a {
+            text-decoration: none;
+            &.active,
+            &:hover {
+                .singleMenu {
+                    .iconWrap {
+                        svg {
+                            path {
+                                fill: var(--primary-color);
+                            }
+                        }
+                    }
+                    .name {
+                        color: var(--primary-color);
+                    }
+                }
             }
-          }
-          .name {
-            color: var(--primary-color);
-          }
         }
-      }
-    }
-    .singleMenu {
-      display: block;
-      text-align: center;
-      .iconWrap {
-        background: var(--body-background-color);
-        padding: 10px;
-        border-radius: 15px;
-        display: inline-block;
-        margin: 0px 40px;
-        svg {
-          height: 50px;
-          width: 50px;
-          path {
-            fill: var(--primary-font-color);
-          }
+        .singleMenu {
+            display: block;
+            text-align: center;
+            .iconWrap {
+                background: var(--body-background-color);
+                padding: 10px;
+                border-radius: 15px;
+                display: inline-block;
+                margin: 0px 40px;
+                svg {
+                    height: 50px;
+                    width: 50px;
+                    path {
+                        fill: var(--primary-font-color);
+                    }
+                }
+            }
+            .name {
+                font-weight: bold;
+                font-size: 18px;
+                text-align: center;
+                color: var(--primary-font-color);
+            }
         }
-      }
-      .name {
-        font-weight: bold;
-        font-size: 18px;
-        text-align: center;
-        color: var(--primary-font-color);
-      }
     }
-  }
 }
 
 .headerWrap {
-  .societyWrap {
-    display: flex;
-    justify-content: center;
-    min-height: 162px;
-    background-color: var(--background-color);
-    .name {
-      background: var(--primary-color);
-      padding: 7px 17px 17px 17px;
-      font-family: "Righteous", cursive;
-      font-style: normal;
-      font-weight: normal;
-      font-size: 40px;
-      line-height: 135.94%;
-      color: var(--font-white);
-      border-radius: 0px 0px 20px 20px;
-      height: fit-content;
+    .societyWrap {
+        display: flex;
+        justify-content: center;
+        min-height: 162px;
+        background-color: var(--background-color);
+        .name {
+            background: var(--primary-color);
+            padding: 7px 17px 17px 17px;
+            font-family: "Righteous", cursive;
+            font-style: normal;
+            font-weight: normal;
+            font-size: 40px;
+            line-height: 135.94%;
+            color: var(--font-white);
+            border-radius: 0px 0px 20px 20px;
+            height: fit-content;
+        }
     }
-  }
-  @extend .baseMenuWrap;
+    @extend .baseMenuWrap;
 }
 
 .mobile-header {
-  .MuiAppBar-root {
-    background-color: white;
+    .MuiAppBar-root {
+        background-color: white;
 
-    .societyWrap {
-      height: 50px;
-      min-height: 50px;
-      background-color: white;
+        .societyWrap {
+            height: 50px;
+            min-height: 50px;
+            background-color: white;
 
-      .name {
-        font-size: 18px;
-      }
+            .name {
+                font-size: 18px;
+            }
+        }
     }
-  }
 }
 
 .MuiDrawer-paper {
-  @extend .baseMenuWrap;
-  .menuWrap {
-    background: #0000ff00;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-top: 15px;
+    @extend .baseMenuWrap;
+    .menuWrap {
+        background: #0000ff00;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin-top: 15px;
 
-    .singleMenu {
-      display: flex;
-      justify-content: flex-start;
-      align-items: center;
-      margin: 10px 0px;
-      .iconWrap {
-        background: none;
-        svg {
-          width: 30px;
-          height: 30px;
+        .singleMenu {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            margin: 10px 0px;
+            .iconWrap {
+                background: none;
+                svg {
+                    width: 30px;
+                    height: 30px;
+                }
+            }
         }
-      }
+        a {
+            &.active {
+                background: linear-gradient(
+                    90deg,
+                    rgba(232, 128, 115, 0.29) 1.59%,
+                    rgba(233, 128, 117, 0.07) 50.36%
+                );
+                border-left: 5px solid var(--primary-color);
+            }
+        }
     }
-    a {
-      &.active {
-        background: linear-gradient(
-          90deg,
-          rgba(232, 128, 115, 0.29) 1.59%,
-          rgba(233, 128, 117, 0.07) 50.36%
-        );
-        border-left: 5px solid var(--primary-color);
-      }
-    }
-  }
 
-  .personal-details {
-    margin: 5px 10px;
-    .MuiAvatar-root {
-      height: 60px;
-      width: 60px;
-      border: 2px solid var(--primary-color);
+    .personal-details {
+        margin: 5px 10px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        & > div {
+            margin-right: 5px;
+        }
+        .MuiAvatar-root {
+            height: 60px;
+            width: 60px;
+            border: 2px solid var(--primary-color);
+        }
+        h5 {
+            font-weight: bold;
+        }
+        span {
+            position: absolute;
+            right: 15px;
+        }
     }
-  }
 }

@@ -15,27 +15,31 @@ import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
 import ToolBar from "@material-ui/core/ToolBar";
 import { ReactComponent as MenuIcon } from "../assets/svgs/menuIcon.svg";
+import { ReactComponent as CloseIcon } from "../assets/svgs/closeIcon.svg";
+
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
-
+import Typography from "@material-ui/core/Typography";
 export {
-  MsModal,
-  TextField,
-  Select,
-  MenuItem,
-  Modal,
-  FormControl,
-  InputLabel,
-  Button,
-  Drawer,
-  Divider,
-  AppBar,
-  CssBaseline,
-  Hidden,
-  IconButton,
-  ToolBar,
-  makeStyles,
-  useTheme,
-  MenuIcon,
-  Avatar,
+    MsModal,
+    TextField,
+    Select,
+    MenuItem,
+    Modal,
+    FormControl,
+    InputLabel,
+    Button,
+    Drawer,
+    Divider,
+    AppBar,
+    CssBaseline,
+    Hidden,
+    IconButton,
+    ToolBar,
+    makeStyles,
+    useTheme,
+    MenuIcon,
+    Avatar,
+    Typography,
+    CloseIcon
 };
