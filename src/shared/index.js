@@ -13,7 +13,7 @@ import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
-import ToolBar from "@material-ui/core/ToolBar";
+import ToolBar from "@material-ui/core/Toolbar";
 import { ReactComponent as MenuIcon } from "../assets/svgs/menuIcon.svg";
 import { ReactComponent as CloseIcon } from "../assets/svgs/closeIcon.svg";
 
