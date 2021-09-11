@@ -1,0 +1,29 @@
+{
+    "plugins": ["prettier", "sonarjs", "sonar"],
+    "extends": [
+        "react-app",
+        "prettier",
+        "plugin:sonarjs/recommended",
+        "plugin:sonar/recommended"
+    ],
+    "rules": {
+        "object-curly-spacing": ["warn", "always"],
+        "no-redundant-roles": "off",
+        "comma-dangle": ["error", "never"],
+        "no-unused-vars": [
+            "warn",
+            {
+                "vars": "all",
+                "args": "none"
+            }
+        ],
+        "prefer-const": "error",
+        "prefer-template": "error",
+        "prettier/prettier": "error",
+        "react-hooks/exhaustive-deps": "off",
+        "react/prop-types": "off",
+        "sonarjs/no-duplicate-string": "off",
+        "sonarjs/no-duplicated-branches": "off",
+        "sonarjs/no-collapsible-if": "off"
+    }
+}
