@@ -1,0 +1,40 @@
+.profileCardWrap {
+    max-width: 342px;
+    background: #ffffff;
+    box-shadow: 3px 3px 17px -9px rgba(0, 0, 0, 0.25);
+    border-radius: 15px;
+    .actionWrap {
+        padding: 20px;
+        .avatarMedia {
+            height: 125px;
+            width: 125px;
+            display: flex;
+            border-radius: 50%;
+            border: 2px solid var(--primary-color);
+            margin: 0 auto;
+        }
+        .profileName {
+            margin-top: 8px;
+            text-align: center;
+        }
+        .infoWrap {
+            padding: 0;
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: center;
+            .contactIcon {
+                margin-right: 8px;
+            }
+            .buildingInfo {
+                display: flex;
+                .title {
+                    margin-right: 8px;
+                    color: var(--secondary-font-color);
+                }
+                .name {
+                    color: var(--primary-font-color);
+                }
+            }
+        }
+    }
+}

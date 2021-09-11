@@ -2,14 +2,16 @@ import logo from "./logo.svg";
 import { ThemeProvider } from "@material-ui/core/styles";
 import "./App.css";
 import theme from "./theme";
+import { BrowserRouter as Router } from "react-router-dom";
+import Routing from "./routing/routing";
 function App() {
-  return (
-    <ThemeProvider theme={theme}>
-      <div className="App">
-        <img src={logo} alt="logo" />
-      </div>
-    </ThemeProvider>
-  );
+    return (
+        <ThemeProvider theme={theme}>
+            <Router>
+                <Routing></Routing>
+            </Router>
+        </ThemeProvider>
+    );
 }
 
 export default App;
