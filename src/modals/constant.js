@@ -6,14 +6,14 @@ export const ActionStatus = {
 };
 
 export const AlertTypes = {
-  success: "success",
-  error: "error",
-  info: "info",
-  warning: "warning",
+    success: "success",
+    error: "error",
+    info: "info",
+    warning: "warning"
 };
 
 export const ModalTypes = {
-  complain: "COMPLAIN",
-  announcement: "ANNOUNCEMENT",
-  event: "EVENT",
+    complain: "COMPLAIN",
+    announcement: "ANNOUNCEMENT",
+    event: "EVENT"
 };
