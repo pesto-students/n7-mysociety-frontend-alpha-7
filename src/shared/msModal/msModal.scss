@@ -1,24 +1,24 @@
 .responsive_width {
-  width: 30%;
-  @media screen and (max-width: 768px) {
-    width: 90% !important;
-  }
+    width: 30%;
+    @media screen and (max-width: 768px) {
+        width: 90% !important;
+    }
 }
 .ms-modal-title {
-  display: flex;
-  flex-direction: row;
-  color: var(--primary-color);
-  font-weight: bolder;
-  & div:first-of-type {
-    flex: 95%;
-  }
-  & div:last-of-type {
-    flex: 5%;
-  }
-  padding-bottom: 5px;
-  border-bottom: 1px solid var(--primary-color);
+    display: flex;
+    flex-direction: row;
+    color: var(--primary-color);
+    font-weight: bolder;
+    & div:first-of-type {
+        flex: 95%;
+    }
+    & div:last-of-type {
+        flex: 5%;
+    }
+    padding-bottom: 5px;
+    border-bottom: 1px solid var(--primary-color);
 
-  .close_icon {
-    cursor: pointer;
-  }
+    .close_icon {
+        cursor: pointer;
+    }
 }

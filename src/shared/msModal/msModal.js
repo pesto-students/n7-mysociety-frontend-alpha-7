@@ -51,7 +51,7 @@ export default function MsModal(PopupComponent) {
             <Modal open={open} onClose={(e, r) => preventBackDropClose(e, r)}>
                 <div
                     style={modalStyle}
-                    className={classes.paper + " responsive_width"}
+                    className={`${classes.paper} responsive_width`}
                 >
                     <div className="ms-modal-title">
                         <div>{title}</div>

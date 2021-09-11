@@ -1,19 +1,19 @@
 .complain {
-  display: flex;
-  justify-content: space-around;
-  flex-direction: column;
-  padding: 0 30px;
-  .MuiFormControl-root {
-    margin: 10px 0px;
-  }
-  .action-btn {
     display: flex;
-    justify-content: flex-end;
-    align-items: flex-end;
-    padding: 15px 0px;
-
-    button {
-      margin: 5px;
+    justify-content: space-around;
+    flex-direction: column;
+    padding: 0 30px;
+    .MuiFormControl-root {
+        margin: 10px 0px;
     }
-  }
+    .action-btn {
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        padding: 15px 0px;
+
+        button {
+            margin: 5px;
+        }
+    }
 }
