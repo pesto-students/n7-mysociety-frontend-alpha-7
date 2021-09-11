@@ -1,5 +1,15 @@
-@import url("https://fonts.googleapis.com/css2?family=Righteous&family=Roboto&display=swap");
-
+@font-face {
+    font-family: "Righteous";
+    src: local("Righteous"),
+        url("./fonts/Righteous/Righteous-Regular.ttf") format("truetype");
+    font-weight: normal;
+}
+@font-face {
+    font-family: "Roboto";
+    src: local("Roboto"),
+        url("./fonts/Roboto/Roboto-Regular.ttf") format("truetype");
+    font-weight: normal;
+}
 .App {
     text-align: center;
 }
@@ -45,5 +55,6 @@
     --primary-font-color: #8e8d8a;
     --secondary-font-color: #e98074;
     --primary-color: #e85a4f;
+    --secondary-color: #8e8d8a;
     --font-white: #ffffff;
 }

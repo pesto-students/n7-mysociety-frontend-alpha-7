@@ -3,6 +3,7 @@ import "./App.css";
 import theme from "./theme";
 import { BrowserRouter as Router } from "react-router-dom";
 import Routing from "./routing/routing";
+import "./fonts/Righteous/Righteous-Regular.ttf";
 function App() {
     return (
         <ThemeProvider theme={theme}>

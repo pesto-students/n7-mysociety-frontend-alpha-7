@@ -33,6 +33,11 @@ export const links = [
         menu: "FAQ",
         path: "/faq",
         component: Pages.FAQ
+    },
+    {
+        menu: "members",
+        path: "/members",
+        component: Pages.Members
     }
 ];
 

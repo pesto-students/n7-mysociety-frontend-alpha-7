@@ -5,13 +5,25 @@
     border-radius: 15px;
     .actionWrap {
         padding: 20px;
-        .avatarMedia {
+        .avatar {
             height: 125px;
             width: 125px;
             display: flex;
             border-radius: 50%;
-            border: 2px solid var(--primary-color);
             margin: 0 auto;
+            &.avatarMedia {
+                border: 2px solid var(--primary-color);
+            }
+            &.avatarName {
+                border: 2px solid var(--secondary-color);
+                background: var(--primary-color);
+                .text {
+                    font-weight: bold;
+                    font-size: 60px;
+                    text-align: center;
+                    color: #ffffff;
+                }
+            }
         }
         .profileName {
             margin-top: 8px;
@@ -27,12 +39,17 @@
             }
             .buildingInfo {
                 display: flex;
+                padding: 6px 8px;
                 .title {
                     margin-right: 8px;
                     color: var(--secondary-font-color);
                 }
                 .name {
                     color: var(--primary-font-color);
+                    text-overflow: ellipsis;
+                    width: 80px;
+                    white-space: nowrap;
+                    overflow: hidden;
                 }
             }
         }
