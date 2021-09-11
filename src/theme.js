@@ -11,7 +11,8 @@ const theme = createTheme({
             contrastText: "rgba(255,255,255,0.87)"
         },
         background: {
-            default: "#F9F9F9"
+            default: "#F9F9F9",
+            primary: "#EAE8DC"
         },
         text: {
             primary: "#8E8D8A",
