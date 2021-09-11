@@ -1,8 +1,8 @@
 export const ActionStatus = {
-  none: "None",
-  busy: "Busy",
-  success: "Success",
-  error: "Error",
+    none: "None",
+    busy: "Busy",
+    success: "Success",
+    error: "Error"
 };
 
 export const AlertTypes = {

@@ -6,13 +6,13 @@ import "./defaultLayout.scss";
 
 const DefaultLayout = ({ children }) => {
     return (
-        <>
+        <React.Fragment>
             <Header />
             <Container maxWidth="lg" className="container">
-                <div>{children}</div>
+                {children}
             </Container>
             <Footer />
-        </>
+        </React.Fragment>
     );
 };
 
