@@ -12,59 +12,59 @@ export const links = [
     {
         menu: "Announcements",
         path: "/announcements",
-        component: Pages.Announcements,
+        component: Pages.Announcements
     },
     {
         menu: "Events",
         path: "/events",
-        component: Pages.Events,
+        component: Pages.Events
     },
     {
         menu: "Gallery",
         path: "/gallery",
-        component: Pages.Gallery,
+        component: Pages.Gallery
     },
     {
         menu: "Complaints",
         path: "/complaints",
-        component: Pages.Complaints,
+        component: Pages.Complaints
     },
     {
         menu: "FAQ",
         path: "/faq",
-        component: Pages.FAQ,
-    },
+        component: Pages.FAQ
+    }
 ];
 
 export const menus = [
     {
         name: "Dashboard",
         path: "/dashboard",
-        icon: <DashboardIcon />,
+        icon: <DashboardIcon />
     },
     {
         name: "Announcements",
         path: "/announcements",
-        icon: <AnnouncementIcon />,
+        icon: <AnnouncementIcon />
     },
     {
         name: "Events",
         path: "/events",
-        icon: <EventIcon />,
+        icon: <EventIcon />
     },
     {
         name: "Gallery",
         path: "/gallery",
-        icon: <GalleryIcon />,
+        icon: <GalleryIcon />
     },
     {
         name: "Complaints",
         path: "/complaints",
-        icon: <ComplaintIcon />,
+        icon: <ComplaintIcon />
     },
     {
         name: "FAQ's",
         path: "/FAQ",
-        icon: <FAQIcon />,
-    },
+        icon: <FAQIcon />
+    }
 ];

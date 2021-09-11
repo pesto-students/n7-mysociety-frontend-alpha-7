@@ -2,7 +2,7 @@ import React from "react";
 import "./header.scss";
 import { menus } from "../../../modals/page";
 import { NavLink } from "react-router-dom";
-const Header = (props) => {
+const Header = () => {
     return (
         <header className="headerWrap">
             <div className="societyWrap">
