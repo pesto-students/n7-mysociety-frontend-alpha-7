@@ -19,6 +19,33 @@ const theme = createTheme({
         },
         typography: {
             fontFamily: font,
+            h1: {
+                fontSize: 32,
+            },
+            h2: {
+                fontSize: 28,
+            },
+            h3: {
+                fontSize: 24,
+            },
+            h4: {
+                fontSize: 22,
+            },
+            h5: {
+                fontSize: 20,
+            },
+            h6: {
+                fontSize: 18,
+            },
+            subtitle1: {
+                fontSize: 16,
+            },
+            subtitle2: {
+                fontSize: 14,
+            },
+            button: {
+                fontSize: 22,
+            },
         },
     },
     breakpoints: {
@@ -28,6 +55,17 @@ const theme = createTheme({
             md: 960,
             lg: 1388,
             xl: 1920,
+        },
+    },
+    shape: {
+        borderRadius: 15,
+    },
+    shadows: ["none", "3px 3px 17px -9px rgba(0, 0, 0, 0.25)"],
+    overrides: {
+        MuiButton: {
+            root: {
+                textTransform: "inherit",
+            },
         },
     },
 });

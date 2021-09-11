@@ -1,12 +1,13 @@
 import * as Pages from "../pages";
-import { ReactComponent as DashboardIcon } from "../svgs/dashboard.svg";
-import { ReactComponent as AnnouncementIcon } from "../svgs/announcement.svg";
-import { ReactComponent as EventIcon } from "../svgs/event.svg";
-import { ReactComponent as GalleryIcon } from "../svgs/gallery.svg";
-import { ReactComponent as ComplaintIcon } from "../svgs/complaint.svg";
-import { ReactComponent as FAQIcon } from "../svgs/faq.svg";
+import { ReactComponent as DashboardIcon } from "../assets/svgs/dashboard.svg";
+import { ReactComponent as AnnouncementIcon } from "../assets/svgs/announcement.svg";
+import { ReactComponent as EventIcon } from "../assets/svgs/event.svg";
+import { ReactComponent as GalleryIcon } from "../assets/svgs/gallery.svg";
+import { ReactComponent as ComplaintIcon } from "../assets/svgs/complaint.svg";
+import { ReactComponent as FAQIcon } from "../assets/svgs/faq.svg";
 
 export const links = [
+    { menu: "Dashboard", path: "/", component: Pages.Dashboard },
     { menu: "Dashboard", path: "/dashboard", component: Pages.Dashboard },
     {
         menu: "Announcements",
