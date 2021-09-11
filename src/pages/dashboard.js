@@ -1,8 +1,7 @@
 import React from "react";
 import DefaultLayout from "../components/layout/defaultLayout";
 import ProfileCard from "../components/shared/profileCard/index";
-
-const Dashboard = (props) => {
+const Dashboard = () => {
     return (
         <div className="wrapper">
             <DefaultLayout>

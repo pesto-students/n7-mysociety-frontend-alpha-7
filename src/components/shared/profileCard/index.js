@@ -4,8 +4,7 @@ import {
     Card,
     CardActionArea,
     CardActions,
-    CardContent,
-    Typography,
+    Typography
 } from "@material-ui/core";
 import React from "react";
 import "./profileCard.scss";
