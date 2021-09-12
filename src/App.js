@@ -38,9 +38,7 @@ function App() {
 
                     <div className="App">
                         <button
-                            onClick={(e) =>
-                                openModal({ id: 2, title: "CC/TV" })
-                            }
+                            onClick={() => openModal({ id: 2, title: "CC/TV" })}
                         >
                             open modal
                         </button>

@@ -1,5 +1,6 @@
 import { NavLink } from "react-router-dom";
 import { Divider } from "../../../shared";
+import React from "react";
 export default function MySocietyMenu({ menus, isMobileMenu }) {
     return (
         <div className="menuWrap">
