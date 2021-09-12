@@ -68,7 +68,7 @@ function ComplainPopup() {
         return (
             <FormControl>
                 <InputLabel id="demo-simple-select-helper-label">
-                    Age
+                    Priority
                 </InputLabel>
                 <Select
                     id="complainPriority"
