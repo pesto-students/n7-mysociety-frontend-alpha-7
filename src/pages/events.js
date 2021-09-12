@@ -14,7 +14,7 @@ const Events = () => {
         <div className="wrapper">
             <DefaultLayout>
                 Events View call here...
-                <EventCard content={content} isDashboardView />
+                <EventCard content={content} isAdmin />
             </DefaultLayout>
         </div>
     );

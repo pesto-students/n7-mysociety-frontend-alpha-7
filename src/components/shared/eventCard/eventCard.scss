@@ -53,3 +53,46 @@
         }
     }
 }
+.slide {
+    display: flex;
+    padding: 8px;
+    align-items: center;
+    position: absolute;
+    margin-left: 80px;
+    background: var(--font-white);
+    border-radius: 20px 20px 0px 0px;
+    padding: 10px 20px;
+    opacity: 0;
+    visibility: hidden;
+}
+.slide-enter {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.enter.enter-active {
+    transition: all 1000ms;
+    transform: translateY(-62px);
+    opacity: 1;
+    visibility: visible;
+}
+.enter-done {
+    transition: all 1000ms;
+    transform: translateY(-62px);
+    opacity: 1;
+    visibility: visible;
+}
+
+.exit {
+    transform: translateY(0px);
+    transition: all 1000ms;
+    opacity: 1;
+    visibility: visible;
+}
+
+.exit.exit-active {
+    opacity: 0;
+    transition: all 1000ms;
+    transform: translateY(-100%);
+    visibility: hidden;
+}
