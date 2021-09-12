@@ -1,10 +1,11 @@
 {
-    "plugins": ["prettier", "sonarjs", "sonar"],
+    "plugins": ["prettier", "sonarjs", "sonar", "react"],
     "extends": [
         "react-app",
         "prettier",
         "plugin:sonarjs/recommended",
-        "plugin:sonar/recommended"
+        "plugin:sonar/recommended",
+        "plugin:react/recommended"
     ],
     "rules": {
         "object-curly-spacing": ["warn", "always"],
@@ -24,6 +25,8 @@
         "react/prop-types": "off",
         "sonarjs/no-duplicate-string": "off",
         "sonarjs/no-duplicated-branches": "off",
-        "sonarjs/no-collapsible-if": "off"
+        "sonarjs/no-collapsible-if": "off",
+        "react/jsx-uses-react": "error",
+        "react/jsx-uses-vars": "error"
     }
 }

@@ -14,7 +14,7 @@ import {
 } from "../../contexts/variant.context";
 import { useFormGroup } from "../../hooks";
 import "./complainPopup.scss";
-function ComplainPopup({ item }) {
+function ComplainPopup() {
     const inputVarient = useContext(InputVarientContext);
     const buttonVarient = useContext(ButtonVarientContext);
     const [complainForm, updateForm] = useFormGroup({
@@ -77,9 +77,9 @@ function ComplainPopup({ item }) {
                     onChange={updateForm}
                     variant={inputVarient}
                 >
-                    {priorities.map((priority) => {
+                    {priorities.map((priority, index) => {
                         return (
-                            <MenuItem value={priority.value}>
+                            <MenuItem value={priority.value} key={index}>
                                 {priority.title}
                             </MenuItem>
                         );

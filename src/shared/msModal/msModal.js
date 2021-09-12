@@ -27,8 +27,9 @@ const useStyles = makeStyles((theme) => ({
         padding: "15px"
     }
 }));
+// eslint-disable-next-line
 export default function MsModal(PopupComponent) {
-    function Component(props) {
+    function Component() {
         const classes = useStyles();
         const [modalStyle] = React.useState(getModalStyle);
 
@@ -56,7 +57,7 @@ export default function MsModal(PopupComponent) {
                     <div className="ms-modal-title">
                         <div>{title}</div>
                         <div className="close_icon">
-                            <CloseIcon onClick={(e) => closePopup()} />
+                            <CloseIcon onClick={() => closePopup()} />
                         </div>
                     </div>
                     <div>

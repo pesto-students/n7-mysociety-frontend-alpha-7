@@ -1,3 +1,4 @@
+import React from "react";
 import * as Pages from "../pages";
 import { ReactComponent as DashboardIcon } from "../assets/svgs/dashboard.svg";
 import { ReactComponent as AnnouncementIcon } from "../assets/svgs/announcement.svg";

@@ -5,7 +5,7 @@ import DeskTopMenu from "./desktopMenu";
 import MobileSideBarMenu from "./mobileMenu";
 const mediaQuery = "screen and (min-width: 768px)";
 
-const Header = (props) => {
+const Header = () => {
     const mql = window.matchMedia(mediaQuery);
     const [showDesktopMenu, setShowDesktopMenu] = useState(mql.matches);
 
