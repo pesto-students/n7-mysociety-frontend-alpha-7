@@ -1,0 +1,55 @@
+.eventCardWrap {
+    max-width: 314px;
+    background: var(--font-white);
+    border-radius: 20px;
+    .eventImage {
+        height: 216px;
+    }
+    .contentWrap {
+        background: var(--font-white);
+        border-radius: 20px;
+        margin-top: -45px;
+        .eventTitle {
+            font-weight: bold;
+        }
+        .eventDateWrap,
+        .locationWrap {
+            margin-top: 12px;
+            display: flex;
+            .icon {
+                padding-top: 8px;
+                margin-right: 15px;
+            }
+        }
+        .locationWrap {
+            .icon {
+                padding-top: 3px;
+            }
+        }
+        .diffDateWrap {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+        }
+        .aboutTitle {
+            font-weight: 700;
+            margin-top: 12px;
+        }
+        .aboutDes {
+            margin-top: 10px;
+        }
+        .actionWrap {
+            display: flex;
+            justify-content: space-between;
+            padding: 0px;
+            margin-top: 15px;
+            > a {
+                font-weight: 700;
+            }
+            .viewDetail {
+                padding: 2px 20px;
+            }
+        }
+    }
+}
