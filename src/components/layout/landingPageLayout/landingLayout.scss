@@ -1,0 +1,18 @@
+.landing-layout {
+    display: flex;
+    flex-direction: row;
+    height: 100vh;
+    > div {
+        display: flex;
+        flex: 50%;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .left-part {
+        background-color: var(--font-white);
+    }
+    .right-part {
+        background-color: var(--background-color);
+    }
+}

@@ -20,6 +20,7 @@ import { ReactComponent as CloseIcon } from "../assets/svgs/closeIcon.svg";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
+
 export {
     MsModal,
     TextField,

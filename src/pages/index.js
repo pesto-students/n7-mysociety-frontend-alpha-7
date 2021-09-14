@@ -5,5 +5,14 @@ import Gallery from "./gallery";
 import Complaints from "./complaints";
 import FAQ from "./faq";
 import Members from "./members";
-
-export { Dashboard, Announcements, Events, Gallery, Complaints, FAQ, Members };
+import Authentication from "./authentication";
+export {
+    Dashboard,
+    Announcements,
+    Events,
+    Gallery,
+    Complaints,
+    FAQ,
+    Members,
+    Authentication
+};
