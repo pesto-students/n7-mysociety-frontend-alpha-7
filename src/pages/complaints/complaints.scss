@@ -1,0 +1,26 @@
+.complains {
+    .user-actions {
+        display: none;
+    }
+    :hover {
+        .user-actions {
+            display: block;
+        }
+    }
+    @media only screen and (min-width: 768px) {
+        display: flex;
+        flex-direction: row;
+        .complain-card {
+            margin: 0 15px;
+            width: 33%;
+        }
+    }
+    @media only screen and (max-width: 768px) {
+        display: flex;
+        flex-direction: column;
+        .complain-card {
+            margin: 15px 0;
+            width: 100%;
+        }
+    }
+}

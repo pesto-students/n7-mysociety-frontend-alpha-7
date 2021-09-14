@@ -1,3 +1,3 @@
 import ComplainPopup from "./complainPopup/complainPopup";
-
-export { ComplainPopup };
+import ComplainCard from "./complainCard/complainCard";
+export { ComplainPopup, ComplainCard };
