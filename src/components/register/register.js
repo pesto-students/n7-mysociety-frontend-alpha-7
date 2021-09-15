@@ -30,6 +30,8 @@ function Register() {
     const inputVarient = useContext(InputVarientContext);
     const buttonVarient = useContext(ButtonVarientContext);
     const [registerForm, updateRegisterForm] = useFormGroup({
+        firstName: "",
+        lastName: "",
         email: "",
         societyName: "",
         societyAddress: "",
@@ -40,6 +42,36 @@ function Register() {
         confirmPassword: ""
     });
 
+    const firstName = (
+        <div className="first-name">
+            <FormControl>
+                <TextField
+                    required
+                    label="First Name"
+                    id="firstName"
+                    value={registerForm.firstName}
+                    onChange={updateRegisterForm}
+                    variant={inputVarient}
+                ></TextField>
+            </FormControl>
+        </div>
+    );
+
+    const lastName = (
+        <div className="last-name">
+            <FormControl>
+                <TextField
+                    required
+                    label="Last Name"
+                    id="lastName"
+                    value={registerForm.lastName}
+                    onChange={updateRegisterForm}
+                    variant={inputVarient}
+                ></TextField>
+            </FormControl>
+        </div>
+    );
+
     const email = (
         <div className="email-input">
             <FormControl>
@@ -47,6 +79,7 @@ function Register() {
                     required
                     label={isAdmin ? "Admin Email" : "Member Email"}
                     id="email"
+                    type="email"
                     value={registerForm.email}
                     onChange={updateRegisterForm}
                     variant={inputVarient}
@@ -199,12 +232,26 @@ function Register() {
         </div>
     );
 
-    const memberView = (
-        <div className="register-content member-view">
-            {email}
-            {societyName}
+    const personalDetails = (
+        <div className="personal-details">
+            {firstName}
+            {lastName}
+        </div>
+    );
+
+    const contactDetails = (
+        <div className="contact-details">
             {mobile}
             {flat}
+        </div>
+    );
+
+    const memberView = (
+        <div className="register-content member-view">
+            {personalDetails}
+            {email}
+            {societyName}
+            {contactDetails}
             {password}
             {confirmPassword}
             {registerBtn}
@@ -214,6 +261,7 @@ function Register() {
 
     const adminView = (
         <div className="register-content admin-view">
+            {personalDetails}
             {email}
             {societyName}
             {societyAddress}
