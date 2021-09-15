@@ -1,3 +1,5 @@
 import ComplainPopup from "./complainPopup/complainPopup";
+import Login from "./login/login";
 import ComplainCard from "./complainCard/complainCard";
-export { ComplainPopup, ComplainCard };
+import Register from "./register/register";
+export { ComplainPopup, ComplainCard, Login, Register };

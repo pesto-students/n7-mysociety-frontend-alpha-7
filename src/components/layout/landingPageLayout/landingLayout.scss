@@ -11,8 +11,21 @@
 
     .left-part {
         background-color: var(--font-white);
+        img {
+            width: 50%;
+            height: 50%;
+        }
     }
     .right-part {
+        display: flex;
+        flex-direction: column;
         background-color: var(--background-color);
+
+        .society-icon {
+            svg {
+                width: 250px;
+                margin-bottom: 15px;
+            }
+        }
     }
 }

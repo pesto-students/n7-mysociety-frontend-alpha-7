@@ -4,7 +4,8 @@ import {
     TextField,
     Button,
     Card,
-    CardContent
+    CardContent,
+    Typography
 } from "../../shared";
 import { useFormGroup } from "../../hooks";
 import {
@@ -12,7 +13,10 @@ import {
     ButtonVarientContext
 } from "../../contexts/variant.context";
 import "./login.scss";
+import { Link, useHistory } from "react-router-dom";
+
 export default function Login() {
+    const history = useHistory();
     const inputVarient = useContext(InputVarientContext);
     const buttonVarient = useContext(ButtonVarientContext);
     const [loginForm, updateLoginForm] = useFormGroup({
@@ -20,50 +24,78 @@ export default function Login() {
         password: ""
     });
 
-    const authenticate = () => {};
+    const authenticate = () => {
+        history.push("/dashboard");
+    };
 
     const username = (
-        <FormControl>
-            <TextField
-                label="Username"
-                id="username"
-                value={loginForm.username}
-                onChange={updateLoginForm}
-                variant={inputVarient}
-            ></TextField>
-        </FormControl>
+        <div className="username_input">
+            <FormControl>
+                <TextField
+                    required
+                    label="Username"
+                    id="username"
+                    value={loginForm.username}
+                    onChange={updateLoginForm}
+                    variant={inputVarient}
+                ></TextField>
+            </FormControl>
+        </div>
     );
 
     const password = (
-        <FormControl>
-            <TextField
-                label="Password"
-                id="password"
-                value={loginForm.password}
-                onChange={updateLoginForm}
-                variant={inputVarient}
-            ></TextField>
-        </FormControl>
+        <div className="password_input">
+            <FormControl>
+                <TextField
+                    required
+                    label="Password"
+                    id="password"
+                    value={loginForm.password}
+                    onChange={updateLoginForm}
+                    variant={inputVarient}
+                ></TextField>
+            </FormControl>
+        </div>
     );
 
     const loginButton = (
-        <div>
+        <div className="action-btn">
             <Button
                 color="primary"
                 variant={buttonVarient}
                 onClick={authenticate}
             >
-                Complain
+                Login
             </Button>
+        </div>
+    );
+
+    const loginFooter = (
+        <div className="login-footer">
+            <div>
+                <Typography variant="subtitle1">
+                    Want to be a part of society or register your society?
+                </Typography>
+            </div>
+            <div>
+                <Link to="/user/register">
+                    <Typography variant="subtitle2" color="secondary">
+                        Sign up here
+                    </Typography>
+                </Link>
+            </div>
         </div>
     );
 
     return (
         <Card className="login-box">
             <CardContent>
-                {username}
-                {password}
-                {loginButton}
+                <div className="login-content">
+                    {username}
+                    {password}
+                    {loginButton}
+                    {loginFooter}
+                </div>
             </CardContent>
         </Card>
     );

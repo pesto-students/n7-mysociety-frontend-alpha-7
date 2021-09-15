@@ -6,6 +6,7 @@ import Complaints from "./complaints/complaints";
 import FAQ from "./faq";
 import Members from "./members";
 import Authentication from "./authentication";
+import ThankYou from "./thankYou/thankYou";
 export {
     Dashboard,
     Announcements,
@@ -14,5 +15,6 @@ export {
     Complaints,
     FAQ,
     Members,
-    Authentication
+    Authentication,
+    ThankYou
 };
