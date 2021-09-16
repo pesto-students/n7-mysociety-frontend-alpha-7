@@ -1,8 +1,6 @@
 .profileCardWrap {
     max-width: 342px;
-    background: #ffffff;
-    box-shadow: 3px 3px 17px -9px rgba(0, 0, 0, 0.25);
-    border-radius: 15px;
+    background: var(--font-white);
     .actionWrap {
         padding: 20px;
         .avatar {

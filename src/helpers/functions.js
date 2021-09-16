@@ -9,3 +9,17 @@ export const getAvatarName = (name) => {
         .join("")
         .toUpperCase();
 };
+
+export const encodeDataToURL = (data) => {
+    return Object.keys(data)
+        .map((value) => `${value}=${encodeURIComponent(data[value])}`)
+        .join("&");
+};
+
+export const limitSting = (string, limit) => {
+    if (string.length > limit) {
+        return `${string.slice(0, limit)}...`;
+    } else {
+        return string;
+    }
+};
