@@ -3,12 +3,14 @@ import Header from "../../blocks/header";
 import Footer from "../../blocks/footer";
 import { Container } from "@material-ui/core";
 import "./defaultLayout.scss";
+import { FabMenu } from "../../../shared";
 
 const DefaultLayout = ({ children }) => {
     return (
         <React.Fragment>
             <Header />
             <Container maxWidth="lg" className="container">
+                <FabMenu />
                 {children}
             </Container>
             <Footer />

@@ -26,6 +26,8 @@ import { Card, CardContent, CardHeader } from "@material-ui/core";
 import { ReactComponent as EditIcon } from "../assets/svgs/editIcon.svg";
 import { ReactComponent as DeleteIcon } from "../assets/svgs/deleteIcon.svg";
 import UserActions from "./userActions/userAction";
+import AddIcon from "@material-ui/icons/Add";
+import FabMenu from "./fabMenu/fabMenu";
 export {
     MsModal,
     TextField,
@@ -55,5 +57,7 @@ export {
     CardHeader,
     EditIcon,
     DeleteIcon,
-    UserActions
+    UserActions,
+    AddIcon,
+    FabMenu
 };
