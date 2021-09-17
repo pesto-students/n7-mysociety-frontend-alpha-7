@@ -37,6 +37,7 @@ export default function AnnocumentPopup({ item }) {
                     id="description"
                     maxRows={4}
                     minRows={4}
+                    multiline
                     value={annoucementForm.description}
                     onChange={updateAnnouncementForm}
                     variant={inputVarient}

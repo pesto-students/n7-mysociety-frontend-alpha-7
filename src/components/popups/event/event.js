@@ -68,6 +68,7 @@ export default function EventPopup({ event }) {
                     id="description"
                     maxRows={4}
                     minRows={4}
+                    multiline
                     value={eventForm.description}
                     onChange={updateForm}
                     variant={inputVarient}
