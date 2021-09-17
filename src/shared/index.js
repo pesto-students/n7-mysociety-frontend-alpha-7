@@ -28,6 +28,10 @@ import { ReactComponent as DeleteIcon } from "../assets/svgs/deleteIcon.svg";
 import UserActions from "./userActions/userAction";
 import AddIcon from "@material-ui/icons/Add";
 import FabMenu from "./fabMenu/fabMenu";
+import EventIcon from "@material-ui/icons/Event";
+import RecordVoiceOverIcon from "@material-ui/icons/RecordVoiceOver";
+import CameraAltIcon from "@material-ui/icons/CameraAlt";
+import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
 export {
     MsModal,
     TextField,
@@ -59,5 +63,9 @@ export {
     DeleteIcon,
     UserActions,
     AddIcon,
-    FabMenu
+    FabMenu,
+    EventIcon,
+    AssignmentTurnedInIcon,
+    CameraAltIcon,
+    RecordVoiceOverIcon
 };

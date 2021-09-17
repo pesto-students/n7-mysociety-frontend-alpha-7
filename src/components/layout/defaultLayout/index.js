@@ -10,7 +10,7 @@ const DefaultLayout = ({ children }) => {
         <React.Fragment>
             <Header />
             <Container maxWidth="lg" className="container">
-                <FabMenu />
+                <FabMenu isAdmin={true} />
                 {children}
             </Container>
             <Footer />
