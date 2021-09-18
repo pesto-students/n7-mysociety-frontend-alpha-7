@@ -1,0 +1,95 @@
+.register-box {
+    padding: 0;
+    margin: 0;
+    border-radius: 5px !important;
+    max-width: 400px;
+    min-width: 450px;
+    min-height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .MuiCardContent-root {
+        padding: 0;
+        margin: 0;
+        width: 100%;
+        .tab-bar {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding-top: 15px;
+        }
+        .register-content {
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+
+            > div {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                margin: 5px 0;
+            }
+
+            .email-input,
+            .socity-name-input,
+            .password-input,
+            .mobile-input,
+            .society-address-input,
+            .personal-details,
+            .contact-details {
+                display: flex;
+                justify-content: center;
+                .MuiFormControl-root {
+                    width: 75%;
+                    .MuiTextField-root {
+                        width: 100%;
+                    }
+                }
+            }
+            .personal-details {
+                padding: 0 25px;
+            }
+            .register-footer {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                & div:first-child {
+                    margin: 15px;
+                    text-align: center;
+
+                    h6 {
+                        font-size: 14px;
+                    }
+                }
+            }
+            .action-btn {
+                button {
+                    padding: 5px 30px;
+                }
+            }
+        }
+
+        .member-view {
+            padding: 0px;
+            & > div {
+                margin: 5px 0;
+            }
+            .personal-details,
+            .contact-details {
+                padding: 0 15px;
+            }
+            .contact-details {
+                & > div {
+                    justify-content: flex-start;
+                }
+            }
+        }
+
+        &:last-child {
+            padding-bottom: 0px;
+        }
+    }
+}

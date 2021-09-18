@@ -8,37 +8,51 @@ import { ReactComponent as ComplaintIcon } from "../assets/svgs/complaint.svg";
 import { ReactComponent as FAQIcon } from "../assets/svgs/faq.svg";
 
 export const links = [
-    { menu: "Dashboard", path: "/", component: Pages.Dashboard },
-    { menu: "Dashboard", path: "/dashboard", component: Pages.Dashboard },
+    { path: "/", component: Pages.Authentication },
+    { path: "/user", component: Pages.Authentication },
+    { path: "/user/:action", component: Pages.Authentication },
+    { path: "/thankyou", component: Pages.ThankYou },
+    {
+        menu: "Dashboard",
+        path: "/dashboard",
+        component: Pages.Dashboard,
+        isMenu: true
+    },
     {
         menu: "Announcements",
         path: "/announcements",
-        component: Pages.Announcements
+        component: Pages.Announcements,
+        isMenu: true
     },
     {
         menu: "Events",
         path: "/events",
-        component: Pages.Events
+        component: Pages.Events,
+        isMenu: true
     },
     {
         menu: "Gallery",
         path: "/gallery",
-        component: Pages.Gallery
+        component: Pages.Gallery,
+        isMenu: true
     },
     {
         menu: "Complaints",
         path: "/complaints",
-        component: Pages.Complaints
+        component: Pages.Complaints,
+        isMenu: true
     },
     {
         menu: "FAQ",
         path: "/faq",
-        component: Pages.FAQ
+        component: Pages.FAQ,
+        isMenu: true
     },
     {
         menu: "members",
         path: "/members",
-        component: Pages.Members
+        component: Pages.Members,
+        isMenu: true
     }
 ];
 
