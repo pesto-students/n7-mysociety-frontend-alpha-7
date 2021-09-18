@@ -1,3 +1,4 @@
+import React from "react";
 import * as Pages from "../pages";
 import { ReactComponent as DashboardIcon } from "../assets/svgs/dashboard.svg";
 import { ReactComponent as AnnouncementIcon } from "../assets/svgs/announcement.svg";
@@ -33,6 +34,11 @@ export const links = [
         menu: "FAQ",
         path: "/faq",
         component: Pages.FAQ
+    },
+    {
+        menu: "members",
+        path: "/members",
+        component: Pages.Members
     }
 ];
 

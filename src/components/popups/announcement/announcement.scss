@@ -1,0 +1,16 @@
+.annocement-modal-content {
+    padding: 15px;
+    .action-btn {
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-end;
+        margin-top: 25px;
+    }
+
+    .description-input,
+    .title-input {
+        .MuiFormControl-root {
+            width: 100%;
+        }
+    }
+}
