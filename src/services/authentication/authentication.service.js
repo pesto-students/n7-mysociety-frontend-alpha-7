@@ -1,11 +1,15 @@
-import { BaseService } from "../base.service";
-class Authentication extends BaseService {
-    loginUser() {
-        return this.http.get();
+import http from "../base.service";
+class Authentication {
+    loginUser(payload) {
+        return http.post("/auth/signin", payload);
     }
 
-    registerUser() {
-        return this.http.get();
+    registerUser(payload) {
+        return http.post("/auth/signup", payload);
+    }
+
+    getAllSocietities() {
+        return http.get("/get-all-society");
     }
 }
 

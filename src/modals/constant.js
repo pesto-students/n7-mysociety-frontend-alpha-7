@@ -17,3 +17,8 @@ export const ModalTypes = {
     announcement: "ANNOUNCEMENT",
     event: "EVENT"
 };
+
+export const initalPaginator = {
+    limit: 10,
+    page: 1
+};

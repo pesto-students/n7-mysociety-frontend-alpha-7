@@ -1,40 +1,94 @@
 import * as AUTHENTICATION_ACTION from "../actions/authentication.action";
 import { ActionStatus } from "../../modals/constant";
 const initialState = {
-    register: ActionStatus.None,
-    login: ActionStatus.None
+    register: {
+        status: ActionStatus.None,
+        data: null
+    },
+    login: { status: ActionStatus.None, data: null },
+    societies: {
+        status: ActionStatus.None,
+        data: []
+    }
 };
 export default function authentication(state = initialState, action) {
     switch (action.type) {
         case AUTHENTICATION_ACTION.REGISTER_USER:
             return {
                 ...state,
-                register: ActionStatus.busy
+                register: {
+                    ...state.register,
+                    status: ActionStatus.busy
+                }
             };
         case AUTHENTICATION_ACTION.REGISTER_USER_SUCCESS:
             return {
                 ...state,
-                register: ActionStatus.success
+                register: {
+                    ...state.register,
+                    status: ActionStatus.success,
+                    data: action.payload
+                }
             };
         case AUTHENTICATION_ACTION.REGISTER_USER_FAILURE:
             return {
                 ...state,
-                register: ActionStatus.error
+                register: {
+                    ...state.register,
+                    status: ActionStatus.error
+                }
             };
         case AUTHENTICATION_ACTION.LOGIN_USER:
             return {
                 ...state,
-                login: ActionStatus.busy
+                login: {
+                    ...state.login,
+                    status: ActionStatus.busy
+                }
             };
         case AUTHENTICATION_ACTION.LOGIN_USER_SUCCESS:
             return {
                 ...state,
-                login: ActionStatus.success
+                login: {
+                    ...state.login,
+                    status: ActionStatus.success,
+                    data: action.payload
+                }
             };
         case AUTHENTICATION_ACTION.LOGIN_USER_FAILURE:
             return {
                 ...state,
-                login: ActionStatus.error
+                login: {
+                    ...state.login,
+                    status: ActionStatus.error,
+                    data: null
+                }
+            };
+        case AUTHENTICATION_ACTION.GET_ALL_SOCIETIES:
+            return {
+                ...state,
+                societies: {
+                    ...state.societies,
+                    status: ActionStatus.busy
+                }
+            };
+        case AUTHENTICATION_ACTION.GET_ALL_SOCIETIES_SUCCESS:
+            return {
+                ...state,
+                societies: {
+                    ...state.societies,
+                    status: ActionStatus.success,
+                    data: action.payload
+                }
+            };
+        case AUTHENTICATION_ACTION.GET_ALL_SOCIETIES_ERROR:
+            return {
+                ...state,
+                societies: {
+                    ...state.societies,
+                    status: ActionStatus.error,
+                    data: null
+                }
             };
         default:
             return { ...state };
