@@ -15,5 +15,9 @@ export const AlertTypes = {
 export const ModalTypes = {
     complain: "COMPLAIN",
     announcement: "ANNOUNCEMENT",
-    event: "EVENT"
+    event: "EVENT",
+    addComplain: "ADD_COMPLAIN",
+    addEvent: "ADD_EVENT",
+    addGallery: "ADD_GALLERY",
+    addAnnouncement: "ADD_ANNOUCEMENT"
 };
