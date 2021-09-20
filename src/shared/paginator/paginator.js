@@ -11,5 +11,10 @@ export default function Paginator({ children, totalPages, currentPage }) {
             <ChevronRightIcon />
         </div>
     );
-    return <div>{children}</div>;
+    return (
+        <React.Fragment>
+            {children}
+            {paging}
+        </React.Fragment>
+    );
 }
