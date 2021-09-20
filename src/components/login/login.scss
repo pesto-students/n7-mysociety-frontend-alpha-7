@@ -1,0 +1,61 @@
+.login-box {
+    padding: 0;
+    margin: 0;
+    border-radius: 5px !important;
+    max-width: 400px;
+    width: 400px;
+    min-height: 450px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .MuiCardContent-root {
+        padding: 0;
+        margin: 0;
+
+        .login-content {
+            display: flex;
+            flex-direction: column;
+            padding: 15px;
+
+            > div {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                margin: 15px 0;
+            }
+
+            .username_input,
+            .password_input {
+                display: flex;
+                justify-content: center;
+                .MuiFormControl-root {
+                    width: 75%;
+                    .MuiTextField-root {
+                        width: 100%;
+                    }
+                }
+            }
+
+            .action-btn {
+                button {
+                    padding: 5px 30px;
+                }
+            }
+            .login-footer {
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+
+                & div:first-child {
+                    margin: 15px;
+                    text-align: center;
+
+                    h6 {
+                        font-size: 14px;
+                    }
+                }
+            }
+        }
+    }
+}
