@@ -41,6 +41,9 @@ import EventIcon from "@material-ui/icons/Event";
 import RecordVoiceOverIcon from "@material-ui/icons/RecordVoiceOver";
 import CameraAltIcon from "@material-ui/icons/CameraAlt";
 import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+
 export {
     MsModal,
     TextField,
@@ -85,5 +88,7 @@ export {
     Snackbar,
     InputAdornment,
     Visibility,
-    VisibilityOff
+    VisibilityOff,
+    ChevronLeftIcon,
+    ChevronRightIcon
 };

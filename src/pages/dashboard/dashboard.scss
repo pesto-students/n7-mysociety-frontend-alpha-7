@@ -1,0 +1,32 @@
+.data-container {
+    display: flex;
+    flex-direction: color;
+
+    & > div {
+        flex: 30%;
+        margin: 0 10px;
+        .header-title {
+            padding: 15px;
+            border-bottom: 2px solid var(--primary-color);
+        }
+    }
+
+    .announcement,
+    .events,
+    .memories {
+        padding: 15px 0;
+    }
+    .announcement {
+        .list {
+            max-height: 300px;
+            overflow-y: auto;
+            &::-webkit-scrollbar {
+                width: 0 !important;
+            }
+        }
+
+        .annoucement-card {
+            margin: 10px 0 !important;
+        }
+    }
+}

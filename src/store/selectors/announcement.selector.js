@@ -10,4 +10,4 @@ export const successInFetchingAnnocements = (state) =>
     state.announcement.announcementList.status === ActionStatus.success;
 
 export const announcementList = (state) =>
-    state.announcement.announcementList.data;
+    state.announcement?.announcementList?.data;

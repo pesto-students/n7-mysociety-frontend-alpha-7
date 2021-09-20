@@ -1,0 +1,49 @@
+.annoucement-card {
+    .MuiCardHeader-title {
+        color: var(--secondary-font-color);
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .description {
+        font-size: 14px;
+        padding: 0 0 15px 0;
+    }
+    .dates {
+        display: flex;
+        @media only screen and (min-width: 768px) {
+            flex-direction: row;
+        }
+        @media only screen and (max-width: 768px) {
+            flex-direction: column;
+        }
+        label {
+            color: var(--secondary-font-color);
+            font-weight: bold;
+            font-size: 14px;
+        }
+        > div {
+            flex: 50%;
+            > span {
+                margin-left: 10px;
+            }
+        }
+    }
+
+    .admin-action {
+        display: flex;
+        flex-direction: row;
+        > div {
+            flex: 50%;
+        }
+
+        .admin-action-btn {
+            display: flex;
+            justify-content: flex-end;
+        }
+        .dates {
+            display: flex;
+            flex-direction: column;
+        }
+    }
+}

@@ -1,2 +1,3 @@
 import { Validator } from "./validator";
-export { Validator };
+import { formatDate } from "./formatting";
+export { Validator, formatDate };
