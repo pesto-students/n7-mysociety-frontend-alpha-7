@@ -2,9 +2,17 @@ import React, { useState, useEffect } from "react";
 import DefaultLayout from "../../components/layout/defaultLayout";
 import { ComplainCard } from "../../components";
 import { SpinnerLoader } from "../../shared";
+import { useDispatch, useSelector } from "react-redux";
+import { getAllComplaints } from "../../store/dispatchers/complaint.dispatch";
+import { complaintList } from "../../store/selectors/complaint.selector";
+import { loggedInUserSocietyDetails } from "../../store/selectors/authetication.selector";
+import { initalPaginator } from "../../modals/constant";
 import "./complaints.scss";
 const Complaints = () => {
     const [isLoading, setLoading] = useState(true);
+    const dispatch = useDispatch();
+    const listOfComplaints = useSelector(complaintList);
+    const societyDetails = useSelector(loggedInUserSocietyDetails);
 
     const dummyComplains = [
         {
@@ -48,6 +56,15 @@ const Complaints = () => {
             setLoading(false);
         }, 1000);
     }, []);
+    console.log(societyDetails, "societyDetails");
+    useEffect(() => {
+        const param = {
+            ...initalPaginator,
+            societyId: societyDetails._id
+        };
+        dispatch(getAllComplaints(param));
+    }, []);
+    console.log(listOfComplaints, "listOfComplaints");
 
     return (
         <div className="wrapper">
