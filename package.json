@@ -19,6 +19,7 @@
         "react-redux": "^7.2.4",
         "react-router-dom": "^5.3.0",
         "react-scripts": "4.0.3",
+        "react-tiny-fab": "^4.0.3",
         "react-transition-group": "^4.4.2",
         "redux-devtools-extension": "^2.13.9",
         "redux-promise": "^0.6.0",

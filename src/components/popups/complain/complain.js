@@ -1,19 +1,18 @@
 import React, { useState, useContext, useEffect } from "react";
 import {
-    MsModal,
     TextField,
     Select,
     MenuItem,
     FormControl,
     InputLabel,
     Button
-} from "../../shared";
+} from "../../../shared";
 import {
     InputVarientContext,
     ButtonVarientContext
-} from "../../contexts/variant.context";
-import { useFormGroup } from "../../hooks";
-import "./complainPopup.scss";
+} from "../../../contexts/variant.context";
+import { useFormGroup } from "../../../hooks";
+import "./complain.scss";
 function ComplainPopup() {
     const inputVarient = useContext(InputVarientContext);
     const buttonVarient = useContext(ButtonVarientContext);
@@ -110,4 +109,4 @@ function ComplainPopup() {
     );
 }
 
-export default MsModal(ComplainPopup);
+export default ComplainPopup;

@@ -1,4 +1,4 @@
-import ComplainPopup from "./complainPopup/complainPopup";
+import ComplainPopup from "./popups/complain/complain";
 import Login from "./login/login";
 import ComplainCard from "./complainCard/complainCard";
 import Register from "./register/register";
