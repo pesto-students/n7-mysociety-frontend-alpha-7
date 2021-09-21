@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useFormGroup } from "../../hooks";
 import {
     FormControl,
@@ -11,36 +11,126 @@ import {
     Tab,
     InputLabel,
     Select,
-    MenuItem
+    MenuItem,
+    SpinnerLoader,
+    InputAdornment,
+    IconButton,
+    Visibility,
+    VisibilityOff
 } from "../../shared";
 import {
     InputVarientContext,
     ButtonVarientContext
 } from "../../contexts/variant.context";
 import { Link, useHistory } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {
+    registerUser,
+    getAllSocieties
+} from "../../store/dispatchers/authentication.dispatch";
+import {
+    isRegistered,
+    societies,
+    isRegisteringUser
+} from "../../store/selectors/authetication.selector";
 import "./register.scss";
+import { useSelector } from "react-redux";
+import { Validator } from "../../utils";
 function Register() {
+    const dispatch = useDispatch();
     const [isAdmin, setIsAdmin] = useState(true);
+    const [passwordVisibility, setPasswordVisibility] = useState(false);
+    const [confirmVisibility, setConfirmVisibility] = useState(false);
+    const [passwordMismatch, setPasswordMismatchError] = useState(false);
     const [currentTab, setCurrentTab] = useState(0);
+    const allSocieties = useSelector(societies);
     const history = useHistory();
-    const [societies] = useState([
-        { name: "Alpha", societyId: 0 },
-        { name: "Beta", societyId: 1 }
-    ]);
     const inputVarient = useContext(InputVarientContext);
     const buttonVarient = useContext(ButtonVarientContext);
     const [registerForm, updateRegisterForm] = useFormGroup({
-        firstName: "",
-        lastName: "",
-        email: "",
-        societyName: "",
-        societyAddress: "",
-        societyId: "",
-        mobile: "",
-        flatNo: "",
-        password: "",
-        confirmPassword: ""
+        firstName: {
+            value: "",
+            validation: {
+                required: true,
+                msgs: { required: "First name is required" }
+            }
+        },
+        lastName: {
+            value: "",
+            validation: {
+                required: true,
+                msgs: { required: "Last name is required" }
+            }
+        },
+        email: {
+            value: "",
+            validation: {
+                required: true,
+                pattern: Validator.regex.email,
+                msgs: {
+                    required: "Email is required",
+                    pattern: "Invalid email"
+                }
+            }
+        },
+        societyName: {
+            value: "",
+            validation: {
+                required: true,
+                msgs: { required: "Society name is required" }
+            }
+        },
+        societyAddress: {
+            value: "",
+            validation: {
+                required: true,
+                msgs: { required: "Society address is required" }
+            }
+        },
+        societyId: {
+            value: "",
+            validation: { required: isAdmin ? false : true }
+        },
+        mobile: {
+            value: "",
+            validation: {
+                required: isAdmin ? false : true,
+                pattern: Validator.regex.mobile,
+                msgs: {
+                    required: "Mobile is required",
+                    pattern: "Invalid mobile number"
+                }
+            }
+        },
+        flatNo: { value: "" },
+        password: {
+            value: "",
+            validation: {
+                required: true,
+                pattern: Validator.regex.password,
+                msgs: {
+                    required: "Password required",
+                    pattern: "Invalid Password"
+                }
+            }
+        },
+        confirmPassword: {
+            value: "",
+            validation: {
+                required: true,
+                msgs: { required: "Confirm Password is required" }
+            }
+        }
     });
+
+    useEffect(() => {
+        dispatch(getAllSocieties());
+    }, []);
+
+    const isRegisterFormValid =
+        Validator.isFormValid(registerForm) && !passwordMismatch;
+
+    // Start of UI
 
     const firstName = (
         <div className="first-name">
@@ -49,9 +139,10 @@ function Register() {
                     required
                     label="First Name"
                     id="firstName"
-                    value={registerForm.firstName}
+                    value={registerForm.firstName.value}
                     onChange={updateRegisterForm}
                     variant={inputVarient}
+                    helperText={registerForm.firstName.errorMessage}
                 ></TextField>
             </FormControl>
         </div>
@@ -64,9 +155,10 @@ function Register() {
                     required
                     label="Last Name"
                     id="lastName"
-                    value={registerForm.lastName}
+                    value={registerForm.lastName.value}
                     onChange={updateRegisterForm}
                     variant={inputVarient}
+                    helperText={registerForm.lastName.errorMessage}
                 ></TextField>
             </FormControl>
         </div>
@@ -80,9 +172,10 @@ function Register() {
                     label={isAdmin ? "Admin Email" : "Member Email"}
                     id="email"
                     type="email"
-                    value={registerForm.email}
+                    value={registerForm.email.value}
                     onChange={updateRegisterForm}
                     variant={inputVarient}
+                    helperText={registerForm.email.errorMessage}
                 ></TextField>
             </FormControl>
         </div>
@@ -95,26 +188,32 @@ function Register() {
                     required
                     label="Society Name"
                     id="societyName"
-                    value={registerForm.societyName}
+                    value={registerForm.societyName.value}
                     onChange={updateRegisterForm}
                     variant={inputVarient}
+                    helperText={registerForm.societyName.errorMessage}
                 ></TextField>
             </FormControl>
         </div>
     ) : (
         <div className="socity-name-input">
             <FormControl>
-                <InputLabel id="societyId">Society Name</InputLabel>
+                <InputLabel id="societyId" name="societyId">
+                    Society Name
+                </InputLabel>
+
                 <Select
-                    id="complainPriority"
-                    label="Priority"
-                    value={registerForm.societyId}
+                    id="society"
+                    label="Society"
+                    labelId="societyId"
+                    name="societyId"
+                    value={registerForm.societyId.value}
                     onChange={updateRegisterForm}
                     variant={inputVarient}
                 >
-                    {societies.map((society, index) => {
+                    {allSocieties.map((society, index) => {
                         return (
-                            <MenuItem value={society.societyId} key={index}>
+                            <MenuItem value={society._id} key={index}>
                                 {society.name}
                             </MenuItem>
                         );
@@ -131,9 +230,10 @@ function Register() {
                     required
                     label="Society Address"
                     id="societyAddress"
-                    value={registerForm.societyAddress}
+                    value={registerForm.societyAddress.value}
                     onChange={updateRegisterForm}
                     variant={inputVarient}
+                    helperText={registerForm.societyAddress.errorMessage}
                 ></TextField>
             </FormControl>
         </div>
@@ -146,13 +246,56 @@ function Register() {
                     required
                     label="Password"
                     id="password"
-                    value={registerForm.password}
+                    value={registerForm.password.value}
+                    type={passwordVisibility ? "text" : "password"}
                     onChange={updateRegisterForm}
                     variant={inputVarient}
+                    helperText={registerForm.password.errorMessage}
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={() =>
+                                        setPasswordVisibility(
+                                            !passwordVisibility
+                                        )
+                                    }
+                                    edge="end"
+                                >
+                                    {passwordVisibility ? (
+                                        <VisibilityOff />
+                                    ) : (
+                                        <Visibility />
+                                    )}
+                                </IconButton>
+                            </InputAdornment>
+                        )
+                    }}
                 ></TextField>
             </FormControl>
         </div>
     );
+
+    const checkPassword = (event) => {
+        console.log(event);
+
+        if (registerForm.password.value !== event.target.value) {
+            setPasswordMismatchError(true);
+        } else {
+            setPasswordMismatchError(false);
+        }
+    };
+
+    const confirmPasswordError = () => {
+        if (registerForm.confirmPassword.errorMessage) {
+            return registerForm.confirmPassword.errorMessage;
+        }
+        if (passwordMismatch) {
+            return "Password mismatch";
+        }
+        return "";
+    };
 
     const confirmPassword = (
         <div className="password-input">
@@ -161,9 +304,33 @@ function Register() {
                     required
                     label="Confirm Password"
                     id="confirmPassword"
-                    value={registerForm.confirmPassword}
-                    onChange={updateRegisterForm}
+                    type={confirmVisibility ? "text" : "password"}
+                    value={registerForm.confirmPassword.value}
+                    onChange={(e) => {
+                        updateRegisterForm(e);
+                        checkPassword(e);
+                    }}
                     variant={inputVarient}
+                    helperText={confirmPasswordError()}
+                    InputProps={{
+                        endAdornment: (
+                            <InputAdornment position="end">
+                                <IconButton
+                                    aria-label="toggle password visibility"
+                                    onClick={() =>
+                                        setConfirmVisibility(!confirmVisibility)
+                                    }
+                                    edge="end"
+                                >
+                                    {confirmVisibility ? (
+                                        <VisibilityOff />
+                                    ) : (
+                                        <Visibility />
+                                    )}
+                                </IconButton>
+                            </InputAdornment>
+                        )
+                    }}
                 ></TextField>
             </FormControl>
         </div>
@@ -176,9 +343,10 @@ function Register() {
                     required
                     label="Mobile"
                     id="mobile"
-                    value={registerForm.mobile}
+                    value={registerForm.mobile.value}
                     onChange={updateRegisterForm}
                     variant={inputVarient}
+                    helperText={registerForm.mobile.errorMessage}
                 ></TextField>
             </FormControl>
         </div>
@@ -191,17 +359,14 @@ function Register() {
                     required
                     label="Flat Number"
                     id="flatNo"
-                    value={registerForm.flatNo}
+                    value={registerForm.flatNo.value}
                     onChange={updateRegisterForm}
                     variant={inputVarient}
+                    helperText={registerForm.flatNo.errorMessage}
                 ></TextField>
             </FormControl>
         </div>
     );
-
-    const register = () => {
-        history.push("/thankyou");
-    };
 
     const registerBtn = (
         <div className="action-btn">
@@ -209,6 +374,7 @@ function Register() {
                 variant={buttonVarient}
                 color="primary"
                 onClick={() => register()}
+                disabled={!isRegisterFormValid}
             >
                 Register
             </Button>
@@ -296,13 +462,68 @@ function Register() {
         </div>
     );
 
+    const registeredSuccessFully = useSelector(isRegistered);
+    const registeringUser = useSelector(isRegisteringUser);
+
+    if (registeredSuccessFully) {
+        history.push("/thankyou");
+    }
+
+    // End of UI
+
+    //functions
+
+    const getSaveParam = () => {
+        const {
+            firstName,
+            lastName,
+            email,
+            mobile,
+            societyId,
+            societyName,
+            societyAddress,
+            password,
+            flatNo
+        } = registerForm;
+        let obj = {
+            firstName: firstName.value,
+            lastName: lastName.value,
+            email: email.value,
+            role: isAdmin ? "admin" : "member",
+            societyName: societyName.value,
+            societyAddress: societyAddress.value,
+            password: password.value
+        };
+
+        if (!isAdmin) {
+            obj = {
+                ...obj,
+                societyId: societyId.value,
+                mobile: mobile.value,
+                flatNo: flatNo.value
+            };
+        }
+        return obj;
+    };
+
+    const register = () => {
+        console.log(registerForm);
+        const param = getSaveParam();
+
+        dispatch(registerUser(param));
+    };
+
+    // end of functions
+
     return (
-        <Card className="register-box">
-            <CardContent>
-                {tabs}
-                {isAdmin ? adminView : memberView}
-            </CardContent>
-        </Card>
+        <SpinnerLoader show={registeringUser} fullScreen={true}>
+            <Card className="register-box">
+                <CardContent>
+                    {tabs}
+                    {isAdmin ? adminView : memberView}
+                </CardContent>
+            </Card>
+        </SpinnerLoader>
     );
 }
 export default Register;

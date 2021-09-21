@@ -8,6 +8,11 @@
         width: 75%;
         text-align: center;
         color: var(--primary-font-color) !important;
+
+        a {
+            color: var(--secondary-font-color) !important;
+            margin: 0 3px;
+        }
     }
 
     .thank-you-label {

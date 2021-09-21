@@ -6,7 +6,7 @@ import Modal from "@material-ui/core/Modal";
 import FormControl from "@material-ui/core/FormControl";
 import InputLabel from "@material-ui/core/InputLabel";
 import Button from "@material-ui/core/Button";
-
+import InputAdornment from "@material-ui/core/InputAdornment";
 import AppBar from "@material-ui/core/AppBar";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Divider from "@material-ui/core/Divider";
@@ -19,7 +19,7 @@ import { ReactComponent as CloseIcon } from "../assets/svgs/closeIcon.svg";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Typography from "@material-ui/core/Typography";
-
+import WindowCloseIcon from "@material-ui/icons/Close";
 import { Tabs, Tab } from "@material-ui/core";
 
 import SpinnerLoader from "./loader/loader";
@@ -30,7 +30,11 @@ import { ReactComponent as EditIcon } from "../assets/svgs/editIcon.svg";
 import { ReactComponent as DeleteIcon } from "../assets/svgs/deleteIcon.svg";
 import { ReactComponent as SocietyIcon } from "../assets/svgs/society.svg";
 import { ReactComponent as ThankYouIcon } from "../assets/svgs/thankyou.svg";
+import Snackbar from "@material-ui/core/Snackbar";
 import UserActions from "./userActions/userAction";
+
+import Visibility from "@material-ui/icons/Visibility";
+import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import AddIcon from "@material-ui/icons/Add";
 import FabMenu from "./fabMenu/fabMenu";
 import EventIcon from "@material-ui/icons/Event";
@@ -59,6 +63,7 @@ export {
     Avatar,
     Typography,
     CloseIcon,
+    WindowCloseIcon,
     CircularProgress,
     SpinnerLoader,
     Card,
@@ -76,5 +81,9 @@ export {
     SocietyIcon,
     Tabs,
     Tab,
-    ThankYouIcon
+    ThankYouIcon,
+    Snackbar,
+    InputAdornment,
+    Visibility,
+    VisibilityOff
 };

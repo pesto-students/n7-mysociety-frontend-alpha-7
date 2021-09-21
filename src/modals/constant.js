@@ -21,3 +21,8 @@ export const ModalTypes = {
     addGallery: "ADD_GALLERY",
     addAnnouncement: "ADD_ANNOUCEMENT"
 };
+
+export const initalPaginator = {
+    limit: 10,
+    page: 1
+};

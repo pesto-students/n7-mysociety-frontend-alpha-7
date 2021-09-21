@@ -4,8 +4,8 @@ import { links } from "../modals/page";
 export default function Routing() {
     return (
         <Switch>
-            {links.map((page) => {
-                return <Route key={page.menu} exact {...page} />;
+            {links.map((page, index) => {
+                return <Route key={index} exact {...page} />;
             })}
         </Switch>
     );
