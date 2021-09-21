@@ -1,5 +1,5 @@
-import Dashboard from "./dashboard";
-import Announcements from "./announcements";
+import Dashboard from "./dashboard/dashboard";
+import Announcements from "./announcements/announcements";
 import Events from "./events";
 import Gallery from "./gallery";
 import Complaints from "./complaints/complaints";

@@ -4,9 +4,13 @@ class Announcement {
         return http.get("/announcement", { params: payload });
     }
 
-    createAnnouncement() {}
+    createAnnouncement(payload) {
+        return http.put("/announcement", payload);
+    }
 
-    deleteAnnouncement() {}
+    deleteAnnouncement(payload) {
+        return http.delete("/announcement", { params: payload });
+    }
 }
 
 export default new Announcement();

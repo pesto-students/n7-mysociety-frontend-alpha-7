@@ -4,6 +4,7 @@ const initialState = {
     isOpened: false,
     type: null,
     data: null,
+    modalHeader: null,
 
     snackbar: {
         show: false,
@@ -17,7 +18,8 @@ export default function modalReducer(state = initialState, action) {
                 ...state,
                 isOpened: true,
                 type: action.payload.type,
-                data: action.payload.data
+                data: action.payload.data,
+                modalHeader: action.payload.modalHeader
             };
 
         case MODAL_ACTION.CLOSE_MODAL:
@@ -25,7 +27,8 @@ export default function modalReducer(state = initialState, action) {
                 ...state,
                 isOpened: false,
                 type: null,
-                data: null
+                data: null,
+                modalHeader: null
             };
 
         case MODAL_ACTION.SHOW_TOASTER: {

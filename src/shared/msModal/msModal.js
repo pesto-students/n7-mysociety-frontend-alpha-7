@@ -66,7 +66,6 @@ export default function MsModal() {
 
     const ModalComponent = getModalComponent();
 
-    console.log(data);
     const preventBackDropClose = (event, reason) => {
         if (reason !== "backdropClick") {
             dispatch({ type: MODAL_ACTION.CLOSE_MODAL });

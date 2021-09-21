@@ -1,13 +1,55 @@
 import React from "react";
-import { EditIcon, DeleteIcon } from "..";
 import "./userAction.scss";
-export default function UserActions({ canEdit, canDelete }) {
+import { CSSTransition } from "react-transition-group";
+import { CardActions, IconButton, EditIcon, DeleteIcon } from "..";
+export default function UserActions({
+    canEdit,
+    canDelete,
+    show,
+    onEdit,
+    onDelete
+}) {
+    const getAllAvailableActions = () => {
+        const actions = [];
+        if (canEdit) {
+            actions.push(
+                <IconButton
+                    aria-label="edit"
+                    size="medium"
+                    color="secondary"
+                    onClick={() => onEdit()}
+                >
+                    <EditIcon />
+                </IconButton>
+            );
+        }
+        if (canDelete) {
+            actions.push(
+                <IconButton
+                    aria-label="delete"
+                    size="medium"
+                    color="secondary"
+                    onClick={() => onDelete()}
+                >
+                    <DeleteIcon />
+                </IconButton>
+            );
+        }
+
+        return actions;
+    };
+
     return (
-        <div className="user-actions">
-            <div className="action">
-                {canEdit ? <EditIcon /> : null}
-                {canDelete ? <DeleteIcon /> : null}
-            </div>
-        </div>
+        <CSSTransition
+            key="adminAction"
+            timeout={1000}
+            in={show}
+            className="slide"
+            unmountOnExit
+        >
+            <CardActions className="card-action-btns">
+                {getAllAvailableActions()}
+            </CardActions>
+        </CSSTransition>
     );
 }

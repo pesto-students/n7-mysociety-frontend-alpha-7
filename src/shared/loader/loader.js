@@ -3,7 +3,7 @@ import { CircularProgress } from "../../shared";
 import "./loader.scss";
 export default function SpinnerLoader({ show, children, fullScreen }) {
     const fullScreenStyle = {
-        position: "absolute",
+        position: "fixed",
         left: 0,
         right: 0,
         zIndex: 10000

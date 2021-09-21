@@ -25,7 +25,7 @@ import { Tabs, Tab } from "@material-ui/core";
 import SpinnerLoader from "./loader/loader";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-import { Card, CardContent, CardHeader } from "@material-ui/core";
+import { Card, CardContent, CardHeader, CardActions } from "@material-ui/core";
 import { ReactComponent as EditIcon } from "../assets/svgs/editIcon.svg";
 import { ReactComponent as DeleteIcon } from "../assets/svgs/deleteIcon.svg";
 import { ReactComponent as SocietyIcon } from "../assets/svgs/society.svg";
@@ -41,6 +41,9 @@ import EventIcon from "@material-ui/icons/Event";
 import RecordVoiceOverIcon from "@material-ui/icons/RecordVoiceOver";
 import CameraAltIcon from "@material-ui/icons/CameraAlt";
 import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
+import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
+import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import Paginator from "./paginator/paginator";
 export {
     MsModal,
     TextField,
@@ -85,5 +88,9 @@ export {
     Snackbar,
     InputAdornment,
     Visibility,
-    VisibilityOff
+    VisibilityOff,
+    ChevronLeftIcon,
+    ChevronRightIcon,
+    Paginator,
+    CardActions
 };
