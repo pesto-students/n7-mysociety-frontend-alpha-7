@@ -11,9 +11,9 @@ import { BrowserRouter as Router } from "react-router-dom";
 import Routing from "./routing/routing";
 import "./fonts/Righteous/Righteous-Regular.ttf";
 
-import { Snackbar, WindowCloseIcon } from "./shared";
+import { MsModal, Snackbar, WindowCloseIcon } from "./shared";
 import { useSelector, useDispatch } from "react-redux";
-import { snack } from "./store/selectors/modal.selector";
+import { snack, showModal } from "./store/selectors/modal.selector";
 import { CLOSE_TOASTER } from "./store/actions/modal.action";
 function App() {
     const snackBarData = useSelector(snack);
@@ -50,11 +50,14 @@ function App() {
         />
     );
 
+    const displayModal = useSelector(showModal);
+
     return (
         <ThemeProvider theme={theme}>
             <InputVarientContext.Provider value="standard">
                 <ButtonVarientContext.Provider value="contained">
                     {snackBar}
+                    {displayModal ? <MsModal /> : null}
                     <Router>
                         <Routing></Routing>
                     </Router>

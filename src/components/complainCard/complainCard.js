@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import {
     Card,
     CardContent,
@@ -24,6 +24,8 @@ export default function ComplainCard({ complain, isAdmin }) {
         </div>
     );
 
+    const [showAction, setShowAction] = useState(false);
+
     const takeActionButton = (
         <div className="admin-action-btn">
             <Button variant={buttonVarient} color="primary">
@@ -33,8 +35,11 @@ export default function ComplainCard({ complain, isAdmin }) {
     );
 
     return (
-        <Card className="complain-card">
-            <UserActions canEdit={true} canDelete={true} />
+        <Card
+            className="complain-card"
+            onMouseEnter={() => setShowAction(true)}
+            onMouseLeave={() => setShowAction(false)}
+        >
             <CardHeader title={complain.name}></CardHeader>
             <CardContent>
                 <div className="description">{complain.description}</div>
@@ -46,6 +51,11 @@ export default function ComplainCard({ complain, isAdmin }) {
                 ) : (
                     dates
                 )}
+                <UserActions
+                    canEdit={true}
+                    canDelete={true}
+                    show={showAction}
+                />
             </CardContent>
         </Card>
     );

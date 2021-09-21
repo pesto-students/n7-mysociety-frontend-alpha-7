@@ -25,7 +25,7 @@ import { Tabs, Tab } from "@material-ui/core";
 import SpinnerLoader from "./loader/loader";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
-import { Card, CardContent, CardHeader } from "@material-ui/core";
+import { Card, CardContent, CardHeader, CardActions } from "@material-ui/core";
 import { ReactComponent as EditIcon } from "../assets/svgs/editIcon.svg";
 import { ReactComponent as DeleteIcon } from "../assets/svgs/deleteIcon.svg";
 import { ReactComponent as SocietyIcon } from "../assets/svgs/society.svg";
@@ -91,5 +91,6 @@ export {
     VisibilityOff,
     ChevronLeftIcon,
     ChevronRightIcon,
-    Paginator
+    Paginator,
+    CardActions
 };

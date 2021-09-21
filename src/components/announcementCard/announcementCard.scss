@@ -9,6 +9,18 @@
         font-size: 14px;
         padding: 0 0 15px 0;
     }
+    .date-action {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        & div {
+            flex: 50%;
+        }
+        & > div:last-of-type {
+            display: flex;
+            justify-content: flex-end;
+        }
+    }
     .dates {
         display: flex;
         @media only screen and (min-width: 768px) {

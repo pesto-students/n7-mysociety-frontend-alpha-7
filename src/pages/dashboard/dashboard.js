@@ -44,6 +44,7 @@ const Dashboard = () => {
                             <AnnouncementCard
                                 annoucement={announcement}
                                 key={index}
+                                isDashboard={true}
                             ></AnnouncementCard>
                         );
                     })}

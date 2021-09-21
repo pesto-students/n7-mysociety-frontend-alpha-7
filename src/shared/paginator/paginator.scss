@@ -1,0 +1,29 @@
+.pagination {
+    * {
+        color: var(--primary-font-color);
+    }
+    display: flex;
+    flex-direction: revert;
+    align-items: center;
+    justify-content: center;
+
+    .current-page-number {
+        background-color: var(--primary-color);
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+        p {
+            color: var(--font-white) !important;
+        }
+    }
+}
+
+.no-records-message {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 250px;
+}

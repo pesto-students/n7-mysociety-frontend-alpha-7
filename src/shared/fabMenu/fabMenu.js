@@ -10,12 +10,12 @@ import {
 import "react-tiny-fab/dist/styles.css";
 import "./fabMenu.scss";
 import { ModalTypes } from "../../modals/constant";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as MODAL_ACTION from "../../store/actions/modal.action";
-
-export default function FabMenu({ isAdmin }) {
+import { isLoggedInAsAdmin } from "../../store/selectors/authetication.selector";
+export default function FabMenu() {
     const dispatch = useDispatch();
-
+    const isAdmin = useSelector(isLoggedInAsAdmin);
     const getModalTitle = (type) => {
         switch (type) {
             case ModalTypes.addComplain:
@@ -36,9 +36,8 @@ export default function FabMenu({ isAdmin }) {
             type: MODAL_ACTION.OPEN_MODAL,
             payload: {
                 type: type,
-                data: {
-                    title: getModalTitle(type)
-                }
+                modalHeader: getModalTitle(type),
+                data: null
             }
         });
     };
@@ -64,13 +63,6 @@ export default function FabMenu({ isAdmin }) {
             key="gallery"
         >
             <CameraAltIcon />
-        </Action>,
-        <Action
-            text="Add Complain"
-            onClick={() => openPopup(ModalTypes.addComplain)}
-            key="complain"
-        >
-            <AssignmentTurnedInIcon />
         </Action>
     ];
 

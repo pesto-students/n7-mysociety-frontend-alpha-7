@@ -1,3 +1,4 @@
 import { Validator } from "./validator";
 import { formatDate } from "./formatting";
-export { Validator, formatDate };
+import * as toaster from "./toaster";
+export { Validator, formatDate, toaster };
