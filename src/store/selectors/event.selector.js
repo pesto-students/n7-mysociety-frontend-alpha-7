@@ -6,6 +6,7 @@ export const allEvents = (state) => state.event.events.data;
 
 export const pager = (state) => {
     const details = allEvents(state);
+
     return getPager(details);
 };
 

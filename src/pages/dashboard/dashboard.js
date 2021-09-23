@@ -29,8 +29,8 @@ const Dashboard = () => {
             ...initalPaginator,
             societyId: societyDetails._id
         };
-        dispatch(getAllEvents(param));
-        dispatch(getAllAnnouncements(param));
+        dispatch(getAllEvents({ ...param, filterType: "todays" }));
+        dispatch(getAllAnnouncements({ ...param, filterType: "latest" }));
     }, []);
 
     const getHeaderTitle = (title) => {

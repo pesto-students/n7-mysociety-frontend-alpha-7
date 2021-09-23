@@ -5,14 +5,14 @@ export function formatDate(date, format) {
 
 export function getPager(details) {
     return {
-        page: details.page,
-        totalPages: details.totalPages,
-        hasNextPage: details.hasNextPage,
-        hasPrevPage: details.hasPrevPage,
-        limit: details.limit,
-        prevPage: details.prevPage,
-        nextPage: details.nextPage,
-        totalDocs: details.totalDocs
+        page: details?.page,
+        totalPages: details?.totalPages,
+        hasNextPage: details?.hasNextPage,
+        hasPrevPage: details?.hasPrevPage,
+        limit: details?.limit,
+        prevPage: details?.prevPage,
+        nextPage: details?.nextPage,
+        totalDocs: details?.totalDocs
     };
 }
 
