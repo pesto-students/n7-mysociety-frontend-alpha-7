@@ -11,6 +11,8 @@ import { Avatar, Button, Menu, Typography } from "@material-ui/core";
 import { getAvatarName } from "../../../helpers/functions";
 import MySocietyMenu from "./mySocietyMenus";
 import MyProfileMenus from "./myProfileMenus";
+import { useSelector } from "react-redux";
+import { loggedInUserDetails } from "../../../store/selectors/authetication.selector";
 import "./header.scss";
 
 const drawerWidth = "80%";
@@ -57,7 +59,7 @@ export default function MobileSideBarMenu({ menus }) {
     };
     const [anchorEl, setAnchorEl] = React.useState(null);
     const open = Boolean(anchorEl);
-
+    const userData = useSelector(loggedInUserDetails);
     const handleMenu = (event) => {
         setAnchorEl(event.currentTarget);
     };
@@ -65,7 +67,7 @@ export default function MobileSideBarMenu({ menus }) {
     const handleClose = () => {
         setAnchorEl(null);
     };
-    const content = { userName: "Mahesh Vora" };
+    const content = { userName: `${userData.firstName} ${userData.lastName}` };
 
     const classes = useStyles();
     const sideBarMenu = () => {
@@ -121,7 +123,7 @@ export default function MobileSideBarMenu({ menus }) {
                                     component="h6"
                                     className="profileName"
                                 >
-                                    John Smith
+                                    {content?.userName}
                                 </Typography>
                             </Button>
                             <Menu

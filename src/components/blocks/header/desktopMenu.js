@@ -4,8 +4,11 @@ import "./header.scss";
 import MySocietyMenu from "./mySocietyMenus";
 import { getAvatarName } from "../../../helpers/functions";
 import MyProfileMenus from "./myProfileMenus";
+import { useSelector } from "react-redux";
+import { loggedInUserDetails } from "../../../store/selectors/authetication.selector";
 export default function DeskTopMenu({ menus }) {
     const [anchorEl, setAnchorEl] = React.useState(null);
+    const userData = useSelector(loggedInUserDetails);
     const open = Boolean(anchorEl);
 
     const handleMenu = (event) => {
@@ -15,7 +18,8 @@ export default function DeskTopMenu({ menus }) {
     const handleClose = () => {
         setAnchorEl(null);
     };
-    const content = { userName: "Mahesh Vora" };
+
+    const content = { userName: `${userData.firstName} ${userData.lastName}` };
     return (
         <header className="desktop-header headerWrap">
             <div className="societyWrap">
@@ -57,7 +61,7 @@ export default function DeskTopMenu({ menus }) {
                                 component="h6"
                                 className="profileName"
                             >
-                                John Smith
+                                {content?.userName}
                             </Typography>
                         </Button>
                         <Menu
