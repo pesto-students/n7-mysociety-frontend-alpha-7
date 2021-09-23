@@ -1,4 +1,4 @@
-import { Avatar, IconButton, Menu, Typography } from "@material-ui/core";
+import { Avatar, Button, Menu, Typography } from "@material-ui/core";
 import React from "react";
 import "./header.scss";
 import MySocietyMenu from "./mySocietyMenus";
@@ -23,7 +23,7 @@ export default function DeskTopMenu({ menus }) {
 
                 <div className="personal-details desktop">
                     <div>
-                        <IconButton
+                        <Button
                             aria-label="account of current user"
                             aria-controls="menu-appbar"
                             aria-haspopup="true"
@@ -59,18 +59,17 @@ export default function DeskTopMenu({ menus }) {
                             >
                                 John Smith
                             </Typography>
-                        </IconButton>
+                        </Button>
                         <Menu
                             id="menu-appbar"
                             anchorEl={anchorEl}
-                            anchorOrigin={{
-                                vertical: "top",
-                                horizontal: "right"
-                            }}
-                            keepMounted
                             transformOrigin={{
-                                vertical: "top",
-                                horizontal: "right"
+                                horizontal: "right",
+                                vertical: "top"
+                            }}
+                            anchorOrigin={{
+                                horizontal: "right",
+                                vertical: "bottom"
                             }}
                             open={open}
                             onClose={handleClose}

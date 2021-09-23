@@ -151,15 +151,26 @@
 }
 .personal-details.desktop {
     position: absolute;
-    right: 0;
-    top: 70px;
+    right: 10px;
+    top: 80px;
+}
+.personal-details.mobile {
+    span.MuiButton-label {
+        position: inherit;
+        display: flex;
+        flex-direction: row;
+        .avatar {
+            margin-right: 10px;
+        }
+    }
 }
 .profileMenuLink {
     color: var(--primary-font-color);
     text-decoration: none;
+    width: 100%;
 }
 .userProfileButton {
-    > .MuiIconButton-label {
+    > .MuiButton-label {
         flex-direction: column;
     }
     .profileName {
