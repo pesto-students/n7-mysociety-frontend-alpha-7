@@ -154,6 +154,10 @@
     right: 0;
     top: 70px;
 }
+.profileMenuLink {
+    color: var(--primary-font-color);
+    text-decoration: none;
+}
 .userProfileButton {
     > .MuiIconButton-label {
         flex-direction: column;

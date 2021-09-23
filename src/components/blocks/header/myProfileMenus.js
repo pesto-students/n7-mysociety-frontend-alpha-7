@@ -20,7 +20,11 @@ export default function MyProfileMenus() {
             {currentMenus.map((menu, index) => {
                 return (
                     <MenuItem key={index}>
-                        <NavLink key={menu.menu} to={menu.path}>
+                        <NavLink
+                            key={menu.menu}
+                            to={menu.path}
+                            className="profileMenuLink"
+                        >
                             <div className="singleMenu">
                                 <div className="name">{menu.menu}</div>
                             </div>
