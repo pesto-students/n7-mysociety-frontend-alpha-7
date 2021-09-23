@@ -4,9 +4,9 @@ class Complaint {
         return http.get("/complaint", { params: payload });
     }
 
-    createComplaint() {}
-
-    deleteComplaint() {}
+    createComplaint(payload) {
+        return http.put("/complaint", payload);
+    }
 }
 
 export default new Complaint();

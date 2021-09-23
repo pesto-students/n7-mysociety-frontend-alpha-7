@@ -130,6 +130,11 @@
         & > div {
             margin-right: 5px;
         }
+        &.desktop {
+            position: absolute;
+            right: 0;
+            top: 90px;
+        }
         .MuiAvatar-root {
             height: 60px;
             width: 60px;
@@ -141,6 +146,40 @@
         span {
             position: absolute;
             right: 15px;
+        }
+    }
+}
+.personal-details.desktop {
+    position: absolute;
+    right: 0;
+    top: 70px;
+}
+.userProfileButton {
+    > .MuiIconButton-label {
+        flex-direction: column;
+    }
+    .profileName {
+        font-weight: bold;
+        color: var(--primary-font-color);
+    }
+}
+.avatar {
+    height: 40px;
+    width: 40px;
+    display: flex;
+    border-radius: 50%;
+    margin: 0 auto;
+    &.avatarMedia {
+        border: 2px solid var(--primary-color);
+    }
+    &.avatarName {
+        border: 2px solid var(--secondary-color);
+        background: var(--primary-color);
+        .text {
+            font-weight: bold;
+            font-size: 18px;
+            text-align: center;
+            color: #ffffff;
         }
     }
 }

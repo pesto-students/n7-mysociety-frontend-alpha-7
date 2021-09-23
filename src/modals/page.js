@@ -49,9 +49,27 @@ export const links = [
         isMenu: true
     },
     {
-        menu: "members",
-        path: "/members",
-        component: Pages.Members,
+        menu: "Profile",
+        path: "/profile",
+        component: Pages.Profile,
+        isMenu: true
+    },
+    {
+        menu: "All Members",
+        path: "/all-members",
+        component: Pages.AllMembers,
+        isMenu: true
+    },
+    {
+        menu: "Society Profile",
+        path: "/society-profile",
+        component: Pages.SocietyProfile,
+        isMenu: true
+    },
+    {
+        menu: "Logout",
+        path: "/logout",
+        component: Pages.Logout,
         isMenu: true
     }
 ];
@@ -86,5 +104,47 @@ export const menus = [
         name: "FAQ's",
         path: "/FAQ",
         icon: <FAQIcon />
+    }
+];
+
+export const adminProfileMenus = [
+    {
+        menu: "Profile",
+        path: "/profile",
+        component: Pages.Profile,
+        isMenu: true
+    },
+    {
+        menu: "All Members",
+        path: "/all-members",
+        component: Pages.AllMembers,
+        isMenu: true
+    },
+    {
+        menu: "Society Profile",
+        path: "/society-profile",
+        component: Pages.SocietyProfile,
+        isMenu: true
+    },
+    {
+        menu: "Logout",
+        path: "/logout",
+        component: Pages.Logout,
+        isMenu: true
+    }
+];
+
+export const memberProfileMenus = [
+    {
+        menu: "Profile",
+        path: "/profile",
+        component: Pages.Profile,
+        isMenu: true
+    },
+    {
+        menu: "Logout",
+        path: "/logout",
+        component: Pages.Logout,
+        isMenu: true
     }
 ];

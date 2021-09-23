@@ -26,3 +26,8 @@ export const initalPaginator = {
     limit: 10,
     page: 1
 };
+
+export const dashboardInitalPaginator = {
+    limit: 2,
+    page: 1
+};
