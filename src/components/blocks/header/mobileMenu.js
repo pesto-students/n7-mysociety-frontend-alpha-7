@@ -12,7 +12,8 @@ import {
 } from "../../../shared";
 import MySocietyMenu from "./mySocietyMenus";
 import "./header.scss";
-
+import { loggedInUserSocietyDetails } from "../../../store/selectors/authetication.selector";
+import { useSelector } from "react-redux";
 const drawerWidth = "80%";
 
 const useStyles = makeStyles((theme) => ({
@@ -57,6 +58,8 @@ export default function MobileSideBarMenu({ menus }) {
     };
 
     const classes = useStyles();
+    const societyDetails = useSelector(loggedInUserSocietyDetails);
+
     const sideBarMenu = () => {
         return (
             <Drawer
@@ -101,7 +104,7 @@ export default function MobileSideBarMenu({ menus }) {
                         <MenuIcon />
                     </IconButton>
                     <div className="societyWrap">
-                        <div className="name">Bayview Hill Gardens Society</div>
+                        <div className="name">{societyDetails?.name}</div>
                     </div>
                 </ToolBar>
             </AppBar>
