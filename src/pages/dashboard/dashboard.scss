@@ -1,5 +1,4 @@
 .data-container {
-    display: flex;
     flex-direction: color;
 
     & > div {
@@ -10,13 +9,21 @@
             border-bottom: 2px solid var(--primary-color);
         }
     }
+    .firstRow,
+    .secondRow {
+        display: flex;
+        justify-content: space-between;
+    }
 
     .announcement,
     .events,
-    .memories {
+    .memories,
+    .newMembers,
+    .complaint {
         padding: 15px 0;
     }
-    .announcement {
+    .announcement,
+    .complaint {
         .list {
             max-height: 300px;
             overflow-y: auto;
@@ -25,7 +32,8 @@
             }
         }
 
-        .annoucement-card {
+        .annoucement-card,
+        .complain-card {
             margin: 10px 0 !important;
         }
     }
