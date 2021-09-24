@@ -39,6 +39,13 @@ export class Validator {
         return true;
     };
 
+    static minDate = (value, minDate) => {
+        if (new Date(value) < minDate) {
+            return false;
+        }
+        return true;
+    };
+
     static runValidator(value, validations) {
         const obj = {};
         Object.keys(validations)
@@ -62,7 +69,12 @@ export class Validator {
                         }
                         break;
                     case "maxLength":
-                        if (Validator.maxLength(value, validations[key])) {
+                        if (!Validator.maxLength(value, validations[key])) {
+                            obj[key] = false;
+                        }
+                        break;
+                    case "minDate":
+                        if (!Validator.minDate(value, validations[key])) {
                             obj[key] = false;
                         }
                         break;

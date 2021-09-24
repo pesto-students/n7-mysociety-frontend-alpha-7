@@ -4,6 +4,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { getAllAnnouncements } from "../../store/dispatchers/announcement.dispatch";
 import { getAllComplaints } from "../../store/dispatchers/complaint.dispatch";
 import { announcementList } from "../../store/selectors/announcement.selector";
+import {
+    allEvents,
+    isEventLoading
+} from "../../store/selectors/event.selector";
 import { complaintList } from "../../store/selectors/complaint.selector";
 import { loggedInUserSocietyDetails } from "../../store/selectors/authetication.selector";
 import { fetchingAnnocements } from "../../store/selectors/announcement.selector";
@@ -14,14 +18,20 @@ import { isLoggedInAsAdmin } from "../../store/selectors/authetication.selector"
 import "./dashboard.scss";
 import { SpinnerLoader, Typography } from "../../shared";
 import ComplainCard from "../../components/complainCard/complainCard";
+import { getAllEvents } from "../../store/dispatchers/event.dispatch";
+import EventCard from "../../components/shared/eventCard";
+
 const Dashboard = () => {
     const dispatch = useDispatch();
     const listOfAnnouncements = useSelector(announcementList);
+    const listOfEvents = useSelector(allEvents);
     const listOfComplaints = useSelector(complaintList);
+
     const societyDetails = useSelector(loggedInUserSocietyDetails);
     const isAdmin = useSelector(isLoggedInAsAdmin);
     const contents = {
         isAnnocementsLoading: useSelector(fetchingAnnocements),
+        loadingEvents: useSelector(isEventLoading),
         isComplaintsLoading: useSelector(fetchingComplaint)
     };
     useEffect(() => {
@@ -29,6 +39,8 @@ const Dashboard = () => {
             ...dashboardInitalPaginator,
             societyId: societyDetails._id
         };
+        dispatch(getAllEvents({ ...param, filterType: "todays" }));
+        dispatch(getAllAnnouncements({ ...param, filterType: "latest" }));
         dispatch(getAllAnnouncements(param));
         dispatch(getAllComplaints(param));
     }, []);
@@ -84,6 +96,19 @@ const Dashboard = () => {
     const events = (
         <div className="events">
             <div>{getHeaderTitle("Todays Events")}</div>
+            <SpinnerLoader show={contents.loadingEvents}>
+                <div className="list">
+                    {listOfEvents?.docs?.map((event, index) => {
+                        return (
+                            <EventCard
+                                event={event}
+                                key={index}
+                                isDashboardView={true}
+                            ></EventCard>
+                        );
+                    })}
+                </div>
+            </SpinnerLoader>
         </div>
     );
 

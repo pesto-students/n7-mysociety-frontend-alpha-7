@@ -1,21 +1,93 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useFormGroup } from "../../../hooks";
-import { FormControl, TextField, Button } from "../../../shared";
+import { FormControl, TextField, Button, SpinnerLoader } from "../../../shared";
 import {
     InputVarientContext,
     ButtonVarientContext
 } from "../../../contexts/variant.context";
+import { loggedInUserSocietyDetails } from "../../../store/selectors/authetication.selector";
+import { addEvent } from "../../../store/dispatchers/event.dispatch";
+import { useDispatch, useSelector } from "react-redux";
+import S3FileUpload from "react-s3";
 import "./event.scss";
-export default function EventPopup({ event }) {
+import { AWS_CONFIG } from "../../../utils/secrets";
+import { dateTimeLocal, Validator } from "../../../utils";
+import { isAdding } from "../../../store/selectors/event.selector";
+import { modalType } from "../../../store/selectors/modal.selector";
+import { ModalTypes } from "../../../modals/constant";
+
+export default function EventPopup({ item }) {
     const inputVarient = useContext(InputVarientContext);
     const buttonVarient = useContext(ButtonVarientContext);
+    const dispatch = useDispatch();
+    const societyDetails = useSelector(loggedInUserSocietyDetails);
+    const loading = useSelector(isAdding);
+    const modal = useSelector(modalType);
+    const viewOnly = modal === ModalTypes.event;
+    const event = item;
+    const today = new Date();
+    const [error, setError] = useState(null);
     const [eventForm, updateForm] = useFormGroup({
-        title: event?.title ?? "",
-        description: event?.description ?? "",
-        fromDateTime: event?.fromDateTime ?? "",
-        toDateTime: event?.toDateTime ?? "",
-        image: event?.image ?? ""
+        title: {
+            value: event?.title ?? "",
+            validation: {
+                required: true,
+                msgs: { required: "Title is required" }
+            }
+        },
+        venue: {
+            value: event?.venue ?? "",
+            validation: {
+                required: true,
+                msgs: {
+                    required: "Venue is required"
+                }
+            }
+        },
+        desc: {
+            value: event?.desc ?? "",
+            validation: {
+                required: true,
+                msgs: { required: "Description is required" }
+            }
+        },
+        fromDateTime: {
+            value: event?.fromDateTime ? dateTimeLocal(event.fromDateTime) : "",
+            validation: {
+                required: true,
+                minDate: today,
+                msgs: {
+                    required: "FromDateTime is required",
+                    minDate: "fromdate cannot be less than today"
+                }
+            }
+        },
+        toDateTime: {
+            value: event?.toDateTime ? dateTimeLocal(event.toDateTime) : "",
+            validation: {
+                required: true,
+                msgs: { required: "ToDateTime is required" }
+            }
+        },
+        img: {
+            value: event?.img ?? "",
+            validation: {
+                required: true,
+                msgs: { required: "Image is required" }
+            }
+        },
+        _id: { value: event?._id ?? "" }
     });
+
+    const upload = (e) => {
+        S3FileUpload.uploadFile(e.target.files[0], AWS_CONFIG)
+            .then((data) => {
+                updateForm({ target: { id: "img", value: data.location } });
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
 
     const title = (
         <div className="title-input">
@@ -23,13 +95,16 @@ export default function EventPopup({ event }) {
                 <TextField
                     label="Title"
                     id="title"
-                    value={eventForm.title}
+                    value={eventForm.title.value}
                     onChange={updateForm}
                     variant={inputVarient}
+                    disabled={viewOnly}
+                    required
                 ></TextField>
             </FormControl>
         </div>
     );
+    console.log(today.toISOString());
     const fromDateTime = (
         <div className="from-date-time-input">
             <FormControl>
@@ -37,7 +112,12 @@ export default function EventPopup({ event }) {
                     id="fromDateTime"
                     label="From DateTime"
                     type="datetime-local"
-                    value={eventForm.fromDateTime}
+                    value={eventForm.fromDateTime.value}
+                    onChange={updateForm}
+                    disabled={viewOnly}
+                    min={today.toISOString()}
+                    helperText={eventForm.fromDateTime.errorMessage}
+                    required
                     InputLabelProps={{
                         shrink: true
                     }}
@@ -52,10 +132,13 @@ export default function EventPopup({ event }) {
                     id="toDateTime"
                     label="To DateTime"
                     type="datetime-local"
-                    value={eventForm.toDateTime}
+                    value={eventForm.toDateTime.value}
+                    onChange={updateForm}
+                    disabled={viewOnly}
                     InputLabelProps={{
                         shrink: true
                     }}
+                    required
                 />
             </FormControl>
         </div>
@@ -65,28 +148,47 @@ export default function EventPopup({ event }) {
             <FormControl>
                 <TextField
                     label="Description"
-                    id="description"
+                    id="desc"
                     maxRows={4}
                     minRows={4}
                     multiline
-                    value={eventForm.description}
+                    value={eventForm.desc.value}
                     onChange={updateForm}
                     variant={inputVarient}
+                    disabled={viewOnly}
+                    required
                 ></TextField>
             </FormControl>
         </div>
     );
+    const venue = (
+        <div className="venue-input">
+            <FormControl>
+                <TextField
+                    label="Venue"
+                    id="venue"
+                    value={eventForm.venue.value}
+                    onChange={updateForm}
+                    variant={inputVarient}
+                    disabled={viewOnly}
+                    required
+                ></TextField>
+            </FormControl>
+        </div>
+    );
+
     const image = (
         <div className="event-image-input">
             <div style={{ display: "none" }}>
                 <FormControl>
                     <TextField
                         label="Image"
-                        id="image"
-                        value={eventForm.image}
+                        id="img"
                         type="file"
-                        onChange={updateForm}
+                        onChange={upload}
                         variant={inputVarient}
+                        disabled={viewOnly}
+                        required
                     ></TextField>
                 </FormControl>
             </div>
@@ -95,15 +197,22 @@ export default function EventPopup({ event }) {
 
     const uploadImageButton = (
         <div className="action-btn  upload-btn">
-            <Button variant="outlined" color="primary">
-                <label htmlFor="image">upload</label>
+            <Button variant="outlined" color="primary" disabled={viewOnly}>
+                <label htmlFor="img">upload</label>
             </Button>
         </div>
     );
 
+    const isEventFormValid = Validator.isFormValid(eventForm);
+
     const saveButton = (
         <div className="action-btn">
-            <Button variant={buttonVarient} color="primary">
+            <Button
+                variant={buttonVarient}
+                color="primary"
+                disabled={!isEventFormValid}
+                onClick={() => saveEvent()}
+            >
                 save
             </Button>
         </div>
@@ -111,22 +220,64 @@ export default function EventPopup({ event }) {
 
     const updateImage = (
         <div className="upload-image-input">
-            <div className="image-preview">&nbsp;</div>
+            <div
+                className="image-preview"
+                style={{
+                    backgroundImage: `url(${eventForm.img?.value ?? ""})`
+                }}
+            >
+                &nbsp;
+            </div>
             {image}
             {uploadImageButton}
         </div>
     );
 
+    const saveEvent = () => {
+        if (
+            new Date(eventForm.fromDateTime.value) >
+            new Date(eventForm.toDateTime.value)
+        ) {
+            setError("fromdate should be less than to date");
+            setTimeout(() => setError(null), 2000);
+            return;
+        }
+
+        let payload = {
+            title: eventForm.title.value,
+            desc: eventForm.desc.value,
+            fromDateTime: eventForm.fromDateTime.value,
+            toDateTime: eventForm.toDateTime.value,
+            venue: eventForm.venue.value,
+            img: eventForm.img.value,
+            societyId: societyDetails._id
+        };
+
+        if (eventForm._id?.value) {
+            payload = {
+                ...payload,
+                _id: eventForm._id.value
+            };
+        }
+        dispatch(addEvent(payload));
+    };
+
     return (
-        <div className="event-model-content">
-            <div>{updateImage}</div>
-            <div>
-                {title}
-                {fromDateTime}
-                {toDateTime}
-                {description}
-                {saveButton}
+        <SpinnerLoader show={loading} fullScreen={true}>
+            <div className="event-model-content">
+                <div>{updateImage}</div>
+                <div>
+                    {title}
+                    {venue}
+                    {fromDateTime}
+                    {toDateTime}
+                    {description}
+                    {error ? (
+                        <span style={{ color: "red" }}>{error}</span>
+                    ) : null}
+                    {!viewOnly ? saveButton : null}
+                </div>
             </div>
-        </div>
+        </SpinnerLoader>
     );
 }

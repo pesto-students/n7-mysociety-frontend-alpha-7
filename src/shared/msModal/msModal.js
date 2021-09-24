@@ -89,7 +89,7 @@ export default function MsModal() {
                     </div>
                 </div>
                 <div className="modalBody">
-                    <ModalComponent item={data} />{" "}
+                    <ModalComponent item={data} />
                 </div>
             </div>
         </Modal>

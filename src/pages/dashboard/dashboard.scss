@@ -23,18 +23,21 @@
         padding: 15px 0;
     }
     .announcement,
-    .complaint {
-        .list {
-            max-height: 300px;
-            overflow-y: auto;
-            &::-webkit-scrollbar {
-                width: 0 !important;
+    .events {
+        .complaint {
+            .list {
+                margin-top: 15px;
+                max-height: 500px;
+                overflow-y: auto;
+                &::-webkit-scrollbar {
+                    width: 0 !important;
+                }
             }
-        }
 
-        .annoucement-card,
-        .complain-card {
-            margin: 10px 0 !important;
+            .annoucement-card,
+            .complain-card {
+                margin: 10px 0 !important;
+            }
         }
     }
 }

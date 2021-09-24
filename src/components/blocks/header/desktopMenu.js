@@ -5,10 +5,14 @@ import MySocietyMenu from "./mySocietyMenus";
 import { getAvatarName } from "../../../helpers/functions";
 import MyProfileMenus from "./myProfileMenus";
 import { useSelector } from "react-redux";
-import { loggedInUserDetails } from "../../../store/selectors/authetication.selector";
+import {
+    loggedInUserDetails,
+    loggedInUserSocietyDetails
+} from "../../../store/selectors/authetication.selector";
 export default function DeskTopMenu({ menus }) {
     const [anchorEl, setAnchorEl] = React.useState(null);
     const userData = useSelector(loggedInUserDetails);
+    const societyDetails = useSelector(loggedInUserSocietyDetails);
     const open = Boolean(anchorEl);
 
     const handleMenu = (event) => {
@@ -23,7 +27,7 @@ export default function DeskTopMenu({ menus }) {
     return (
         <header className="desktop-header headerWrap">
             <div className="societyWrap">
-                <div className="name">Bayview Hill Gardens Society</div>
+                <div className="name">{societyDetails?.name}</div>
 
                 <div className="personal-details desktop">
                     <div>
