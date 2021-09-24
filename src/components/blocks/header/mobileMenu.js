@@ -15,7 +15,6 @@ import { useSelector } from "react-redux";
 import { loggedInUserDetails } from "../../../store/selectors/authetication.selector";
 import "./header.scss";
 import { loggedInUserSocietyDetails } from "../../../store/selectors/authetication.selector";
-import { useSelector } from "react-redux";
 const drawerWidth = "80%";
 
 const useStyles = makeStyles((theme) => ({
