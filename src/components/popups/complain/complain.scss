@@ -16,4 +16,11 @@
             margin: 5px;
         }
     }
+    .commentDateWrap {
+        padding: 10px 0px;
+        .comment,
+        .date {
+            color: var(--primary-font-color);
+        }
+    }
 }
