@@ -1,7 +1,14 @@
 export const AWS_CONFIG = {
-    bucketName: process.env.REACT_APP_AWS_BUCKET_NAME,
+    bucketName: "mysociety-app",
     dirName: process.env.REACT_APP_AWS_EVENT_DIR_NAME,
-    region: process.env.REACT_APP_AWS_REGION,
-    accessKeyId: process.env.REACT_APP_AWS_ACCESS_KEY_ID,
-    secretAccessKey: process.env.REACT_APP_AWS_SECRET_ACCESS_KEY
+    region: "eu-west-3",
+    accessKeyId: "AKIAZ7OGRQHKI2E6FTGO",
+    secretAccessKey: "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"
+};
+
+export const getConfig = (dirName) => {
+    return {
+        ...AWS_CONFIG,
+        dirName: dirName
+    };
 };

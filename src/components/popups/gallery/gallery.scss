@@ -22,17 +22,15 @@
                     height: 100px;
                     border-radius: 15px;
                 }
-
-                .user-actions {
+                button {
                     display: none;
+                    position: relative;
+                    top: -75%;
+                    left: 25px;
                 }
                 &:hover {
-                    .user-actions {
+                    button {
                         display: block;
-                        border-radius: 15px;
-                    }
-                    img {
-                        display: none;
                     }
                 }
             }
@@ -79,6 +77,7 @@
     }
     .event-selector {
         width: 100%;
+        padding: 10px 0;
         .MuiFormControl-root {
             width: 100%;
         }
