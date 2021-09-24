@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { useFormGroup } from "../../../hooks";
 import { FormControl, TextField, Button, SpinnerLoader } from "../../../shared";
 import {
@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import S3FileUpload from "react-s3";
 import "./event.scss";
 import { AWS_CONFIG } from "../../../utils/secrets";
-import { dateTimeLocal } from "../../../utils";
+import { dateTimeLocal, Validator } from "../../../utils";
 import { isAdding } from "../../../store/selectors/event.selector";
 import { modalType } from "../../../store/selectors/modal.selector";
 import { ModalTypes } from "../../../modals/constant";
@@ -25,6 +25,8 @@ export default function EventPopup({ item }) {
     const modal = useSelector(modalType);
     const viewOnly = modal === ModalTypes.event;
     const event = item;
+    const today = new Date();
+    const [error, setError] = useState(null);
     const [eventForm, updateForm] = useFormGroup({
         title: {
             value: event?.title ?? "",
@@ -53,7 +55,11 @@ export default function EventPopup({ item }) {
             value: event?.fromDateTime ? dateTimeLocal(event.fromDateTime) : "",
             validation: {
                 required: true,
-                msgs: { required: "FromDateTime is required" }
+                minDate: today,
+                msgs: {
+                    required: "FromDateTime is required",
+                    minDate: "fromdate cannot be less than today"
+                }
             }
         },
         toDateTime: {
@@ -98,6 +104,7 @@ export default function EventPopup({ item }) {
             </FormControl>
         </div>
     );
+    console.log(today.toISOString());
     const fromDateTime = (
         <div className="from-date-time-input">
             <FormControl>
@@ -108,6 +115,8 @@ export default function EventPopup({ item }) {
                     value={eventForm.fromDateTime.value}
                     onChange={updateForm}
                     disabled={viewOnly}
+                    min={today.toISOString()}
+                    helperText={eventForm.fromDateTime.errorMessage}
                     required
                     InputLabelProps={{
                         shrink: true
@@ -194,11 +203,14 @@ export default function EventPopup({ item }) {
         </div>
     );
 
+    const isEventFormValid = Validator.isFormValid(eventForm);
+
     const saveButton = (
         <div className="action-btn">
             <Button
                 variant={buttonVarient}
                 color="primary"
+                disabled={!isEventFormValid}
                 onClick={() => saveEvent()}
             >
                 save
@@ -222,6 +234,15 @@ export default function EventPopup({ item }) {
     );
 
     const saveEvent = () => {
+        if (
+            new Date(eventForm.fromDateTime.value) >
+            new Date(eventForm.toDateTime.value)
+        ) {
+            setError("fromdate should be less than to date");
+            setTimeout(() => setError(null), 2000);
+            return;
+        }
+
         let payload = {
             title: eventForm.title.value,
             desc: eventForm.desc.value,
@@ -251,6 +272,9 @@ export default function EventPopup({ item }) {
                     {fromDateTime}
                     {toDateTime}
                     {description}
+                    {error ? (
+                        <span style={{ color: "red" }}>{error}</span>
+                    ) : null}
                     {!viewOnly ? saveButton : null}
                 </div>
             </div>
