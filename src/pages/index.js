@@ -7,9 +7,9 @@ import FAQ from "./faq";
 import Members from "./members";
 import Authentication from "./authentication";
 import ThankYou from "./thankYou/thankYou";
-import Profile from "./profile";
+import Profile from "./profile/profile";
 import SocietyProfile from "./societyProfile";
-import AllMembers from "./allMembers";
+import AllMembers from "./allMembers/allMembers";
 import Logout from "./logout";
 export {
     Dashboard,

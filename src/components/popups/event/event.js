@@ -70,11 +70,7 @@ export default function EventPopup({ item }) {
             }
         },
         img: {
-            value: event?.img ?? "",
-            validation: {
-                required: true,
-                msgs: { required: "Image is required" }
-            }
+            value: event?.img ?? ""
         },
         _id: { value: event?._id ?? "" }
     });
@@ -188,7 +184,6 @@ export default function EventPopup({ item }) {
                         onChange={upload}
                         variant={inputVarient}
                         disabled={viewOnly}
-                        required
                     ></TextField>
                 </FormControl>
             </div>
@@ -249,9 +244,11 @@ export default function EventPopup({ item }) {
             fromDateTime: eventForm.fromDateTime.value,
             toDateTime: eventForm.toDateTime.value,
             venue: eventForm.venue.value,
-            img: eventForm.img.value,
             societyId: societyDetails._id
         };
+        if (eventForm.img.value !== "") {
+            payload.img = eventForm.img.value;
+        }
 
         if (eventForm._id?.value) {
             payload = {

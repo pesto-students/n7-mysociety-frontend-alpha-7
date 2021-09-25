@@ -19,7 +19,8 @@ export const ModalTypes = {
     addComplain: "ADD_COMPLAIN",
     addEvent: "ADD_EVENT",
     addGallery: "ADD_GALLERY",
-    addAnnouncement: "ADD_ANNOUCEMENT"
+    addAnnouncement: "ADD_ANNOUCEMENT",
+    addUser: "ADD_USER"
 };
 
 export const initalPaginator = {
