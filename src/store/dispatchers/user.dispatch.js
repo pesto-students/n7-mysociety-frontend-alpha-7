@@ -1,0 +1,63 @@
+import * as USER_ACTION from "../actions/user.action";
+import * as MODAL_ACTION from "../actions/modal.action";
+import userService from "../../services/user";
+import { toaster } from "../../utils";
+export function getAllUsers(payload) {
+    return (dispatch) => {
+        dispatch({ type: USER_ACTION.GET_ALL_USER });
+        userService
+            .getAllUsers(payload)
+            .then((response) => {
+                if (response.status === 200) {
+                    dispatch({
+                        type: USER_ACTION.GET_ALL_USER_SUCCESS,
+                        payload: response.data?.result
+                    });
+                }
+            })
+            .catch((error) => {
+                dispatch({
+                    type: USER_ACTION.GET_ALL_USER_ERROR
+                });
+                dispatch({
+                    type: MODAL_ACTION.SHOW_TOASTER,
+                    payload: {
+                        error: error.response?.data?.message,
+                        type: "error"
+                    }
+                });
+            });
+    };
+}
+
+export function saveUser(payload) {
+    return (dispatch) => {
+        dispatch({ type: USER_ACTION.SAVE_USER });
+        userService
+            .createUser(payload)
+            .then((response) => {
+                if (response.status === 201 || response.status === 203) {
+                    console.log(response, "response.data?.message");
+                    dispatch({
+                        type: USER_ACTION.SAVE_USER_SUCCESS,
+                        payload: response?.data?.result
+                    });
+
+                    toaster.showSuccessMessage(
+                        dispatch,
+                        response.data?.message
+                    );
+                    dispatch({ type: MODAL_ACTION.CLOSE_MODAL });
+                } else {
+                    toaster.showErrorMessage(dispatch, "Error in saving user");
+                }
+            })
+            .catch((error) => {
+                dispatch({ type: USER_ACTION.SAVE_USER_ERROR });
+                toaster.showErrorMessage(
+                    dispatch,
+                    error.response?.data?.message
+                );
+            });
+    };
+}

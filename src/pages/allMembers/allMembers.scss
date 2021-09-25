@@ -1,0 +1,14 @@
+.user-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 15px;
+    justify-content: flex-start;
+    .profileCardWrap {
+        width: 23.5%;
+        margin: 0px 15px 10px 0px;
+        @media (max-width: 768px) {
+            width: 100%;
+            margin: 10px;
+        }
+    }
+}

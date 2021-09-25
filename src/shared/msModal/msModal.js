@@ -13,7 +13,8 @@ import {
     Announcement,
     Event,
     Gallery,
-    Complain
+    Complain,
+    User
 } from "../../components/popups";
 import "./msModal.scss";
 import { ModalTypes } from "../../modals/constant";
@@ -59,6 +60,8 @@ export default function MsModal() {
                 return Complain;
             case ModalTypes.addGallery:
                 return Gallery;
+            case ModalTypes.addUser:
+                return User;
             default:
                 return null;
         }
