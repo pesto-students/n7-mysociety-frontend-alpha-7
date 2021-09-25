@@ -5,15 +5,16 @@ import {
     IconButton,
     ToolBar,
     makeStyles,
-    MenuIcon,
-    Avatar,
-    Typography,
-    CloseIcon
+    MenuIcon
 } from "../../../shared";
+import { Avatar, Button, Menu, Typography } from "@material-ui/core";
+import { getAvatarName } from "../../../helpers/functions";
 import MySocietyMenu from "./mySocietyMenus";
+import MyProfileMenus from "./myProfileMenus";
+import { useSelector } from "react-redux";
+import { loggedInUserDetails } from "../../../store/selectors/authetication.selector";
 import "./header.scss";
 import { loggedInUserSocietyDetails } from "../../../store/selectors/authetication.selector";
-import { useSelector } from "react-redux";
 const drawerWidth = "80%";
 
 const useStyles = makeStyles((theme) => ({
@@ -56,6 +57,17 @@ export default function MobileSideBarMenu({ menus }) {
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
+    const [anchorEl, setAnchorEl] = React.useState(null);
+    const open = Boolean(anchorEl);
+    const userData = useSelector(loggedInUserDetails);
+    const handleMenu = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleClose = () => {
+        setAnchorEl(null);
+    };
+    const content = { userName: `${userData.firstName} ${userData.lastName}` };
 
     const classes = useStyles();
     const societyDetails = useSelector(loggedInUserSocietyDetails);
@@ -77,12 +89,62 @@ export default function MobileSideBarMenu({ menus }) {
                 elevation={0}
             >
                 <React.Fragment>
-                    <div className="personal-details">
-                        <Avatar alt="Remy Sharp" />
-                        <Typography variant="h5">John Smith</Typography>
-                        <span>
-                            <CloseIcon onClick={handleDrawerToggle} />
-                        </span>
+                    <div className="personal-details mobile">
+                        <div>
+                            <Button
+                                aria-label="account of current user"
+                                aria-controls="menu-appbar"
+                                aria-haspopup="true"
+                                onClick={handleMenu}
+                                color="inherit"
+                                className="userProfileButton"
+                                disableRipple={true}
+                                disableFocusRipple={true}
+                            >
+                                {content?.avatarUrl ? (
+                                    <Avatar
+                                        alt={content?.userName}
+                                        src={`${content?.avatarUrl}`}
+                                        className="avatar avatarMedia"
+                                        role="img"
+                                        aria-label={content?.userName}
+                                    />
+                                ) : (
+                                    <Avatar
+                                        className="avatar avatarName"
+                                        role="img"
+                                        aria-label={content?.userName}
+                                    >
+                                        <span className="text">
+                                            {getAvatarName(content?.userName)}
+                                        </span>
+                                    </Avatar>
+                                )}
+                                <Typography
+                                    variant="h6"
+                                    component="h6"
+                                    className="profileName"
+                                >
+                                    {content?.userName}
+                                </Typography>
+                            </Button>
+                            <Menu
+                                id="menu-appbar"
+                                anchorEl={anchorEl}
+                                transformOrigin={{
+                                    horizontal: "left",
+                                    vertical: "top"
+                                }}
+                                anchorOrigin={{
+                                    horizontal: "left",
+                                    vertical: "bottom"
+                                }}
+                                open={open}
+                                onClose={handleClose}
+                            >
+                                <MyProfileMenus />
+                            </Menu>
+                        </div>
                     </div>
                     <MySocietyMenu menus={menus} />
                 </React.Fragment>

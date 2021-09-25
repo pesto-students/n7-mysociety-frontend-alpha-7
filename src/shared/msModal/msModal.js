@@ -88,7 +88,7 @@ export default function MsModal() {
                         <CloseIcon onClick={() => closePopup()} />
                     </div>
                 </div>
-                <div>
+                <div className="modalBody">
                     <ModalComponent item={data} />
                 </div>
             </div>
