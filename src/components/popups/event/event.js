@@ -10,7 +10,7 @@ import { addEvent } from "../../../store/dispatchers/event.dispatch";
 import { useDispatch, useSelector } from "react-redux";
 import S3FileUpload from "react-s3";
 import "./event.scss";
-import { AWS_CONFIG } from "../../../utils/secrets";
+import { getConfig } from "../../../utils/secrets";
 import { dateTimeLocal, Validator } from "../../../utils";
 import { isAdding } from "../../../store/selectors/event.selector";
 import { modalType } from "../../../store/selectors/modal.selector";
@@ -80,8 +80,9 @@ export default function EventPopup({ item }) {
     });
 
     const upload = (e) => {
-        S3FileUpload.uploadFile(e.target.files[0], AWS_CONFIG)
+        S3FileUpload.uploadFile(e.target.files[0], getConfig("events"))
             .then((data) => {
+                console.log(data);
                 updateForm({ target: { id: "img", value: data.location } });
             })
             .catch((error) => {
