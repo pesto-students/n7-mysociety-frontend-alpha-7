@@ -36,6 +36,8 @@ import UserActions from "./userActions/userAction";
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";
 import AddIcon from "@material-ui/icons/Add";
+import RemoveIcon from "@material-ui/icons/Remove";
+
 import FabMenu from "./fabMenu/fabMenu";
 import EventIcon from "@material-ui/icons/Event";
 import RecordVoiceOverIcon from "@material-ui/icons/RecordVoiceOver";
@@ -83,6 +85,7 @@ export {
     DeleteIcon,
     UserActions,
     AddIcon,
+    RemoveIcon,
     FabMenu,
     EventIcon,
     AssignmentTurnedInIcon,
