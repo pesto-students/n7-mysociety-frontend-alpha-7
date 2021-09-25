@@ -16,7 +16,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { snack, showModal } from "./store/selectors/modal.selector";
 import { CLOSE_TOASTER } from "./store/actions/modal.action";
 import { getCookie } from "./utils";
-import { updateSocietyId } from "./store/dispatchers/authentication.dispatch";
+import { updateLoggedInUserDetails } from "./store/dispatchers/authentication.dispatch";
 function App() {
     const snackBarData = useSelector(snack);
     const autoHideDuration = 5000;
@@ -27,7 +27,7 @@ function App() {
 
     useEffect(() => {
         if (getCookie("society-id")) {
-            dispatch(updateSocietyId(getCookie("society-id")));
+            dispatch(updateLoggedInUserDetails(getCookie("society-id")));
         }
     }, []);
 

@@ -11,6 +11,10 @@ class Authentication {
     getAllSocietities() {
         return http.get("/get-all-society");
     }
+
+    getUserDetails(payload) {
+        return http.get("/user", { params: payload });
+    }
 }
 
 export default new Authentication();

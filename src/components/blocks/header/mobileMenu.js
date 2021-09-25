@@ -67,7 +67,9 @@ export default function MobileSideBarMenu({ menus }) {
     const handleClose = () => {
         setAnchorEl(null);
     };
-    const content = { userName: `${userData.firstName} ${userData.lastName}` };
+    const content = {
+        userName: `${userData?.firstName} ${userData?.lastName}`
+    };
 
     const classes = useStyles();
     const societyDetails = useSelector(loggedInUserSocietyDetails);

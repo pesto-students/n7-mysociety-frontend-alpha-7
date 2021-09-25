@@ -1,7 +1,7 @@
 import * as AUTHENTICATION_ACTION from "../actions/authentication.action";
 import * as MODAL_ACTION from "../actions/modal.action";
 import authenticationService from "../../services/authentication/authentication.service";
-import { setCookie } from "../../utils";
+import { setCookie, toaster } from "../../utils";
 
 const showErrorMessage = (dispatch, msg) => {
     dispatch({
@@ -109,5 +109,39 @@ export function updateSocietyId(societyId) {
             type: AUTHENTICATION_ACTION.UPDATE_SOCITY_ID,
             payload: societyId
         });
+    };
+}
+
+export function updateLoggedInUserDetails(societyId) {
+    return (dispatch) => {
+        dispatch({ type: AUTHENTICATION_ACTION.UPDATE_USER_DETAILS });
+        authenticationService
+            .getUserDetails({ societyId })
+            .then((response) => {
+                if (response.status === 200) {
+                    dispatch({
+                        type: AUTHENTICATION_ACTION.UPDATE_USER_DETAILS_SUCCESS,
+                        payload: response?.data?.result
+                    });
+                    toaster.showSuccessMessage(dispatch, "Login success");
+                } else {
+                    toaster.showSuccessMessage(
+                        dispatch,
+                        "error in fetching user details"
+                    );
+                    dispatch({
+                        type: AUTHENTICATION_ACTION.UPDATE_USER_DETAILS_ERROR
+                    });
+                }
+            })
+            .catch((error) => {
+                toaster.showErrorMessage(
+                    dispatch,
+                    error?.response?.data?.message
+                );
+                dispatch({
+                    type: AUTHENTICATION_ACTION.UPDATE_USER_DETAILS_ERROR
+                });
+            });
     };
 }

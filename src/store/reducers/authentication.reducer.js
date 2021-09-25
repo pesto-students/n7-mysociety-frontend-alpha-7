@@ -38,6 +38,7 @@ export default function authentication(state = initialState, action) {
                     status: ActionStatus.error
                 }
             };
+        case AUTHENTICATION_ACTION.UPDATE_USER_DETAILS:
         case AUTHENTICATION_ACTION.LOGIN_USER:
             return {
                 ...state,
@@ -46,6 +47,7 @@ export default function authentication(state = initialState, action) {
                     status: ActionStatus.busy
                 }
             };
+        case AUTHENTICATION_ACTION.UPDATE_USER_DETAILS_SUCCESS:
         case AUTHENTICATION_ACTION.LOGIN_USER_SUCCESS:
             return {
                 ...state,
@@ -55,6 +57,7 @@ export default function authentication(state = initialState, action) {
                     data: action.payload
                 }
             };
+        case AUTHENTICATION_ACTION.UPDATE_USER_DETAILS_ERROR:
         case AUTHENTICATION_ACTION.LOGIN_USER_FAILURE:
             return {
                 ...state,
