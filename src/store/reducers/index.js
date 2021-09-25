@@ -9,8 +9,7 @@ const appReducer = combineReducers({
     announcement,
     modal,
     event,
-    complaint,
-    modal
+    complaint
 });
 
 export default appReducer;
