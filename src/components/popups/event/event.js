@@ -251,7 +251,7 @@ export default function EventPopup({ item }) {
             toDateTime: eventForm.toDateTime.value,
             venue: eventForm.venue.value,
             img: eventForm.img.value,
-            societyId: societyDetails._id
+            societyId: societyDetails?._id
         };
 
         if (eventForm._id?.value) {

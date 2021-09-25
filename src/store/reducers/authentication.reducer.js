@@ -64,6 +64,20 @@ export default function authentication(state = initialState, action) {
                     data: null
                 }
             };
+        case AUTHENTICATION_ACTION.UPDATE_SOCITY_ID:
+            return {
+                ...state,
+                login: {
+                    ...state.login,
+                    data: {
+                        ...state.login.data,
+                        society: {
+                            ...state.login.society,
+                            _id: action.payload
+                        }
+                    }
+                }
+            };
         case AUTHENTICATION_ACTION.GET_ALL_SOCIETIES:
             return {
                 ...state,

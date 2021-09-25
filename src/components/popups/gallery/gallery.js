@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { useFormGroup } from "../../../hooks";
 import {
     AddIcon,
@@ -31,6 +31,9 @@ export default function GalleryPopup({ item }) {
     const societyDetails = useSelector(loggedInUserSocietyDetails);
     const [uploading, setUploading] = useState(false);
     const isCreatingGallery = useSelector(isAddingGallery);
+
+    const [newUploads, setNewUploads] = useState([]);
+
     const [galleryForm, updateForm] = useFormGroup({
         images: {
             value: gallery?.images ?? [],
@@ -44,16 +47,18 @@ export default function GalleryPopup({ item }) {
             value: gallery?._id ?? null
         }
     });
-    const upload = async (e) => {
+
+    useEffect(() => {
+        console.log(newUploads);
+    }, [newUploads]);
+
+    const upload = (e) => {
         const images = [];
         setUploading(true);
         for (const file of e.target.files) {
-            const data = await S3FileUpload.uploadFile(
-                file,
-                getConfig("gallery")
-            );
-            images.push(data.location);
+            images.push(URL.createObjectURL(file));
         }
+        setNewUploads([...newUploads, ...e.target.files]);
 
         updateForm({
             target: {
@@ -89,10 +94,13 @@ export default function GalleryPopup({ item }) {
     };
 
     const saveGallery = () => {
+        const formData = new FormData();
+        formData.append("images", newUploads);
         let payload = {
             societyId: societyDetails._id,
             images: galleryForm.images.value,
-            category: galleryForm.category.value
+            category: galleryForm.category.value,
+            newImages: formData
         };
         if (galleryForm?._id?.value) {
             payload = {
@@ -100,6 +108,7 @@ export default function GalleryPopup({ item }) {
                 _id: galleryForm._id.value
             };
         }
+        console.log(galleryForm.images);
         dispatch(createGallery(payload));
     };
 

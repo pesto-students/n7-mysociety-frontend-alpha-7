@@ -11,8 +11,7 @@ const appReducer = combineReducers({
     modal,
     event,
     gallery,
-    complaint,
-    modal
+    complaint
 });
 
 export default appReducer;

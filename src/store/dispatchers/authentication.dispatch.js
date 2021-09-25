@@ -1,6 +1,7 @@
 import * as AUTHENTICATION_ACTION from "../actions/authentication.action";
 import * as MODAL_ACTION from "../actions/modal.action";
 import authenticationService from "../../services/authentication/authentication.service";
+import { setCookie } from "../../utils";
 
 const showErrorMessage = (dispatch, msg) => {
     dispatch({
@@ -55,7 +56,8 @@ export function loginUser(payload) {
             .loginUser(payload)
             .then((response) => {
                 if (response.status === 200) {
-                    document.cookie = `x-auth-token=${response.headers["x-auth-token"]}`;
+                    setCookie("x-auth-token", response.headers["x-auth-token"]);
+                    setCookie("society-id", response.data?.society?._id);
                     dispatch({
                         type: AUTHENTICATION_ACTION.LOGIN_USER_SUCCESS,
                         payload: response.data
@@ -98,5 +100,14 @@ export function getAllSocieties() {
                     }
                 });
             });
+    };
+}
+
+export function updateSocietyId(societyId) {
+    return (dispatch) => {
+        dispatch({
+            type: AUTHENTICATION_ACTION.UPDATE_SOCITY_ID,
+            payload: societyId
+        });
     };
 }

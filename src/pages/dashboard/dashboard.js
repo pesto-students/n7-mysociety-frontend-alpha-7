@@ -37,7 +37,7 @@ const Dashboard = () => {
     useEffect(() => {
         const param = {
             ...dashboardInitalPaginator,
-            societyId: societyDetails._id
+            societyId: societyDetails?._id
         };
         dispatch(getAllEvents({ ...param, filterType: "todays" }));
         dispatch(getAllAnnouncements({ ...param, filterType: "latest" }));

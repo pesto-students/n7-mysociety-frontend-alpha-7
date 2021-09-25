@@ -6,7 +6,6 @@ import { ReactComponent as EventIcon } from "../assets/svgs/event.svg";
 import { ReactComponent as GalleryIcon } from "../assets/svgs/gallery.svg";
 import { ReactComponent as ComplaintIcon } from "../assets/svgs/complaint.svg";
 import { ReactComponent as FAQIcon } from "../assets/svgs/faq.svg";
-
 export const links = [
     { path: "/", component: Pages.Authentication },
     { path: "/user", component: Pages.Authentication },
@@ -125,12 +124,6 @@ export const adminProfileMenus = [
         path: "/society-profile",
         component: Pages.SocietyProfile,
         isMenu: true
-    },
-    {
-        menu: "Logout",
-        path: "/logout",
-        component: Pages.Logout,
-        isMenu: true
     }
 ];
 
@@ -139,12 +132,6 @@ export const memberProfileMenus = [
         menu: "Profile",
         path: "/profile",
         component: Pages.Profile,
-        isMenu: true
-    },
-    {
-        menu: "Logout",
-        path: "/logout",
-        component: Pages.Logout,
         isMenu: true
     }
 ];

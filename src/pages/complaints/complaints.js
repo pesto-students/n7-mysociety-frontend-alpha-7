@@ -40,7 +40,7 @@ const Complaints = () => {
         const payload = {
             limit: initalPaginator.limit,
             page: pageNumber,
-            societyId: societyDetails._id,
+            societyId: societyDetails?._id,
             status: status
         };
         dispatch(getAllComplaints(payload));
