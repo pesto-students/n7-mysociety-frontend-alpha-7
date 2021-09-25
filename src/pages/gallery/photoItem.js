@@ -6,7 +6,7 @@ const PhotoItem = ({ image, url, title }) => {
     return (
         <LightgalleryItem group="any" src={image}>
             <a href={url}>
-                <img src={image} />
+                <img src={image} alt="..." />
                 <Typography>{title}</Typography>
             </a>
         </LightgalleryItem>
