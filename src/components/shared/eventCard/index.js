@@ -231,7 +231,7 @@ const EventCard = ({ event, isDashboardView, isAdmin }) => {
                         role="button"
                         aria-label="View Detail"
                         className="viewDetail"
-                        onClick={(e) => openView()}
+                        onClick={() => openView()}
                     >
                         View Detail
                     </Button>
