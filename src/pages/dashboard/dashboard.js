@@ -3,11 +3,13 @@ import DefaultLayout from "../../components/layout/defaultLayout";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllAnnouncements } from "../../store/dispatchers/announcement.dispatch";
 import { getAllComplaints } from "../../store/dispatchers/complaint.dispatch";
+import { getAllUsers } from "../../store/dispatchers/user.dispatch";
 import { announcementList } from "../../store/selectors/announcement.selector";
 import {
     allEvents,
     isEventLoading
 } from "../../store/selectors/event.selector";
+import { userList, isUserLoading } from "../../store/selectors/user.selector";
 import { complaintList } from "../../store/selectors/complaint.selector";
 import { loggedInUserSocietyDetails } from "../../store/selectors/authetication.selector";
 import { fetchingAnnocements } from "../../store/selectors/announcement.selector";
@@ -20,18 +22,21 @@ import { SpinnerLoader, Typography } from "../../shared";
 import ComplainCard from "../../components/complainCard/complainCard";
 import { getAllEvents } from "../../store/dispatchers/event.dispatch";
 import EventCard from "../../components/shared/eventCard";
+import ProfileCard from "../../components/shared/profileCard/index";
 
 const Dashboard = () => {
     const dispatch = useDispatch();
     const listOfAnnouncements = useSelector(announcementList);
     const listOfEvents = useSelector(allEvents);
     const listOfComplaints = useSelector(complaintList);
-
+    const listOfUsers = useSelector(userList);
+    console.log(listOfUsers, "listOfUsers---");
     const societyDetails = useSelector(loggedInUserSocietyDetails);
     const isAdmin = useSelector(isLoggedInAsAdmin);
     const contents = {
         isAnnocementsLoading: useSelector(fetchingAnnocements),
         loadingEvents: useSelector(isEventLoading),
+        isLoadingMember: useSelector(isUserLoading),
         isComplaintsLoading: useSelector(fetchingComplaint)
     };
     useEffect(() => {
@@ -43,6 +48,7 @@ const Dashboard = () => {
         dispatch(getAllAnnouncements({ ...param, filterType: "latest" }));
         dispatch(getAllAnnouncements(param));
         dispatch(getAllComplaints(param));
+        dispatch(getAllUsers({ ...param, getAll: true, isConfirmed: false }));
     }, []);
 
     const getHeaderTitle = (title) => {
@@ -121,6 +127,19 @@ const Dashboard = () => {
     const newMembers = (
         <div className="newMembers">
             <div>{getHeaderTitle("New members joins the society")}</div>
+            <SpinnerLoader show={contents.isLoadingMember}>
+                <div className="list">
+                    {listOfUsers?.docs?.map((member, index) => {
+                        return (
+                            <ProfileCard
+                                content={member}
+                                key={index}
+                                isDashboardView={true}
+                            ></ProfileCard>
+                        );
+                    })}
+                </div>
+            </SpinnerLoader>
         </div>
     );
 

@@ -5,7 +5,7 @@ import { getAllUsers } from "../../store/dispatchers/user.dispatch";
 import { loggedInUserSocietyDetails } from "../../store/selectors/authetication.selector";
 import {
     pagerDetails,
-    loading,
+    isUserLoading,
     userList
 } from "../../store/selectors/user.selector";
 import { SpinnerLoader, Paginator, Tabs, Tab } from "../../shared";
@@ -13,24 +13,10 @@ import { initalPaginator } from "../../modals/constant";
 import ProfileCard from "../../components/shared/profileCard";
 import "./allMembers.scss";
 const AllMembers = () => {
-    /*const content = {
-        avatarUrl: "logo512.png",
-        userName: "John Smith",
-        phone: "888998343",
-        email: "john@gmail.com",
-        building: "B19"
-    };
-    const content1 = {
-        userName: "Yasmin Austin",
-        phone: "888998343",
-        email: "john@gmail.com",
-        building: "B19"
-    };*/
-
     const dispatch = useDispatch();
     const listOfUsers = useSelector(userList);
     const societyDetails = useSelector(loggedInUserSocietyDetails);
-    const usersLoadingState = useSelector(loading);
+    const usersLoadingState = useSelector(isUserLoading);
     const pager = useSelector(pagerDetails);
     const [currentTab, setTab] = useState(0);
 

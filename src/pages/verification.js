@@ -1,23 +1,20 @@
 import React from "react";
-import { Register, Login, ForgetPassword } from "../components";
+import { VerifySociety, ResetPassword } from "../components";
 import LandingLayout from "../components/layout/landingPageLayout/landingLayout";
 import { useParams } from "react-router";
-export default function Authetication() {
+export default function Verification() {
     const { action } = useParams();
-
+    console.log(action, "action");
     const component = () => {
-        if (action === "register") {
-            return <Register />;
+        if (action === "society") {
+            return <VerifySociety />;
         }
 
-        if (action === "login") {
-            return <Login />;
-        }
-        if (action === "forget-password") {
-            return <ForgetPassword />;
+        if (action === "reset-password") {
+            return <ResetPassword />;
         }
 
-        return <Login />;
+        return null;
     };
 
     return (

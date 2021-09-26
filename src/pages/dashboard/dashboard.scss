@@ -13,6 +13,9 @@
     .secondRow {
         display: flex;
         justify-content: space-between;
+        > div {
+            min-width: 32%;
+        }
     }
 
     .announcement,

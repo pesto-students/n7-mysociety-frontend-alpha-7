@@ -1,4 +1,4 @@
-.login-box {
+.verification-box {
     padding: 0;
     margin: 0;
     border-radius: 5px !important;
@@ -12,7 +12,7 @@
         padding: 0;
         margin: 0;
 
-        .login-content {
+        .verification-content {
             display: flex;
             flex-direction: column;
             padding: 15px;
@@ -24,24 +24,16 @@
                 margin: 15px 0;
             }
 
-            .username_input,
-            .password_input {
-                display: flex;
-                justify-content: center;
-                .MuiFormControl-root {
-                    width: 75%;
-                    .MuiTextField-root {
-                        width: 100%;
-                    }
-                }
+            .shortText {
+                padding: 0px 35px 14px 35px;
+                text-align: center;
             }
-
             .action-btn {
                 button {
                     padding: 5px 30px;
                 }
             }
-            .login-footer {
+            .verification-footer {
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
