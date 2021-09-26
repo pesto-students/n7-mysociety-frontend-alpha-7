@@ -26,3 +26,11 @@ export const societies = (state) => state.authentication.societies.data;
 
 export const isLoggedInAsAdmin = (state) =>
     state.authentication?.login?.data?.role === "admin";
+
+export const isForgetPasswordDone = (state) =>
+    state.authentication.forgetPassword.status === ActionStatus.success;
+export const isResetPasswordDone = (state) =>
+    state.authentication.resetPassword.status === ActionStatus.success;
+
+export const isSocietyVerificationDone = (state) =>
+    state.authentication.verifySociety.status === ActionStatus.success;

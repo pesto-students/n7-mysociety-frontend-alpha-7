@@ -28,6 +28,6 @@ export const pagerDetails = (state) => {
 export const isUserSaving = (state) =>
     state.user?.lastAdded?.status === ActionStatus.busy;
 
-export const loading = (state) =>
+export const isUserLoading = (state) =>
     state.user?.userList.status === ActionStatus.busy ||
     state.user?.lastDeleted?.status === ActionStatus.busy;

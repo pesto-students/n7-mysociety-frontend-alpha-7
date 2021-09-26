@@ -61,3 +61,38 @@ export function saveUser(payload) {
             });
     };
 }
+
+export function saveSociety(payload) {
+    return (dispatch) => {
+        dispatch({ type: USER_ACTION.SAVE_SOCIETY });
+        userService
+            .updateSociety(payload)
+            .then((response) => {
+                if (response.status === 201 || response.status === 203) {
+                    console.log(response, "response.data?.message");
+                    dispatch({
+                        type: USER_ACTION.SAVE_SOCIETY_SUCCESS,
+                        payload: response?.data?.result
+                    });
+
+                    toaster.showSuccessMessage(
+                        dispatch,
+                        response.data?.message
+                    );
+                    dispatch({ type: MODAL_ACTION.CLOSE_MODAL });
+                } else {
+                    toaster.showErrorMessage(
+                        dispatch,
+                        "Error in saving society"
+                    );
+                }
+            })
+            .catch((error) => {
+                dispatch({ type: USER_ACTION.SAVE_SOCIETY_ERROR });
+                toaster.showErrorMessage(
+                    dispatch,
+                    error.response?.data?.message
+                );
+            });
+    };
+}

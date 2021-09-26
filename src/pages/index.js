@@ -8,9 +8,10 @@ import Members from "./members";
 import Authentication from "./authentication";
 import ThankYou from "./thankYou/thankYou";
 import Profile from "./profile/profile";
-import SocietyProfile from "./societyProfile";
+import SocietyProfile from "./societyProfile/societyProfile";
 import AllMembers from "./allMembers/allMembers";
 import Logout from "./logout";
+import Verification from "./verification";
 export {
     Dashboard,
     Announcements,
@@ -24,5 +25,6 @@ export {
     Profile,
     SocietyProfile,
     AllMembers,
-    Logout
+    Logout,
+    Verification
 };

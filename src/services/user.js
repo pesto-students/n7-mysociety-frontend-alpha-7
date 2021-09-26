@@ -7,6 +7,10 @@ class User {
     createUser(payload) {
         return http.put("/user", payload);
     }
+
+    updateSociety(payload) {
+        return http.put("/society", payload);
+    }
 }
 
 export default new User();
