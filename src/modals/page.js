@@ -10,6 +10,7 @@ export const links = [
     { path: "/", component: Pages.Authentication },
     { path: "/user", component: Pages.Authentication },
     { path: "/user/:action", component: Pages.Authentication },
+    { path: "/verify/:action/:token", component: Pages.Verification },
     { path: "/thankyou", component: Pages.ThankYou },
     {
         menu: "Dashboard",

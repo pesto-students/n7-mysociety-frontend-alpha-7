@@ -1,0 +1,16 @@
+.society {
+    display: flex;
+    justify-content: center;
+    .societyIntoWrap {
+        .single {
+            padding: 10px;
+            input {
+                min-width: 350px;
+            }
+        }
+    }
+    .actionWrap {
+        margin-top: 30px;
+        text-align: center;
+    }
+}

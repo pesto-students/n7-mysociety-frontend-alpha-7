@@ -138,7 +138,12 @@ export default function Login() {
                     Want to be a part of society or register your society?
                 </Typography>
             </div>
-            <div>
+            <div className="redirectLink">
+                <Link to="/user/forget-password">
+                    <Typography variant="subtitle2" color="secondary">
+                        Forget password
+                    </Typography>
+                </Link>
                 <Link to="/user/register">
                     <Typography variant="subtitle2" color="secondary">
                         Sign up here
