@@ -9,7 +9,7 @@ class Announcement {
     }
 
     deleteAnnouncement(payload) {
-        return http.delete("/announcement", { data: payload });
+        return http.delete("/announcement", { params: payload });
     }
 }
 
