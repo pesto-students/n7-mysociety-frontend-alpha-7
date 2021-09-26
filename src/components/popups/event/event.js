@@ -8,14 +8,12 @@ import {
 import { loggedInUserSocietyDetails } from "../../../store/selectors/authetication.selector";
 import { addEvent } from "../../../store/dispatchers/event.dispatch";
 import { useDispatch, useSelector } from "react-redux";
-import S3FileUpload from "react-s3";
 import "./event.scss";
-import { getConfig } from "../../../utils/secrets";
 import { dateTimeLocal, Validator } from "../../../utils";
 import { isAdding } from "../../../store/selectors/event.selector";
 import { modalType } from "../../../store/selectors/modal.selector";
 import { ModalTypes } from "../../../modals/constant";
-
+import uploadService from "../../../services/upload";
 export default function EventPopup({ item }) {
     const inputVarient = useContext(InputVarientContext);
     const buttonVarient = useContext(ButtonVarientContext);
@@ -79,11 +77,16 @@ export default function EventPopup({ item }) {
         _id: { value: event?._id ?? "" }
     });
 
-    const upload = (e) => {
-        S3FileUpload.uploadFile(e.target.files[0], getConfig("events"))
-            .then((data) => {
-                console.log(data);
-                updateForm({ target: { id: "img", value: data.location } });
+    const upload = async (e) => {
+        const formData = new FormData();
+        formData.append("image", e.target.files[0]);
+        uploadService
+            .uploadImage(formData)
+            .then((response) => {
+                console.log(response);
+                updateForm({
+                    target: { id: "img", value: response.imageUrl }
+                });
             })
             .catch((error) => {
                 console.error(error);
