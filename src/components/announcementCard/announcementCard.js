@@ -7,6 +7,7 @@ import {
     Button
 } from "../../shared";
 import { formatDate } from "../../utils";
+import { limitSting } from "../../helpers/functions";
 import {
     isLoggedInAsAdmin,
     loggedInUserSocietyDetails
@@ -68,7 +69,9 @@ export default function AnnouncementCard({ annoucement, isDashboard }) {
         >
             <CardHeader title={annoucement.title}></CardHeader>
             <CardContent>
-                <div className="description">{annoucement.desc}</div>
+                <div className="description">
+                    {limitSting(annoucement.desc, 115)}
+                </div>
                 <div className="date-action">
                     {dates}
                     <div>

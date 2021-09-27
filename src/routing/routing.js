@@ -7,9 +7,19 @@ export default function Routing() {
         <Switch>
             {links.map((page, index) => {
                 return page?.isProtected ? (
-                    <ProtectedRoute key={index} exact {...page} />
+                    <ProtectedRoute
+                        key={index}
+                        exact
+                        {...page}
+                        state={{ pageName: page.menu }}
+                    />
                 ) : (
-                    <Route key={index} exact {...page} />
+                    <Route
+                        key={index}
+                        exact
+                        {...page}
+                        state={{ pageName: page.menu }}
+                    />
                 );
             })}
         </Switch>
