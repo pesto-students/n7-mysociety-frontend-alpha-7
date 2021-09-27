@@ -1,7 +1,7 @@
 import * as AUTHENTICATION_ACTION from "../actions/authentication.action";
 import * as MODAL_ACTION from "../actions/modal.action";
 import authenticationService from "../../services/authentication/authentication.service";
-import { setCookie } from "../../utils";
+import { setCookie, toaster } from "../../utils";
 
 const showErrorMessage = (dispatch, msg) => {
     dispatch({
@@ -75,6 +75,34 @@ export function loginUser(payload) {
     };
 }
 
+export function forgetPassword(payload) {
+    return (dispatch) => {
+        dispatch({ type: AUTHENTICATION_ACTION.FORGET_PASSWORD });
+        authenticationService
+            .forgetPassword(payload)
+            .then((response) => {
+                if (response.status === 200) {
+                    dispatch({
+                        type: AUTHENTICATION_ACTION.FORGET_PASSWORD_SUCCESS,
+                        payload: response.data
+                    });
+                    showSuccessMessage(
+                        dispatch,
+                        "Reset link sent successfully to your mail."
+                    );
+                } else {
+                    showErrorMessage(dispatch, "Error in forget password");
+                }
+            })
+            .catch((error) => {
+                dispatch({
+                    type: AUTHENTICATION_ACTION.FORGET_PASSWORD_FAILURE
+                });
+                showErrorMessage(dispatch, error.response?.data?.message);
+            });
+    };
+}
+
 export function getAllSocieties() {
     return (dispatch) => {
         dispatch({ type: AUTHENTICATION_ACTION.GET_ALL_SOCIETIES });
@@ -109,5 +137,99 @@ export function updateSocietyId(societyId) {
             type: AUTHENTICATION_ACTION.UPDATE_SOCITY_ID,
             payload: societyId
         });
+    };
+}
+
+export function updateLoggedInUserDetails(societyId) {
+    return (dispatch) => {
+        dispatch({ type: AUTHENTICATION_ACTION.UPDATE_USER_DETAILS });
+        authenticationService
+            .getUserDetails({ societyId })
+            .then((response) => {
+                if (response.status === 200) {
+                    dispatch({
+                        type: AUTHENTICATION_ACTION.UPDATE_USER_DETAILS_SUCCESS,
+                        payload: response?.data?.result
+                    });
+                    toaster.showSuccessMessage(dispatch, "Login success");
+                } else {
+                    toaster.showSuccessMessage(
+                        dispatch,
+                        "error in fetching user details"
+                    );
+                    dispatch({
+                        type: AUTHENTICATION_ACTION.UPDATE_USER_DETAILS_ERROR
+                    });
+                }
+            })
+            .catch((error) => {
+                toaster.showErrorMessage(
+                    dispatch,
+                    error?.response?.data?.message
+                );
+                dispatch({
+                    type: AUTHENTICATION_ACTION.UPDATE_USER_DETAILS_ERROR
+                });
+            });
+    };
+}
+export function verifySociety(payload) {
+    return (dispatch) => {
+        dispatch({ type: AUTHENTICATION_ACTION.VERIFY_SOCIETY });
+        authenticationService
+            .verifySociety(payload)
+            .then((response) => {
+                if (response.status === 200) {
+                    dispatch({
+                        type: AUTHENTICATION_ACTION.VERIFY_SOCIETY_SUCCESS,
+                        payload: response.data
+                    });
+                    showSuccessMessage(
+                        dispatch,
+                        "Society verified successfully."
+                    );
+                } else {
+                    showErrorMessage(
+                        dispatch,
+                        "Facing problem in society verification, Please try again."
+                    );
+                }
+            })
+            .catch((error) => {
+                dispatch({
+                    type: AUTHENTICATION_ACTION.VERIFY_SOCIETY_FAILURE
+                });
+                showErrorMessage(dispatch, error.response?.data?.message);
+            });
+    };
+}
+export function resetPassword(payload) {
+    return (dispatch) => {
+        dispatch({ type: AUTHENTICATION_ACTION.RESET_PASSWORD });
+        authenticationService
+            .resetPassword(payload)
+            .then((response) => {
+                if (response.status === 200) {
+                    dispatch({
+                        type: AUTHENTICATION_ACTION.RESET_PASSWORD_SUCCESS,
+                        payload: response.data
+                    });
+                    showSuccessMessage(
+                        dispatch,
+                        "Password reset successfully. Try Login."
+                    );
+                } else {
+                    showErrorMessage(
+                        dispatch,
+                        "Facing problem in reset password, Please try again."
+                    );
+                }
+            })
+            .catch((error) => {
+                dispatch({
+                    type: AUTHENTICATION_ACTION.RESET_PASSWORD_FAILURE
+                });
+                showErrorMessage(dispatch, error.response?.data?.message);
+            });
     };
 }

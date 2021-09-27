@@ -6,64 +6,66 @@ import { ReactComponent as EventIcon } from "../assets/svgs/event.svg";
 import { ReactComponent as GalleryIcon } from "../assets/svgs/gallery.svg";
 import { ReactComponent as ComplaintIcon } from "../assets/svgs/complaint.svg";
 import { ReactComponent as FAQIcon } from "../assets/svgs/faq.svg";
+
 export const links = [
     { path: "/", component: Pages.Authentication },
     { path: "/user", component: Pages.Authentication },
     { path: "/user/:action", component: Pages.Authentication },
+    { path: "/verify/:action/:token", component: Pages.Verification },
     { path: "/thankyou", component: Pages.ThankYou },
     {
         menu: "Dashboard",
         path: "/dashboard",
         component: Pages.Dashboard,
-        isMenu: true
+        isProtected: true
     },
     {
         menu: "Announcements",
         path: "/announcements",
         component: Pages.Announcements,
-        isMenu: true
+        isProtected: true
     },
     {
         menu: "Events",
         path: "/events",
         component: Pages.Events,
-        isMenu: true
+        isProtected: true
     },
     {
         menu: "Gallery",
         path: "/gallery",
         component: Pages.Gallery,
-        isMenu: true
+        isProtected: true
     },
     {
         menu: "Complaints",
         path: "/complaints",
         component: Pages.Complaints,
-        isMenu: true
+        isProtected: true
     },
     {
         menu: "FAQ",
         path: "/faq",
         component: Pages.FAQ,
-        isMenu: true
+        isProtected: true
     },
     {
         menu: "Profile",
         path: "/profile",
         component: Pages.Profile,
-        isMenu: true
+        isProtected: true
     },
     {
         menu: "All Members",
         path: "/all-members",
         component: Pages.AllMembers,
-        isMenu: true
+        isProtected: true
     },
     {
         menu: "Society Profile",
         path: "/society-profile",
         component: Pages.SocietyProfile,
-        isMenu: true
+        isProtected: true
     },
     {
         menu: "Logout",

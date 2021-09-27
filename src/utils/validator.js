@@ -1,10 +1,11 @@
 export class Validator {
     static regex = {
         email: /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/i,
-        password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*d)[a-zA-Zd]{8,}$/i,
+        password:
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/i,
         numbersOnly: "",
         textOnly: "",
-        mobile: /^[789]\d{9}$/i
+        mobile: /^\d{10}$/i
     };
 
     static required = (value) => {

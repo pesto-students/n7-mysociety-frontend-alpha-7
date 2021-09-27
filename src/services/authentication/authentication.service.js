@@ -11,6 +11,21 @@ class Authentication {
     getAllSocietities() {
         return http.get("/get-all-society");
     }
+
+    getUserDetails(payload) {
+        return http.get("/user", { params: payload });
+    }
+    forgetPassword(payload) {
+        return http.post("/auth/forget-password", payload);
+    }
+
+    verifySociety(payload) {
+        return http.post("/auth/verify-society", payload);
+    }
+
+    resetPassword(payload) {
+        return http.post("/auth/reset-password", payload);
+    }
 }
 
 export default new Authentication();

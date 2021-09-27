@@ -3,6 +3,7 @@ import authentication from "./authentication.reducer";
 import announcement from "./announcement.reducer";
 import event from "./event.reducer";
 import complaint from "./complaint.reducer";
+import user from "./user.reducer";
 import modal from "./modal.reducer";
 import gallery from "./gallery.reducer";
 const appReducer = combineReducers({
@@ -11,7 +12,8 @@ const appReducer = combineReducers({
     modal,
     event,
     gallery,
-    complaint
+    complaint,
+    user
 });
 
 export default appReducer;

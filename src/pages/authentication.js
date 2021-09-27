@@ -1,5 +1,5 @@
 import React from "react";
-import { Register, Login } from "../components";
+import { Register, Login, ForgetPassword } from "../components";
 import LandingLayout from "../components/layout/landingPageLayout/landingLayout";
 import { useParams } from "react-router";
 export default function Authetication() {
@@ -12,6 +12,9 @@ export default function Authetication() {
 
         if (action === "login") {
             return <Login />;
+        }
+        if (action === "forget-password") {
+            return <ForgetPassword />;
         }
 
         return <Login />;

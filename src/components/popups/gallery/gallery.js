@@ -1,4 +1,4 @@
-import React, { useContext, useState, useEffect } from "react";
+import React, { useContext, useState } from "react";
 import { useFormGroup } from "../../../hooks";
 import {
     AddIcon,
@@ -17,12 +17,11 @@ import {
     ButtonVarientContext
 } from "../../../contexts/variant.context";
 import "./gallery.scss";
-import S3FileUpload from "react-s3";
-import { getConfig } from "../../../utils";
 import { createGallery } from "../../../store/dispatchers/gallery.dispatch";
 import { useDispatch, useSelector } from "react-redux";
 import { loggedInUserSocietyDetails } from "../../../store/selectors/authetication.selector";
 import { isAddingGallery } from "../../../store/selectors/gallery.selector";
+import uploadService from "../../../services/upload";
 export default function GalleryPopup({ item }) {
     const gallery = item;
     const inputVarient = useContext(InputVarientContext);
@@ -31,8 +30,6 @@ export default function GalleryPopup({ item }) {
     const societyDetails = useSelector(loggedInUserSocietyDetails);
     const [uploading, setUploading] = useState(false);
     const isCreatingGallery = useSelector(isAddingGallery);
-
-    const [newUploads, setNewUploads] = useState([]);
 
     const [galleryForm, updateForm] = useFormGroup({
         images: {
@@ -48,59 +45,40 @@ export default function GalleryPopup({ item }) {
         }
     });
 
-    useEffect(() => {
-        console.log(newUploads);
-    }, [newUploads]);
-
     const upload = (e) => {
-        const images = [];
+        let images = [];
         setUploading(true);
-        for (const file of e.target.files) {
-            images.push(URL.createObjectURL(file));
-        }
-        setNewUploads([...newUploads, ...e.target.files]);
-
-        updateForm({
-            target: {
-                id: "images",
-                value: [...galleryForm.images.value, ...images]
-            }
+        const formData = new FormData();
+        Array.from(e.target.files).forEach((file) => {
+            formData.append("image", file);
         });
-        setUploading(false);
-    };
 
-    const deleteImage = (img) => {
-        console.log(galleryForm.category.value);
-        S3FileUpload.deleteFile(
-            img.substring(img.lastIndexOf("/") + 1),
-            getConfig("gallery")
-        )
-            .then((data) => {
-                console.log(data);
+        uploadService
+            .uploadImages(formData)
+            .then((response) => {
+                console.log(response);
+                images = response?.data?.imageUrls ?? [];
                 updateForm({
                     target: {
                         id: "images",
-                        value: [
-                            ...galleryForm.images.value.filter(
-                                (imgsrc) => imgsrc !== img
-                            )
-                        ]
+                        value: [...galleryForm.images.value, ...images]
                     }
                 });
             })
             .catch((error) => {
                 console.error(error);
             });
+
+        setUploading(false);
     };
 
+    const deleteImage = (img) => {};
+
     const saveGallery = () => {
-        const formData = new FormData();
-        formData.append("images", newUploads);
         let payload = {
             societyId: societyDetails._id,
             images: galleryForm.images.value,
-            category: galleryForm.category.value,
-            newImages: formData
+            category: galleryForm.category.value
         };
         if (galleryForm?._id?.value) {
             payload = {
@@ -108,7 +86,6 @@ export default function GalleryPopup({ item }) {
                 _id: galleryForm._id.value
             };
         }
-        console.log(galleryForm.images);
         dispatch(createGallery(payload));
     };
 
