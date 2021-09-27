@@ -12,6 +12,7 @@ const DefaultLayout = ({ children }) => {
     const res = Object.entries(links).find(
         ([, item]) => location.pathname === item.path
     );
+    console.log(res, "-------");
 
     return (
         <React.Fragment>

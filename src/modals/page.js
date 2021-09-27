@@ -103,7 +103,7 @@ export const menus = [
     },
     {
         name: "FAQ's",
-        path: "/FAQ",
+        path: "/faq",
         icon: <FAQIcon />
     }
 ];
