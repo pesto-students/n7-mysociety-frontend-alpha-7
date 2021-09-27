@@ -44,6 +44,13 @@ import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import Paginator from "./paginator/paginator";
+
+import {
+    Accordion,
+    AccordionSummary,
+    AccordionDetails
+} from "@material-ui/core";
+
 export {
     MsModal,
     TextField,
@@ -92,5 +99,8 @@ export {
     ChevronLeftIcon,
     ChevronRightIcon,
     Paginator,
-    CardActions
+    CardActions,
+    Accordion,
+    AccordionSummary,
+    AccordionDetails
 };

@@ -34,7 +34,7 @@ const Events = () => {
         const payload = {
             limit: initalPaginator.limit,
             page: pageNumber,
-            societyId: societyDetails._id,
+            societyId: societyDetails?._id,
             filterType: getCurrentFilter()
         };
         dispatch(getAllEvents(payload));

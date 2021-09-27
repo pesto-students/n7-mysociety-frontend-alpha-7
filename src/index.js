@@ -5,6 +5,7 @@ import App from "./App";
 import reportWebVitals from "./reportWebVitals";
 import { Provider } from "react-redux";
 import store from "./store";
+import "lightgallery.js/dist/css/lightgallery.css";
 
 ReactDOM.render(
     <React.StrictMode>

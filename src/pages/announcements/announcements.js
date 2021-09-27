@@ -25,7 +25,7 @@ const Announcements = () => {
         const payload = {
             limit: initalPaginator.limit,
             page: pageNumber,
-            societyId: societyDetails._id,
+            societyId: societyDetails?._id,
             filterType: currentTab === 0 ? "latest" : "pasts"
         };
         dispatch(getAllAnnouncements(payload));

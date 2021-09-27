@@ -23,7 +23,9 @@ export default function DeskTopMenu({ menus }) {
         setAnchorEl(null);
     };
 
-    const content = { userName: `${userData.firstName} ${userData.lastName}` };
+    const content = {
+        userName: `${userData?.firstName} ${userData?.lastName}`
+    };
     return (
         <header className="desktop-header headerWrap">
             <div className="societyWrap">

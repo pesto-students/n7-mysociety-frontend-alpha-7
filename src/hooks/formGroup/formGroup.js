@@ -15,7 +15,7 @@ export default function useFormFields(initialState) {
             );
             if (key) {
                 obj.error = true;
-                obj.errorMessage = state.validation?.msgs[key] ?? "invalid";
+                obj.errorMessage = state.validation?.msgs?.[key] ?? "invalid";
             } else {
                 obj.error = false;
                 obj.errorMessage = "";

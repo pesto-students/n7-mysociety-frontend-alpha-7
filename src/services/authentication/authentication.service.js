@@ -12,6 +12,9 @@ class Authentication {
         return http.get("/get-all-society");
     }
 
+    getUserDetails(payload) {
+        return http.get("/user", { params: payload });
+    }
     forgetPassword(payload) {
         return http.post("/auth/forget-password", payload);
     }

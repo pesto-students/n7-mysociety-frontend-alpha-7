@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
     FormControl,
     TextField,
@@ -19,7 +19,7 @@ import {
 } from "../../contexts/variant.context";
 import "./login.scss";
 import { Link, useHistory } from "react-router-dom";
-import { Validator } from "../../utils";
+import { getCookie, Validator } from "../../utils";
 import { loginUser } from "../../store/dispatchers/authentication.dispatch";
 import {
     isLoggedIn,
@@ -158,6 +158,12 @@ export default function Login() {
     if (isLoggedInSuccessFully) {
         history.push("/dashboard");
     }
+
+    useEffect(() => {
+        if (getCookie("x-auth-token")) {
+            history.push("/dashboard");
+        }
+    }, []);
 
     //functions
     const authenticate = () => {

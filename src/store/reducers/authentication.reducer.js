@@ -41,6 +41,7 @@ export default function authentication(state = initialState, action) {
                     status: ActionStatus.error
                 }
             };
+        case AUTHENTICATION_ACTION.UPDATE_USER_DETAILS:
         case AUTHENTICATION_ACTION.LOGIN_USER:
             return {
                 ...state,
@@ -49,6 +50,7 @@ export default function authentication(state = initialState, action) {
                     status: ActionStatus.busy
                 }
             };
+        case AUTHENTICATION_ACTION.UPDATE_USER_DETAILS_SUCCESS:
         case AUTHENTICATION_ACTION.LOGIN_USER_SUCCESS:
             return {
                 ...state,
@@ -58,6 +60,7 @@ export default function authentication(state = initialState, action) {
                     data: action.payload
                 }
             };
+        case AUTHENTICATION_ACTION.UPDATE_USER_DETAILS_ERROR:
         case AUTHENTICATION_ACTION.LOGIN_USER_FAILURE:
             return {
                 ...state,
@@ -65,6 +68,20 @@ export default function authentication(state = initialState, action) {
                     ...state.login,
                     status: ActionStatus.error,
                     data: null
+                }
+            };
+        case AUTHENTICATION_ACTION.UPDATE_SOCITY_ID:
+            return {
+                ...state,
+                login: {
+                    ...state.login,
+                    data: {
+                        ...state.login.data,
+                        society: {
+                            ...state.login.society,
+                            _id: action.payload
+                        }
+                    }
                 }
             };
         case AUTHENTICATION_ACTION.GET_ALL_SOCIETIES:

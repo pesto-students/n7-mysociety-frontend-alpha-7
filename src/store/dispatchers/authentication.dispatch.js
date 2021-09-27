@@ -1,6 +1,8 @@
 import * as AUTHENTICATION_ACTION from "../actions/authentication.action";
 import * as MODAL_ACTION from "../actions/modal.action";
 import authenticationService from "../../services/authentication/authentication.service";
+import { setCookie, toaster } from "../../utils";
+
 const showErrorMessage = (dispatch, msg) => {
     dispatch({
         type: MODAL_ACTION.SHOW_TOASTER,
@@ -54,7 +56,8 @@ export function loginUser(payload) {
             .loginUser(payload)
             .then((response) => {
                 if (response.status === 200) {
-                    document.cookie = `x-auth-token=${response.headers["x-auth-token"]}`;
+                    setCookie("x-auth-token", response.headers["x-auth-token"]);
+                    setCookie("society-id", response.data?.society?._id);
                     dispatch({
                         type: AUTHENTICATION_ACTION.LOGIN_USER_SUCCESS,
                         payload: response.data
@@ -128,6 +131,48 @@ export function getAllSocieties() {
     };
 }
 
+export function updateSocietyId(societyId) {
+    return (dispatch) => {
+        dispatch({
+            type: AUTHENTICATION_ACTION.UPDATE_SOCITY_ID,
+            payload: societyId
+        });
+    };
+}
+
+export function updateLoggedInUserDetails(societyId) {
+    return (dispatch) => {
+        dispatch({ type: AUTHENTICATION_ACTION.UPDATE_USER_DETAILS });
+        authenticationService
+            .getUserDetails({ societyId })
+            .then((response) => {
+                if (response.status === 200) {
+                    dispatch({
+                        type: AUTHENTICATION_ACTION.UPDATE_USER_DETAILS_SUCCESS,
+                        payload: response?.data?.result
+                    });
+                    toaster.showSuccessMessage(dispatch, "Login success");
+                } else {
+                    toaster.showSuccessMessage(
+                        dispatch,
+                        "error in fetching user details"
+                    );
+                    dispatch({
+                        type: AUTHENTICATION_ACTION.UPDATE_USER_DETAILS_ERROR
+                    });
+                }
+            })
+            .catch((error) => {
+                toaster.showErrorMessage(
+                    dispatch,
+                    error?.response?.data?.message
+                );
+                dispatch({
+                    type: AUTHENTICATION_ACTION.UPDATE_USER_DETAILS_ERROR
+                });
+            });
+    };
+}
 export function verifySociety(payload) {
     return (dispatch) => {
         dispatch({ type: AUTHENTICATION_ACTION.VERIFY_SOCIETY });

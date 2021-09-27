@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import { isLoggedInAsAdmin } from "../../../store/selectors/authetication.selector";
 import React, { useState, useEffect } from "react";
 import { MenuItem } from "@material-ui/core";
+import { logout } from "../../../utils";
 export default function MyProfileMenus() {
     const [currentMenus, setCurrentMenus] = useState([]);
     const isAdmin = useSelector(isLoggedInAsAdmin);
@@ -15,6 +16,7 @@ export default function MyProfileMenus() {
             setCurrentMenus(memberProfileMenus);
         }
     }, []);
+
     return (
         <React.Fragment>
             {currentMenus.map((menu, index) => {
@@ -24,6 +26,7 @@ export default function MyProfileMenus() {
                             key={menu.menu}
                             to={menu.path}
                             className="profileMenuLink"
+                            onClick={menu.exec ? menu.exec() : null}
                         >
                             <div className="singleMenu">
                                 <div className="name">{menu.menu}</div>
@@ -32,6 +35,13 @@ export default function MyProfileMenus() {
                     </MenuItem>
                 );
             })}
+            <li className="profileMenuLink logout-menu">
+                <a onClick={() => logout()}>
+                    <div className="singleMenu">
+                        <div className="name">Logout</div>
+                    </div>
+                </a>
+            </li>
         </React.Fragment>
     );
 }
