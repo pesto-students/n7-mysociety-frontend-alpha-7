@@ -23,7 +23,7 @@ const FAQ = () => {
                 console.log(fs);
                 setFaqs(fs.data?.result);
             })
-            .catch((error) => {
+            .catch(() => {
                 setFaqs([]);
             });
     }, []);
