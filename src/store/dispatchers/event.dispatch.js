@@ -2,6 +2,9 @@ import * as EVENT_ACTION from "../actions/event.action";
 import * as MODAL_ACTION from "../actions/modal.action";
 import eventService from "../../services/event";
 import { toaster } from "../../utils";
+
+const checkAndPayload = () => {};
+
 export function getAllEvents(payload) {
     return (dispatch) => {
         dispatch({ type: EVENT_ACTION.GET_EVENTS });
@@ -12,6 +15,10 @@ export function getAllEvents(payload) {
                     dispatch({
                         type: EVENT_ACTION.GET_EVENTS_SUCCESS,
                         payload: response.data?.result
+                    });
+                } else {
+                    dispatch({
+                        type: EVENT_ACTION.GET_EVENTS_ERROR
                     });
                 }
             })
@@ -44,7 +51,13 @@ export function addEvent(payload) {
                     );
                     dispatch({ type: MODAL_ACTION.CLOSE_MODAL });
                 } else {
-                    toaster.showErrorMessage(dispatch, "Error in saving event");
+                    toaster.showErrorMessage(
+                        dispatch,
+                        response?.response?.data?.message
+                    );
+                    dispatch({
+                        type: EVENT_ACTION.ADD_EVENT_ERROR
+                    });
                 }
             })
             .catch((error) => {

@@ -43,7 +43,7 @@ export function saveComplaint(payload) {
                     });
                     toaster.showSuccessMessage(
                         dispatch,
-                        response.data?.message
+                        response.response?.data?.message
                     );
                     dispatch({ type: MODAL_ACTION.CLOSE_MODAL });
                 } else {
@@ -51,6 +51,9 @@ export function saveComplaint(payload) {
                         dispatch,
                         "Error in saving complaint"
                     );
+                    dispatch({
+                        type: COMPLAINT_ACTION.SAVE_COMPLAINT_ERROR
+                    });
                 }
             })
             .catch((error) => {

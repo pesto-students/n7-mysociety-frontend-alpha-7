@@ -2,12 +2,12 @@ import * as AUTHENTICATION_ACTION from "../actions/authentication.action";
 import * as MODAL_ACTION from "../actions/modal.action";
 import authenticationService from "../../services/authentication/authentication.service";
 import { setCookie, toaster } from "../../utils";
-
+const defaultErrorMessage = "Something went wrong , Please try again later.";
 const showErrorMessage = (dispatch, msg) => {
     dispatch({
         type: MODAL_ACTION.SHOW_TOASTER,
         payload: {
-            message: msg,
+            message: msg || defaultErrorMessage,
             type: "error"
         }
     });
@@ -31,6 +31,7 @@ export function registerUser(payload) {
         authenticationService
             .registerUser(payload)
             .then((response) => {
+                console.log(response.response);
                 if (response.status === 200) {
                     dispatch({
                         type: AUTHENTICATION_ACTION.REGISTER_USER_SUCCESS,
@@ -38,7 +39,13 @@ export function registerUser(payload) {
                     });
                     showSuccessMessage(dispatch, "Registered Successfully");
                 } else {
-                    showErrorMessage(dispatch, "Error in registration");
+                    showErrorMessage(
+                        dispatch,
+                        response?.response.data?.message
+                    );
+                    dispatch({
+                        type: AUTHENTICATION_ACTION.REGISTER_USER_FAILURE
+                    });
                 }
             })
             .catch((error) => {
@@ -113,6 +120,10 @@ export function getAllSocieties() {
                     dispatch({
                         type: AUTHENTICATION_ACTION.GET_ALL_SOCIETIES_SUCCESS,
                         payload: response.data?.results
+                    });
+                } else {
+                    dispatch({
+                        type: AUTHENTICATION_ACTION.GET_ALL_SOCIETIES_ERROR
                     });
                 }
             })

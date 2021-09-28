@@ -248,13 +248,11 @@ export default function EventPopup({ item }) {
             fromDateTime: eventForm.fromDateTime.value,
             toDateTime: eventForm.toDateTime.value,
             venue: eventForm.venue.value,
-            img: eventForm.img.value,
             societyId: societyDetails?._id
         };
-        if (eventForm.img.value !== "") {
+        if (!!eventForm.img.value) {
             payload.img = eventForm.img.value;
         }
-
         if (eventForm._id?.value) {
             payload = {
                 ...payload,

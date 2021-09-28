@@ -84,6 +84,14 @@
                 font-size: 18px;
             }
         }
+        .MuiToolbar-root {
+            justify-content: center;
+
+            .MuiButtonBase-root {
+                position: fixed;
+                left: 25px;
+            }
+        }
     }
 }
 

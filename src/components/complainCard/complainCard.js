@@ -23,12 +23,24 @@ export default function ComplainCard({ complaint, isDashboard }) {
     const dates = (
         <div className="dates">
             <div className="posted-on">
-                <label>Posted On:</label>
-                <span>{formatDate(complaint?.created_at, "DD-MM-YYYY")}</span>
+                <div>
+                    <label>Posted On:</label>
+                </div>
+                <div>
+                    <span>
+                        {formatDate(complaint?.created_at, "DD-MM-YYYY")}
+                    </span>
+                </div>
             </div>
             <div className="updated-on">
-                <label>Updated On:</label>
-                <span>{formatDate(complaint?.updated_at, "DD-MM-YYYY")}</span>
+                <div>
+                    <label>Updated On:</label>
+                </div>
+                <div>
+                    <span>
+                        {formatDate(complaint?.updated_at, "DD-MM-YYYY")}
+                    </span>
+                </div>
             </div>
         </div>
     );
