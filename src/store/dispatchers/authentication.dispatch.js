@@ -1,27 +1,7 @@
 import * as AUTHENTICATION_ACTION from "../actions/authentication.action";
-import * as MODAL_ACTION from "../actions/modal.action";
 import authenticationService from "../../services/authentication/authentication.service";
 import { setCookie, toaster } from "../../utils";
-const defaultErrorMessage = "Something went wrong , Please try again later.";
-const showErrorMessage = (dispatch, msg) => {
-    dispatch({
-        type: MODAL_ACTION.SHOW_TOASTER,
-        payload: {
-            message: msg || defaultErrorMessage,
-            type: "error"
-        }
-    });
-};
-
-const showSuccessMessage = (dispatch, msg) => {
-    dispatch({
-        type: MODAL_ACTION.SHOW_TOASTER,
-        payload: {
-            message: msg,
-            type: "success"
-        }
-    });
-};
+import { showErrorMessage, showSuccessMessage } from "../../utils/toaster";
 export function registerUser(payload) {
     return (dispatch) => {
         dispatch({
@@ -131,13 +111,7 @@ export function getAllSocieties() {
                 dispatch({
                     type: AUTHENTICATION_ACTION.GET_ALL_SOCIETIES_ERROR
                 });
-                dispatch({
-                    type: MODAL_ACTION.SHOW_TOASTER,
-                    payload: {
-                        error: error.response?.data?.message,
-                        type: "error"
-                    }
-                });
+                showErrorMessage(dispatch, error.response?.data?.message);
             });
     };
 }
@@ -162,7 +136,6 @@ export function updateLoggedInUserDetails(societyId) {
                         type: AUTHENTICATION_ACTION.UPDATE_USER_DETAILS_SUCCESS,
                         payload: response?.data?.result
                     });
-                    toaster.showSuccessMessage(dispatch, "Login success");
                 } else {
                     toaster.showSuccessMessage(
                         dispatch,

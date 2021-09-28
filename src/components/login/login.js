@@ -140,13 +140,21 @@ export default function Login() {
             </div>
             <div className="redirectLink">
                 <Link to="/user/forget-password">
-                    <Typography variant="subtitle2" color="secondary">
+                    <Typography
+                        variant="subtitle2"
+                        color="secondary"
+                        className="link_tp"
+                    >
                         Forget password
                     </Typography>
                 </Link>
                 <Link to="/user/register">
-                    <Typography variant="subtitle2" color="secondary">
-                        Sign up here
+                    <Typography
+                        variant="subtitle2"
+                        color="secondary"
+                        className="link_tp"
+                    >
+                        Sign up
                     </Typography>
                 </Link>
             </div>

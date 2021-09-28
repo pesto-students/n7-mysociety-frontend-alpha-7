@@ -12,6 +12,7 @@ import SocietyProfile from "./societyProfile/societyProfile";
 import AllMembers from "./allMembers/allMembers";
 import Logout from "./logout";
 import Verification from "./verification";
+import _404NotFound from "./_404NotFound/_404NotFound";
 export {
     Dashboard,
     Announcements,
@@ -26,5 +27,6 @@ export {
     SocietyProfile,
     AllMembers,
     Logout,
-    Verification
+    Verification,
+    _404NotFound
 };

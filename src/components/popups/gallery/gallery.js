@@ -72,7 +72,7 @@ export default function GalleryPopup({ item }) {
         setUploading(false);
     };
 
-    const deleteImage = (img) => {};
+    const deleteImage = () => {};
 
     const saveGallery = () => {
         let payload = {
@@ -123,7 +123,7 @@ export default function GalleryPopup({ item }) {
                                 // style={{ backgroundImage: `url(${image.url})` }}
                             >
                                 <img src={image} alt="event" />
-                                <IconButton onClick={() => deleteImage(image)}>
+                                <IconButton onClick={() => deleteImage()}>
                                     <DeleteIcon />
                                 </IconButton>
                             </div>

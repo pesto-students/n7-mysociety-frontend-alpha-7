@@ -211,7 +211,7 @@ function Register() {
                     onChange={updateRegisterForm}
                     variant={inputVarient}
                 >
-                    {allSocieties.map((society, index) => {
+                    {allSocieties?.map((society, index) => {
                         return (
                             <MenuItem value={society._id} key={index}>
                                 {society.name}
@@ -390,8 +390,12 @@ function Register() {
             </div>
             <div>
                 <Link to="/user/login">
-                    <Typography variant="subtitle2" color="secondary">
-                        Login here
+                    <Typography
+                        variant="subtitle2"
+                        color="secondary"
+                        className="link_tp"
+                    >
+                        Login
                     </Typography>
                 </Link>
             </div>

@@ -40,16 +40,20 @@ const Dashboard = () => {
         isComplaintsLoading: useSelector(fetchingComplaint)
     };
     useEffect(() => {
-        const param = {
-            ...dashboardInitalPaginator,
-            societyId: societyDetails?._id
-        };
-        dispatch(getAllEvents({ ...param, filterType: "todays" }));
-        dispatch(getAllAnnouncements({ ...param, filterType: "latest" }));
-        dispatch(getAllAnnouncements(param));
-        dispatch(getAllComplaints(param));
-        dispatch(getAllUsers({ ...param, getAll: true, isConfirmed: false }));
-    }, []);
+        if (societyDetails?._id) {
+            const param = {
+                ...dashboardInitalPaginator,
+                societyId: societyDetails?._id
+            };
+            dispatch(getAllEvents({ ...param, filterType: "upcoming" }));
+            dispatch(getAllAnnouncements({ ...param, filterType: "latest" }));
+            dispatch(getAllAnnouncements(param));
+            dispatch(getAllComplaints(param));
+            dispatch(
+                getAllUsers({ ...param, getAll: true, isConfirmed: false })
+            );
+        }
+    }, [societyDetails]);
 
     const getHeaderTitle = (title) => {
         return (
@@ -61,8 +65,8 @@ const Dashboard = () => {
         );
     };
 
-    const annocements = (
-        <div className="announcement">
+    const announcement = (
+        <div className="announcement dashboard">
             {getHeaderTitle("Latest Announcements")}
             <SpinnerLoader show={contents.isAnnocementsLoading}>
                 <div className="list">
@@ -81,7 +85,7 @@ const Dashboard = () => {
     );
 
     const complaints = (
-        <div className="complaint">
+        <div className="complaint dashboard">
             {getHeaderTitle("Open Complaints")}
             <SpinnerLoader show={contents.isComplaintsLoading}>
                 <div className="list">
@@ -100,8 +104,8 @@ const Dashboard = () => {
     );
 
     const events = (
-        <div className="events">
-            <div>{getHeaderTitle("Todays Events")}</div>
+        <div className="events dashboard">
+            <div>{getHeaderTitle("Upcoming Events")}</div>
             <SpinnerLoader show={contents.loadingEvents}>
                 <div className="list">
                     {listOfEvents?.docs?.map((event, index) => {
@@ -115,12 +119,6 @@ const Dashboard = () => {
                     })}
                 </div>
             </SpinnerLoader>
-        </div>
-    );
-
-    const memories = (
-        <div className="memories">
-            <div>{getHeaderTitle("Some Latest Memories")}</div>
         </div>
     );
 
@@ -146,24 +144,14 @@ const Dashboard = () => {
     return (
         <div className="wrapper">
             <DefaultLayout>
-                {isAdmin ? (
-                    <div className="data-container">
-                        <div className="firstRow">
-                            {newMembers}
-                            {complaints}
-                            {memories}
-                        </div>
+                <div className="data-container dashboard">
+                    <div className="firstRow">
+                        {isAdmin && newMembers}
+                        {!isAdmin && announcement}
+                        {complaints}
+                        {events}
                     </div>
-                ) : (
-                    <div className="data-container">
-                        <div className="firstRow">
-                            {annocements}
-                            {events}
-                            {memories}
-                        </div>
-                        <div className="secondRow"> {complaints}</div>
-                    </div>
-                )}
+                </div>
             </DefaultLayout>
         </div>
     );

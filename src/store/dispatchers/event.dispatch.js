@@ -3,8 +3,6 @@ import * as MODAL_ACTION from "../actions/modal.action";
 import eventService from "../../services/event";
 import { toaster } from "../../utils";
 
-const checkAndPayload = () => {};
-
 export function getAllEvents(payload) {
     return (dispatch) => {
         dispatch({ type: EVENT_ACTION.GET_EVENTS });

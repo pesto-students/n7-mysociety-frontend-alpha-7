@@ -20,7 +20,11 @@ const Gallery = () => {
     const param = {
         societyId: societyDetails?._id
     };
-    useEffect(() => dispatch(getGallery(param)), []);
+    useEffect(() => {
+        if (societyDetails?._id) {
+            dispatch(getGallery(param));
+        }
+    }, [societyDetails]);
 
     const editGallery = (item) => {
         dispatch(openModal(ModalTypes.addGallery, "Edit Gallery", item));

@@ -89,3 +89,6 @@
 .MuiFormHelperText-root {
     color: red !important;
 }
+.link_tp {
+    text-decoration: underline;
+}

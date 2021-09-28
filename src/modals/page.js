@@ -8,7 +8,7 @@ import { ReactComponent as ComplaintIcon } from "../assets/svgs/complaint.svg";
 import { ReactComponent as FAQIcon } from "../assets/svgs/faq.svg";
 
 export const links = [
-    { path: "/", component: Pages.Authentication },
+    { path: "/", component: Pages.Authentication, menu: "MySociety" },
     { path: "/user", component: Pages.Authentication },
     { path: "/user/:action", component: Pages.Authentication },
     { path: "/verify/:action/:token", component: Pages.Verification },
@@ -103,7 +103,7 @@ export const menus = [
     },
     {
         name: "FAQ's",
-        path: "/FAQ",
+        path: "/faq",
         icon: <FAQIcon />
     }
 ];

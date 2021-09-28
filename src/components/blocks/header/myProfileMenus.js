@@ -35,13 +35,11 @@ export default function MyProfileMenus() {
                     </MenuItem>
                 );
             })}
-            <li className="profileMenuLink logout-menu">
-                <a onClick={() => logout()}>
-                    <div className="singleMenu">
-                        <div className="name">Logout</div>
-                    </div>
-                </a>
-            </li>
+            <MenuItem>
+                <div className="singleMenu" onClick={() => logout()}>
+                    <div className="name">Logout</div>
+                </div>
+            </MenuItem>
         </React.Fragment>
     );
 }

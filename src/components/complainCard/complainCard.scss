@@ -6,7 +6,7 @@
     }
 
     .MuiCardContent-root {
-        height: 80%;
+        height: 100%;
         padding-top: 0px;
         .description {
             font-size: 14px;
@@ -14,7 +14,7 @@
             height: 100%;
             overflow: hidden;
             text-overflow: ellipsis;
-            height: 60%;
+            height: 45%;
             padding: 5px;
         }
         .dates {
@@ -79,6 +79,16 @@
 
         & > div {
             flex: 50%;
+        }
+    }
+}
+.dashboard {
+    .firstRow {
+        @media only screen and (min-width: 768px) {
+            flex-direction: row;
+        }
+        @media only screen and (max-width: 768px) {
+            flex-direction: column;
         }
     }
 }

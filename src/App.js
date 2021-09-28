@@ -11,9 +11,10 @@ import { BrowserRouter as Router } from "react-router-dom";
 import Routing from "./routing/routing";
 import "./fonts/Righteous/Righteous-Regular.ttf";
 
-import { MsModal, Snackbar, WindowCloseIcon } from "./shared";
+import { MsModal, Snackbar, SpinnerLoader, WindowCloseIcon } from "./shared";
 import { useSelector, useDispatch } from "react-redux";
 import { snack, showModal } from "./store/selectors/modal.selector";
+import { isFetchingLoggedInUserDetails } from "./store/selectors/authetication.selector";
 import { CLOSE_TOASTER } from "./store/actions/modal.action";
 import { getCookie } from "./utils";
 import { updateLoggedInUserDetails } from "./store/dispatchers/authentication.dispatch";
@@ -24,6 +25,8 @@ function App() {
     const handleClose = () => {
         dispatch({ type: CLOSE_TOASTER });
     };
+
+    const isLoadingUserDetails = useSelector(isFetchingLoggedInUserDetails);
 
     useEffect(() => {
         if (getCookie("society-id")) {
@@ -59,19 +62,20 @@ function App() {
     );
 
     const displayModal = useSelector(showModal);
-
     return (
-        <ThemeProvider theme={theme}>
-            <InputVarientContext.Provider value="standard">
-                <ButtonVarientContext.Provider value="contained">
-                    {snackBar}
-                    {displayModal ? <MsModal /> : null}
-                    <Router>
-                        <Routing></Routing>
-                    </Router>
-                </ButtonVarientContext.Provider>
-            </InputVarientContext.Provider>
-        </ThemeProvider>
+        <SpinnerLoader show={isLoadingUserDetails}>
+            <ThemeProvider theme={theme}>
+                <InputVarientContext.Provider value="standard">
+                    <ButtonVarientContext.Provider value="contained">
+                        {snackBar}
+                        {displayModal ? <MsModal /> : null}
+                        <Router>
+                            <Routing></Routing>
+                        </Router>
+                    </ButtonVarientContext.Provider>
+                </InputVarientContext.Provider>
+            </ThemeProvider>
+        </SpinnerLoader>
     );
 }
 
