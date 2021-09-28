@@ -14,7 +14,6 @@ import { ModalTypes } from "../../modals/constant";
 import { openModal } from "../../store/dispatchers/modal.dispatch";
 import "./complainCard.scss";
 export default function ComplainCard({ complaint, isDashboard }) {
-    console.log(complaint, "complaint------");
     const isAdmin = useSelector(isLoggedInAsAdmin);
     const buttonVarient = useContext(ButtonVarientContext);
 
@@ -65,7 +64,10 @@ export default function ComplainCard({ complaint, isDashboard }) {
         >
             <CardHeader title={complaint?.title}></CardHeader>
             <CardContent>
-                <div className="description">{complaint?.desc}</div>
+                {!isDashboard && (
+                    <div className="description">{complaint?.desc}</div>
+                )}
+
                 {isAdmin ? (
                     <div className="admin-action">
                         {dates}

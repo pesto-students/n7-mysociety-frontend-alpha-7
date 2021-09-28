@@ -26,6 +26,7 @@
             flex: 50%;
             > span {
                 margin-left: 10px;
+                font-size: 14px;
             }
         }
     }
@@ -34,9 +35,7 @@
         display: flex;
         flex-direction: row;
         align-items: flex-end;
-        > div {
-            flex: 50%;
-        }
+        justify-content: space-between;
 
         .admin-action-btn {
             display: flex;
@@ -44,6 +43,16 @@
         }
         .dates {
             display: flex;
+            flex-direction: column;
+        }
+    }
+}
+.dashboard {
+    .firstRow {
+        @media only screen and (min-width: 768px) {
+            flex-direction: row;
+        }
+        @media only screen and (max-width: 768px) {
             flex-direction: column;
         }
     }

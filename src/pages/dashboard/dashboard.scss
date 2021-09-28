@@ -4,6 +4,7 @@
     & > div {
         flex: 30%;
         margin: 0 10px;
+
         .header-title {
             padding: 15px;
             border-bottom: 2px solid var(--primary-color);
@@ -15,6 +16,37 @@
         justify-content: space-between;
         > div {
             min-width: 32%;
+            margin: 0px 15px 10px 0px;
+        }
+        .complaint.dashboard {
+            .list {
+                .complain-card {
+                    margin-top: 20px;
+                    .MuiCardContent-root {
+                        padding-top: 0px;
+                        .dates {
+                            label {
+                                color: var(--primary-font-color);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .events.dashboard {
+            .list {
+                .eventCardWrap {
+                    margin-top: 20px;
+                }
+            }
+        }
+        .announcement.dashboard {
+            .list {
+                .annoucement-card {
+                    max-width: 422px;
+                    margin-top: 20px;
+                }
+            }
         }
     }
 
@@ -36,11 +68,28 @@
                     width: 0 !important;
                 }
             }
-
             .annoucement-card,
             .complain-card {
                 margin: 10px 0 !important;
             }
+        }
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .dashboard .firstRow {
+        flex-direction: row;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .dashboard .firstRow {
+        > div {
+            margin: 0px;
+            max-width: 100%;
         }
     }
 }
