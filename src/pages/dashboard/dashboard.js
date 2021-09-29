@@ -23,6 +23,7 @@ import ComplainCard from "../../components/complainCard/complainCard";
 import { getAllEvents } from "../../store/dispatchers/event.dispatch";
 import EventCard from "../../components/shared/eventCard";
 import ProfileCard from "../../components/shared/profileCard/index";
+import { Link } from "react-router-dom";
 
 const Dashboard = () => {
     const dispatch = useDispatch();
@@ -30,7 +31,6 @@ const Dashboard = () => {
     const listOfEvents = useSelector(allEvents);
     const listOfComplaints = useSelector(complaintList);
     const listOfUsers = useSelector(userList);
-    console.log(listOfUsers, "listOfUsers---");
     const societyDetails = useSelector(loggedInUserSocietyDetails);
     const isAdmin = useSelector(isLoggedInAsAdmin);
     const contents = {
@@ -45,7 +45,12 @@ const Dashboard = () => {
                 ...dashboardInitalPaginator,
                 societyId: societyDetails?._id
             };
-            dispatch(getAllEvents({ ...param, filterType: "upcoming" }));
+            const eventParam = {
+                limit: 2,
+                page: 1,
+                societyId: societyDetails?._id
+            };
+            dispatch(getAllEvents({ ...eventParam, filterType: "upcoming" }));
             dispatch(getAllAnnouncements({ ...param, filterType: "latest" }));
             dispatch(getAllAnnouncements(param));
             dispatch(getAllComplaints(param));
@@ -55,11 +60,18 @@ const Dashboard = () => {
         }
     }, [societyDetails]);
 
-    const getHeaderTitle = (title) => {
+    const getHeaderTitle = (title, count = 0) => {
         return (
             <div className="header-title">
                 <Typography variant="h6" color="primary">
                     {title}
+                </Typography>
+                <Typography
+                    variant="subtitle1"
+                    color="primary"
+                    className="counts"
+                >
+                    {count > 9 ? `9+` : count}
                 </Typography>
             </div>
         );
@@ -67,7 +79,10 @@ const Dashboard = () => {
 
     const announcement = (
         <div className="announcement dashboard">
-            {getHeaderTitle("Latest Announcements")}
+            {getHeaderTitle(
+                "Latest Announcements",
+                listOfAnnouncements.totalDocs
+            )}
             <SpinnerLoader show={contents.isAnnocementsLoading}>
                 <div className="list">
                     {listOfAnnouncements?.docs?.map((announcement, index) => {
@@ -80,13 +95,19 @@ const Dashboard = () => {
                         );
                     })}
                 </div>
+                {listOfAnnouncements?.docs &&
+                    listOfAnnouncements?.docs.length > 0 && (
+                        <div className="showMore">
+                            <Link to="/announcements">Show More</Link>
+                        </div>
+                    )}
             </SpinnerLoader>
         </div>
     );
 
     const complaints = (
         <div className="complaint dashboard">
-            {getHeaderTitle("Open Complaints")}
+            {getHeaderTitle("Open Complaints", listOfComplaints.totalDocs)}
             <SpinnerLoader show={contents.isComplaintsLoading}>
                 <div className="list">
                     {listOfComplaints?.docs?.map((complaint, index) => {
@@ -99,13 +120,20 @@ const Dashboard = () => {
                         );
                     })}
                 </div>
+                {listOfComplaints?.docs && listOfComplaints?.docs.length > 0 && (
+                    <div className="showMore">
+                        <Link to="/complaints">Show More</Link>
+                    </div>
+                )}
             </SpinnerLoader>
         </div>
     );
 
     const events = (
         <div className="events dashboard">
-            <div>{getHeaderTitle("Upcoming Events")}</div>
+            <div>
+                {getHeaderTitle("Upcoming Events", listOfEvents.totalDocs)}
+            </div>
             <SpinnerLoader show={contents.loadingEvents}>
                 <div className="list">
                     {listOfEvents?.docs?.map((event, index) => {
@@ -118,13 +146,20 @@ const Dashboard = () => {
                         );
                     })}
                 </div>
+                {listOfEvents?.docs && listOfEvents?.docs.length > 0 && (
+                    <div className="showMore">
+                        <Link to="/events">Show More</Link>
+                    </div>
+                )}
             </SpinnerLoader>
         </div>
     );
 
     const newMembers = (
         <div className="newMembers">
-            <div>{getHeaderTitle("New members joins the society")}</div>
+            <div>
+                {getHeaderTitle("New Member Requests", listOfUsers.totalDocs)}
+            </div>
             <SpinnerLoader show={contents.isLoadingMember}>
                 <div className="list">
                     {listOfUsers?.docs?.map((member, index) => {
@@ -137,6 +172,11 @@ const Dashboard = () => {
                         );
                     })}
                 </div>
+                {listOfUsers?.docs && listOfUsers?.docs.length > 0 && (
+                    <div className="showMore">
+                        <Link to="/all-members">Show More</Link>
+                    </div>
+                )}
             </SpinnerLoader>
         </div>
     );

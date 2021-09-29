@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import {
     Card,
     CardContent,
@@ -45,8 +45,6 @@ export default function ComplainCard({ complaint, isDashboard }) {
         </div>
     );
 
-    const [showAction, setShowAction] = useState(false);
-
     const takeAction = () => {
         openPopup(ModalTypes.addComplain, "Take Action On Complaint");
     };
@@ -68,14 +66,24 @@ export default function ComplainCard({ complaint, isDashboard }) {
             </Button>
         </div>
     );
+    const status = (
+        <span variant={buttonVarient} className={`status ${complaint?.status}`}>
+            {complaint?.status}
+        </span>
+    );
 
     return (
-        <Card
-            className="complain-card"
-            onMouseEnter={() => setShowAction(true)}
-            onMouseLeave={() => setShowAction(false)}
-        >
-            <CardHeader title={complaint?.title}></CardHeader>
+        <Card className="complain-card">
+            <div className="cardHeaderWrap">
+                <CardHeader title={complaint.title}></CardHeader>
+                {!isAdmin ? (
+                    <UserActions
+                        canEdit={!isAdmin}
+                        show={!isDashboard}
+                        onEdit={editComplaint}
+                    />
+                ) : null}
+            </div>
             <CardContent>
                 {!isDashboard && (
                     <div className="description">
@@ -89,13 +97,11 @@ export default function ComplainCard({ complaint, isDashboard }) {
                         {takeActionButton}
                     </div>
                 ) : (
-                    dates
+                    <div className="admin-action">
+                        {dates}
+                        {status}
+                    </div>
                 )}
-                <UserActions
-                    canEdit={!isAdmin}
-                    show={showAction && !isDashboard}
-                    onEdit={editComplaint}
-                />
             </CardContent>
         </Card>
     );

@@ -19,9 +19,12 @@ const Announcements = () => {
     const annoucementLoadingState = useSelector(loading);
     const pager = useSelector(pagerDetails);
     const [currentTab, setTab] = useState(0);
+    const [tabCount, setTabCount] = useState(0);
 
+    useEffect(() => {
+        setTabCount(listOfAnnouncements.totalDocs);
+    }, [listOfAnnouncements]);
     const fetchAnnouncements = (pageNumber) => {
-        console.log(pageNumber);
         const payload = {
             limit: initalPaginator.limit,
             page: pageNumber,
@@ -40,13 +43,30 @@ const Announcements = () => {
     const handleTabChange = (e, v) => {
         e && e.stopPropagation();
         setTab(v);
+        setTabCount(0);
+    };
+    const Counts = () => {
+        return <div className="count">{tabCount > 9 ? `9+` : tabCount}</div>;
     };
 
     const tabs = (
         <div className="tab-bar">
-            <Tabs value={currentTab} onChange={handleTabChange}>
-                <Tab index={0} label="Latest" />
-                <Tab index={1} label="Past" />
+            <Tabs
+                value={currentTab}
+                onChange={handleTabChange}
+                indicatorColor="primary"
+                textColor="primary"
+            >
+                <Tab
+                    index={0}
+                    label="Latest"
+                    icon={currentTab === 0 ? <Counts /> : ""}
+                />
+                <Tab
+                    index={1}
+                    label="Past"
+                    icon={currentTab === 1 ? <Counts /> : ""}
+                />
             </Tabs>
         </div>
     );

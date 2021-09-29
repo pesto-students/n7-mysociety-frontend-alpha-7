@@ -1,4 +1,9 @@
 .annoucement-card {
+    .cardHeaderWrap {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
     .MuiCardHeader-title {
         color: var(--secondary-font-color);
         font-size: 18px;
