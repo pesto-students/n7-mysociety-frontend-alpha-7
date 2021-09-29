@@ -40,16 +40,20 @@ const Dashboard = () => {
         isComplaintsLoading: useSelector(fetchingComplaint)
     };
     useEffect(() => {
-        const param = {
-            ...dashboardInitalPaginator,
-            societyId: societyDetails?._id
-        };
-        dispatch(getAllEvents({ ...param, filterType: "upcoming" }));
-        dispatch(getAllAnnouncements({ ...param, filterType: "latest" }));
-        dispatch(getAllAnnouncements(param));
-        dispatch(getAllComplaints(param));
-        dispatch(getAllUsers({ ...param, getAll: true, isConfirmed: false }));
-    }, []);
+        if (societyDetails?._id) {
+            const param = {
+                ...dashboardInitalPaginator,
+                societyId: societyDetails?._id
+            };
+            dispatch(getAllEvents({ ...param, filterType: "upcoming" }));
+            dispatch(getAllAnnouncements({ ...param, filterType: "latest" }));
+            dispatch(getAllAnnouncements(param));
+            dispatch(getAllComplaints(param));
+            dispatch(
+                getAllUsers({ ...param, getAll: true, isConfirmed: false })
+            );
+        }
+    }, [societyDetails]);
 
     const getHeaderTitle = (title) => {
         return (

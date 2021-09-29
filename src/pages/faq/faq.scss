@@ -1,4 +1,7 @@
 .faqs {
+    @media only screen and (max-width: 768px) {
+        padding: 15px;
+    }
     .MuiAccordionSummary-root,
     .MuiAccordionSummary-root,
     .MuiAccordionSummary-content,

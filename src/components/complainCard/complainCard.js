@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { ButtonVarientContext } from "../../contexts/variant.context";
 import { formatDate } from "../../utils";
 import { ModalTypes } from "../../modals/constant";
+import { limitSting } from "../../helpers/functions";
 import { openModal } from "../../store/dispatchers/modal.dispatch";
 import "./complainCard.scss";
 export default function ComplainCard({ complaint, isDashboard }) {
@@ -22,12 +23,24 @@ export default function ComplainCard({ complaint, isDashboard }) {
     const dates = (
         <div className="dates">
             <div className="posted-on">
-                <label>Posted On:</label>
-                <span>{formatDate(complaint?.created_at, "DD-MM-YYYY")}</span>
+                <div>
+                    <label>Posted On:</label>
+                </div>
+                <div>
+                    <span>
+                        {formatDate(complaint?.created_at, "DD-MM-YYYY")}
+                    </span>
+                </div>
             </div>
             <div className="updated-on">
-                <label>Updated On:</label>
-                <span>{formatDate(complaint?.updated_at, "DD-MM-YYYY")}</span>
+                <div>
+                    <label>Updated On:</label>
+                </div>
+                <div>
+                    <span>
+                        {formatDate(complaint?.updated_at, "DD-MM-YYYY")}
+                    </span>
+                </div>
             </div>
         </div>
     );
@@ -65,7 +78,9 @@ export default function ComplainCard({ complaint, isDashboard }) {
             <CardHeader title={complaint?.title}></CardHeader>
             <CardContent>
                 {!isDashboard && (
-                    <div className="description">{complaint?.desc}</div>
+                    <div className="description">
+                        {limitSting(complaint?.desc, 200)}
+                    </div>
                 )}
 
                 {isAdmin ? (

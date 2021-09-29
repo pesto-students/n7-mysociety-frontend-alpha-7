@@ -39,7 +39,12 @@ const Events = () => {
         };
         dispatch(getAllEvents(payload));
     };
-    useEffect(() => fetchEvents(1), [currentTab]);
+    console.log(societyDetails);
+    useEffect(() => {
+        if (societyDetails?._id) {
+            fetchEvents(1);
+        }
+    }, [societyDetails, currentTab]);
 
     const handleTabChange = (e, v) => {
         e && e.stopPropagation();

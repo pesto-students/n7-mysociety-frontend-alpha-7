@@ -24,7 +24,7 @@ export default function DeskTopMenu({ menus }) {
     };
 
     const content = {
-        userName: `${userData?.firstName} ${userData?.lastName}`
+        userName: userData ? `${userData?.firstName} ${userData?.lastName}` : ""
     };
     return (
         <header className="desktop-header headerWrap">

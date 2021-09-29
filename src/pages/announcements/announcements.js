@@ -31,7 +31,11 @@ const Announcements = () => {
         dispatch(getAllAnnouncements(payload));
     };
 
-    useEffect(() => fetchAnnouncements(1), [currentTab]);
+    useEffect(() => {
+        if (societyDetails?._id) {
+            fetchAnnouncements(1);
+        }
+    }, [societyDetails, currentTab]);
 
     const handleTabChange = (e, v) => {
         e && e.stopPropagation();

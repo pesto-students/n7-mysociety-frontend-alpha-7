@@ -106,13 +106,21 @@ export default function ForgetPassword() {
             </div>
             <div className="redirectLink">
                 <Link to="/user/login">
-                    <Typography variant="subtitle2" color="secondary">
-                        Login here
+                    <Typography
+                        variant="subtitle2"
+                        color="secondary"
+                        className="link_tp"
+                    >
+                        Login
                     </Typography>
                 </Link>
                 <Link to="/user/register">
-                    <Typography variant="subtitle2" color="secondary">
-                        Sign up here
+                    <Typography
+                        variant="subtitle2"
+                        color="secondary"
+                        className="link_tp"
+                    >
+                        Sign up
                     </Typography>
                 </Link>
             </div>

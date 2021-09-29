@@ -1,27 +1,7 @@
 import * as AUTHENTICATION_ACTION from "../actions/authentication.action";
-import * as MODAL_ACTION from "../actions/modal.action";
 import authenticationService from "../../services/authentication/authentication.service";
 import { setCookie, toaster } from "../../utils";
-
-const showErrorMessage = (dispatch, msg) => {
-    dispatch({
-        type: MODAL_ACTION.SHOW_TOASTER,
-        payload: {
-            message: msg,
-            type: "error"
-        }
-    });
-};
-
-const showSuccessMessage = (dispatch, msg) => {
-    dispatch({
-        type: MODAL_ACTION.SHOW_TOASTER,
-        payload: {
-            message: msg,
-            type: "success"
-        }
-    });
-};
+import { showErrorMessage, showSuccessMessage } from "../../utils/toaster";
 export function registerUser(payload) {
     return (dispatch) => {
         dispatch({
@@ -31,6 +11,7 @@ export function registerUser(payload) {
         authenticationService
             .registerUser(payload)
             .then((response) => {
+                console.log(response.response);
                 if (response.status === 200) {
                     dispatch({
                         type: AUTHENTICATION_ACTION.REGISTER_USER_SUCCESS,
@@ -38,7 +19,13 @@ export function registerUser(payload) {
                     });
                     showSuccessMessage(dispatch, "Registered Successfully");
                 } else {
-                    showErrorMessage(dispatch, "Error in registration");
+                    showErrorMessage(
+                        dispatch,
+                        response?.response.data?.message
+                    );
+                    dispatch({
+                        type: AUTHENTICATION_ACTION.REGISTER_USER_FAILURE
+                    });
                 }
             })
             .catch((error) => {
@@ -114,19 +101,17 @@ export function getAllSocieties() {
                         type: AUTHENTICATION_ACTION.GET_ALL_SOCIETIES_SUCCESS,
                         payload: response.data?.results
                     });
+                } else {
+                    dispatch({
+                        type: AUTHENTICATION_ACTION.GET_ALL_SOCIETIES_ERROR
+                    });
                 }
             })
             .catch((error) => {
                 dispatch({
                     type: AUTHENTICATION_ACTION.GET_ALL_SOCIETIES_ERROR
                 });
-                dispatch({
-                    type: MODAL_ACTION.SHOW_TOASTER,
-                    payload: {
-                        error: error.response?.data?.message,
-                        type: "error"
-                    }
-                });
+                showErrorMessage(dispatch, error.response?.data?.message);
             });
     };
 }
@@ -151,7 +136,6 @@ export function updateLoggedInUserDetails(societyId) {
                         type: AUTHENTICATION_ACTION.UPDATE_USER_DETAILS_SUCCESS,
                         payload: response?.data?.result
                     });
-                    toaster.showSuccessMessage(dispatch, "Login success");
                 } else {
                     toaster.showSuccessMessage(
                         dispatch,

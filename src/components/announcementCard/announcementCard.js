@@ -28,6 +28,8 @@ export default function AnnouncementCard({ annoucement, isDashboard }) {
         <div className="dates">
             <div className="posted-on">
                 <label>Posted On:</label>
+            </div>
+            <div>
                 <span>{formatDate(annoucement.created_at, "DD-MM-YYYY")}</span>
             </div>
         </div>
@@ -50,7 +52,7 @@ export default function AnnouncementCard({ annoucement, isDashboard }) {
     };
 
     const onReadMore = () => {
-        openPopup(ModalTypes.announcement, "Announcement");
+        openPopup(ModalTypes.announcement, annoucement.title);
     };
 
     const actions = {
@@ -70,7 +72,7 @@ export default function AnnouncementCard({ annoucement, isDashboard }) {
             <CardHeader title={annoucement.title}></CardHeader>
             <CardContent>
                 <div className="description">
-                    {limitSting(annoucement.desc, 115)}
+                    {limitSting(annoucement.desc, 360)}
                 </div>
                 <div className="date-action">
                     {dates}

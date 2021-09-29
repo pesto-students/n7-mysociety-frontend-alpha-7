@@ -5,39 +5,47 @@
         font-weight: bold;
     }
 
-    .description {
-        font-size: 14px;
-        padding: 0 0 15px 0;
-    }
-    .date-action {
-        display: flex;
-        flex-direction: row;
-        align-items: center;
-        & div {
-            flex: 50%;
-        }
-        & > div:last-of-type {
-            display: flex;
-            justify-content: flex-end;
-        }
-    }
-    .dates {
-        display: flex;
-        @media only screen and (min-width: 768px) {
-            flex-direction: row;
-        }
-        @media only screen and (max-width: 768px) {
-            flex-direction: column;
-        }
-        label {
-            color: var(--secondary-font-color);
-            font-weight: bold;
+    .MuiCardContent-root {
+        height: 80%;
+        padding-top: 0px;
+        .description {
             font-size: 14px;
+            padding: 0 0 15px 0;
+            height: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            height: 60%;
+            padding: 5px;
         }
-        > div {
-            flex: 50%;
-            > span {
-                margin-left: 10px;
+        .date-action {
+            padding: 10px 5px;
+            display: flex;
+            height: 20%;
+            flex-direction: row;
+            align-items: center;
+            & div {
+                flex: 50%;
+            }
+            & > div:last-of-type {
+                display: flex;
+                justify-content: flex-end;
+            }
+        }
+        .dates {
+            display: flex;
+            @media only screen and (min-width: 768px) {
+                flex-direction: row;
+            }
+            @media only screen and (max-width: 768px) {
+                flex-direction: column;
+            }
+            label {
+                color: var(--secondary-font-color);
+                font-weight: bold;
+                font-size: 14px;
+            }
+            > div {
+                flex: 50%;
             }
         }
     }

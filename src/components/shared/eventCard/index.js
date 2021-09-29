@@ -211,32 +211,31 @@ const EventCard = ({ event, isDashboardView, isAdmin }) => {
                         )}
                     </React.Fragment>
                 )}
-
-                <CardActions className="actionWrap">
-                    <Button
-                        href={`http://www.google.com/calendar/render?${encodeDataToURL(
-                            calendarParam
-                        )}`}
-                        target="_blank"
-                        rel="nofollow"
-                        color="secondary"
-                        role="button"
-                        aria-label="Add to Calendar"
-                    >
-                        Add To Calendar
-                    </Button>
-                    <Button
-                        variant="contained"
-                        color="secondary"
-                        role="button"
-                        aria-label="View Detail"
-                        className="viewDetail"
-                        onClick={() => openView()}
-                    >
-                        View Detail
-                    </Button>
-                </CardActions>
             </CardContent>
+            <CardActions className="actionWrap">
+                <Button
+                    href={`http://www.google.com/calendar/render?${encodeDataToURL(
+                        calendarParam
+                    )}`}
+                    target="_blank"
+                    rel="nofollow"
+                    color="secondary"
+                    role="button"
+                    aria-label="Add to Calendar"
+                >
+                    Add To Calendar
+                </Button>
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    role="button"
+                    aria-label="View Detail"
+                    className="viewDetail"
+                    onClick={() => openView()}
+                >
+                    View Detail
+                </Button>
+            </CardActions>
         </Card>
     );
 };

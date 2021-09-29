@@ -11,6 +11,17 @@
     .title-input {
         .MuiFormControl-root {
             width: 100%;
+            margin: 10px 0;
         }
+    }
+
+    .view-only-description {
+        padding: 15px;
+        max-height: 400px;
+        overflow: auto;
+    }
+
+    .view-only-title {
+        padding: 0 15px;
     }
 }

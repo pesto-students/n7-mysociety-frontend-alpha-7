@@ -2,6 +2,8 @@
     max-width: 100%;
     background: var(--font-white);
     border-radius: 20px;
+    height: 500px;
+    max-height: 500px;
     .eventImage {
         height: 216px;
     }
@@ -9,6 +11,7 @@
         background: var(--font-white);
         border-radius: 20px;
         margin-top: -45px;
+        height: 45%;
         .eventTitle {
             font-weight: bold;
         }
@@ -39,17 +42,16 @@
         .aboutDes {
             margin-top: 10px;
         }
-        .actionWrap {
-            display: flex;
-            justify-content: space-between;
-            padding: 0px;
-            margin-top: 15px;
-            > a {
-                font-weight: 700;
-            }
-            .viewDetail {
-                padding: 2px 20px;
-            }
+    }
+    .actionWrap {
+        display: flex;
+        justify-content: space-between;
+        padding: 15px;
+        > a {
+            font-weight: 700;
+        }
+        .viewDetail {
+            padding: 2px 20px;
         }
     }
 }

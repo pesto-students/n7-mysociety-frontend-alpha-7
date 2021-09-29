@@ -1,5 +1,11 @@
 import React, { useContext } from "react";
-import { FormControl, TextField, Button, SpinnerLoader } from "../../../shared";
+import {
+    FormControl,
+    TextField,
+    Button,
+    SpinnerLoader,
+    Typography
+} from "../../../shared";
 import {
     InputVarientContext,
     ButtonVarientContext
@@ -72,7 +78,7 @@ export default function AnnocumentPopup({ item }) {
                     label="Description"
                     id="desc"
                     maxRows={4}
-                    minRows={4}
+                    minRows={8}
                     multiline
                     value={annoucementForm.desc.value}
                     onChange={updateAnnouncementForm}
@@ -114,13 +120,32 @@ export default function AnnocumentPopup({ item }) {
             </Button>
         </div>
     );
+
+    const viewOnlyDiv = (
+        <div className="annocement-modal-content">
+            {/* <div className="view-only-title">
+                <Typography variant="subtitle1" color="secondary">
+                    {annoucementForm.title.value}
+                </Typography>
+            </div> */}
+            <div className="view-only-description">
+                <Typography variant="subtitle2">
+                    {annoucementForm.desc.value}
+                </Typography>
+            </div>
+        </div>
+    );
+
+    const editableDiv = (
+        <div className="annocement-modal-content">
+            {title}
+            {description}
+            {!viewOnly ? saveButton : null}
+        </div>
+    );
     return (
         <SpinnerLoader show={savingAnnouncement} fullScreen={true}>
-            <div className="annocement-modal-content">
-                {title}
-                {description}
-                {!viewOnly ? saveButton : null}
-            </div>
+            {viewOnly ? viewOnlyDiv : editableDiv}
         </SpinnerLoader>
     );
 }

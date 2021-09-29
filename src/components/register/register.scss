@@ -22,7 +22,9 @@
         .register-content {
             display: flex;
             flex-direction: column;
-            padding: 15px;
+            @media screen and (min-width: 768px) {
+                padding: 15px;
+            }
 
             > div {
                 width: 100%;
@@ -48,7 +50,9 @@
                 }
             }
             .personal-details {
-                padding: 0 25px;
+                @media only screen and (min-width: 768px) {
+                    padding: 0 25px;
+                }
             }
             .register-footer {
                 display: flex;
@@ -57,7 +61,9 @@
                 align-items: center;
 
                 & div:first-child {
-                    margin: 15px;
+                    @media only screen and (min-width: 768px) {
+                        margin: 15px;
+                    }
                     text-align: center;
 
                     h6 {
@@ -70,7 +76,9 @@
             }
             .action-btn {
                 button {
-                    padding: 5px 30px;
+                    @media only screen and (min-width: 768px) {
+                        padding: 5px 30px;
+                    }
                 }
             }
         }

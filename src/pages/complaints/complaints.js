@@ -45,7 +45,11 @@ const Complaints = () => {
         };
         dispatch(getAllComplaints(payload));
     };
-    useEffect(() => fetchComplaints(1), [currentTab]);
+    useEffect(() => {
+        if (societyDetails?._id) {
+            fetchComplaints(1);
+        }
+    }, [societyDetails, currentTab]);
 
     const handleTabChange = (e, v) => {
         e && e.stopPropagation();

@@ -5,6 +5,9 @@ export const isRegistered = (state) =>
 export const isLoggedIn = (state) =>
     state.authentication.login.status === ActionStatus.success;
 
+export const isFetchingLoggedInUserDetails = (state) =>
+    state.authentication?.login?.status === ActionStatus.busy;
+
 export const isRegisteringUser = (state) =>
     state.authentication.register.status === ActionStatus.busy;
 
