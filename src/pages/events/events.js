@@ -21,6 +21,11 @@ const Events = () => {
     const societyDetails = useSelector(loggedInUserSocietyDetails);
     const dispatch = useDispatch();
     const [currentTab, setTab] = useState(0);
+    const [tabCount, setTabCount] = useState(0);
+
+    useEffect(() => {
+        setTabCount(events.totalDocs);
+    }, [events]);
 
     const getCurrentFilter = () => {
         if (currentTab === 0) return "todays";
@@ -49,14 +54,34 @@ const Events = () => {
     const handleTabChange = (e, v) => {
         e && e.stopPropagation();
         setTab(v);
+        setTabCount(0);
     };
-
+    const Counts = () => {
+        return <div className="count">{tabCount > 9 ? `9+` : tabCount}</div>;
+    };
     const tabs = (
         <div className="tab-bar">
-            <Tabs value={currentTab} onChange={handleTabChange}>
-                <Tab index={0} label="Today" />
-                <Tab index={1} label="Past" />
-                <Tab index={2} label="Upcoming" />
+            <Tabs
+                value={currentTab}
+                onChange={handleTabChange}
+                indicatorColor="primary"
+                textColor="primary"
+            >
+                <Tab
+                    index={0}
+                    label="Today"
+                    icon={currentTab === 0 ? <Counts /> : ""}
+                />
+                <Tab
+                    index={1}
+                    label="Past"
+                    icon={currentTab === 1 ? <Counts /> : ""}
+                />
+                <Tab
+                    index={2}
+                    label="Upcoming"
+                    icon={currentTab === 2 ? <Counts /> : ""}
+                />
             </Tabs>
         </div>
     );

@@ -5,3 +5,45 @@
         padding: 15px 0 !important;
     }
 }
+.MuiTabs-root {
+    .MuiButtonBase-root {
+        padding: 0px;
+        margin-right: 20px;
+        &.MuiTab-labelIcon {
+            min-height: 50px;
+        }
+        &.MuiTab-labelIcon {
+            .MuiTab-wrapper {
+                justify-content: space-between;
+                flex-direction: row-reverse;
+                color: var(--primary-font-color);
+                .count {
+                    color: var(--font-white);
+                    background: var(--primary-font-color);
+                    width: 25px;
+                    height: 25px;
+                    text-align: center;
+                    border-radius: 25px;
+                    line-height: 27px;
+                    font-size: 14px;
+                }
+            }
+            &.Mui-selected {
+                .MuiTab-wrapper {
+                    color: var(--secondary-font-color);
+                    .count {
+                        color: var(--font-white);
+                        background: var(--primary-color);
+                    }
+                }
+            }
+        }
+        .MuiTab-wrapper {
+            justify-content: flex-start;
+            flex-direction: row;
+            font-weight: bold;
+            font-size: 22px;
+            text-transform: capitalize;
+        }
+    }
+}

@@ -29,6 +29,6 @@ export const initalPaginator = {
 };
 
 export const dashboardInitalPaginator = {
-    limit: 2,
+    limit: 5,
     page: 1
 };

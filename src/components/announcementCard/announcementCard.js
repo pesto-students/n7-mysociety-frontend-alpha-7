@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import {
     CardHeader,
     Card,
@@ -23,7 +23,6 @@ export default function AnnouncementCard({ annoucement, isDashboard }) {
     const buttonVarient = useContext(ButtonVarientContext);
     const societyDetails = useSelector(loggedInUserSocietyDetails);
     const dispatch = useDispatch();
-    const [showAction, setShowAction] = useState(false);
     const dates = (
         <div className="dates">
             <div className="posted-on">
@@ -64,12 +63,13 @@ export default function AnnouncementCard({ annoucement, isDashboard }) {
     };
 
     return (
-        <Card
-            className="annoucement-card"
-            onMouseEnter={() => setShowAction(true)}
-            onMouseLeave={() => setShowAction(false)}
-        >
-            <CardHeader title={annoucement.title}></CardHeader>
+        <Card className="annoucement-card">
+            <div className="cardHeaderWrap">
+                <CardHeader title={annoucement.title}></CardHeader>
+                {isAdmin ? (
+                    <UserActions {...actions} show={!isDashboard} />
+                ) : null}
+            </div>
             <CardContent>
                 <div className="description">
                     {limitSting(annoucement.desc, 360)}
@@ -86,12 +86,6 @@ export default function AnnouncementCard({ annoucement, isDashboard }) {
                         </Button>
                     </div>
                 </div>
-                {isAdmin ? (
-                    <UserActions
-                        {...actions}
-                        show={showAction && !isDashboard}
-                    />
-                ) : null}
             </CardContent>
         </Card>
     );

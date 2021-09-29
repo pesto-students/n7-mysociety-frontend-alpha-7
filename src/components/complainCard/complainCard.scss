@@ -1,4 +1,9 @@
 .complain-card {
+    .cardHeaderWrap {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+    }
     .MuiCardHeader-title {
         color: var(--secondary-font-color);
         font-size: 18px;
@@ -79,6 +84,20 @@
 
         & > div {
             flex: 50%;
+        }
+        .status {
+            color: var(--font-white);
+            padding: 4px 14px;
+            border-radius: 25px;
+            &.Pending {
+                background-color: var(--primary-color);
+            }
+            &.Resolved {
+                background-color: green;
+            }
+            &.Rejected {
+                background-color: red;
+            }
         }
     }
 }
