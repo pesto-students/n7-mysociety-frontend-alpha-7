@@ -96,7 +96,8 @@ const Dashboard = () => {
                     })}
                 </div>
                 {listOfAnnouncements?.docs &&
-                    listOfAnnouncements?.docs.length > 0 && (
+                    listOfAnnouncements?.docs.length >=
+                        dashboardInitalPaginator.limit && (
                         <div className="showMore">
                             <Link to="/announcements">Show More</Link>
                         </div>
@@ -120,11 +121,13 @@ const Dashboard = () => {
                         );
                     })}
                 </div>
-                {listOfComplaints?.docs && listOfComplaints?.docs.length > 0 && (
-                    <div className="showMore">
-                        <Link to="/complaints">Show More</Link>
-                    </div>
-                )}
+                {listOfComplaints?.docs &&
+                    listOfComplaints?.docs.length >=
+                        dashboardInitalPaginator.limit && (
+                        <div className="showMore">
+                            <Link to="/complaints">Show More</Link>
+                        </div>
+                    )}
             </SpinnerLoader>
         </div>
     );
@@ -146,7 +149,7 @@ const Dashboard = () => {
                         );
                     })}
                 </div>
-                {listOfEvents?.docs && listOfEvents?.docs.length > 0 && (
+                {listOfEvents?.docs && listOfEvents?.docs.length >= 2 && (
                     <div className="showMore">
                         <Link to="/events">Show More</Link>
                     </div>
@@ -172,11 +175,13 @@ const Dashboard = () => {
                         );
                     })}
                 </div>
-                {listOfUsers?.docs && listOfUsers?.docs.length > 0 && (
-                    <div className="showMore">
-                        <Link to="/all-members">Show More</Link>
-                    </div>
-                )}
+                {listOfUsers?.docs &&
+                    listOfUsers?.docs.length >=
+                        dashboardInitalPaginator.limit && (
+                        <div className="showMore">
+                            <Link to="/all-members">Show More</Link>
+                        </div>
+                    )}
             </SpinnerLoader>
         </div>
     );
