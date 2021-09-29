@@ -23,7 +23,7 @@ export default function Routing() {
                     />
                 );
             })}
-            <Route path="*" exact={true} component={_404NotFound} />
+            <ProtectedRoute path="*" exact={true} component={_404NotFound} />
         </Switch>
     );
 }
