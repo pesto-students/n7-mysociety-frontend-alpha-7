@@ -7,6 +7,9 @@
     .eventImage {
         height: 216px;
     }
+    &.dashboard {
+        height: auto;
+    }
     .contentWrap {
         background: var(--font-white);
         border-radius: 20px;
