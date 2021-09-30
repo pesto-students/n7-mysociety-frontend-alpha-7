@@ -65,14 +65,16 @@ export default function AnnouncementCard({ annoucement, isDashboard }) {
     return (
         <Card className="annoucement-card">
             <div className="cardHeaderWrap">
-                <CardHeader title={annoucement.title}></CardHeader>
+                <CardHeader
+                    title={limitSting(annoucement.title, 35)}
+                ></CardHeader>
                 {isAdmin ? (
                     <UserActions {...actions} show={!isDashboard} />
                 ) : null}
             </div>
             <CardContent>
                 <div className="description">
-                    {limitSting(annoucement.desc, 360)}
+                    {limitSting(annoucement.desc, 250)}
                 </div>
                 <div className="date-action">
                     {dates}

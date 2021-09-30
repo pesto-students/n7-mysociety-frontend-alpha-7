@@ -75,7 +75,9 @@ export default function ComplainCard({ complaint, isDashboard }) {
     return (
         <Card className="complain-card">
             <div className="cardHeaderWrap">
-                <CardHeader title={complaint.title}></CardHeader>
+                <CardHeader
+                    title={limitSting(complaint.title, 35)}
+                ></CardHeader>
                 {!isAdmin ? (
                     <UserActions
                         canEdit={!isAdmin}

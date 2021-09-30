@@ -82,7 +82,7 @@ const EventCard = ({ event, isDashboardView, isAdmin }) => {
     };
     return (
         <Card
-            className="eventCardWrap"
+            className={`eventCardWrap ${isDashboardView ? "dashboard" : ""}`}
             elevation={1}
             onMouseEnter={() => {
                 setShowAdminAction(true);
@@ -129,12 +129,12 @@ const EventCard = ({ event, isDashboardView, isAdmin }) => {
                 {title && (
                     <div className="titleWrap">
                         <Typography
-                            variant="h5"
+                            variant="h6"
                             color="textSecondary"
-                            component="h5"
+                            component="h6"
                             className="eventTitle"
                         >
-                            {title}
+                            {limitSting(title, 25)}
                         </Typography>
                     </div>
                 )}

@@ -20,6 +20,12 @@ const AllMembers = () => {
     const pager = useSelector(pagerDetails);
     const [currentTab, setTab] = useState(0);
 
+    const [tabCount, setTabCount] = useState(0);
+
+    useEffect(() => {
+        setTabCount(listOfUsers.totalDocs);
+    }, [listOfUsers]);
+
     const fetchUsers = (pageNumber) => {
         console.log(pageNumber);
         const payload = {
@@ -43,14 +49,34 @@ const AllMembers = () => {
     const handleTabChange = (e, v) => {
         e && e.stopPropagation();
         setTab(v);
+        setTabCount(0);
     };
-
+    const Counts = () => {
+        return <div className="count">{tabCount > 9 ? `9+` : tabCount}</div>;
+    };
     const tabs = (
         <div className="tab-bar">
-            <Tabs value={currentTab} onChange={handleTabChange}>
-                <Tab index={0} label="Pending" />
-                <Tab index={1} label="Active" />
-                <Tab index={2} label="Deactivated" />
+            <Tabs
+                value={currentTab}
+                onChange={handleTabChange}
+                indicatorColor="primary"
+                textColor="primary"
+            >
+                <Tab
+                    index={0}
+                    label="Pending"
+                    icon={currentTab === 0 ? <Counts /> : ""}
+                />
+                <Tab
+                    index={1}
+                    label="Active"
+                    icon={currentTab === 1 ? <Counts /> : ""}
+                />
+                <Tab
+                    index={2}
+                    label="Deactivated"
+                    icon={currentTab === 2 ? <Counts /> : ""}
+                />
             </Tabs>
         </div>
     );

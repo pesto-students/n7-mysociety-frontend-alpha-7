@@ -20,7 +20,7 @@ const DefaultLayout = ({ children }) => {
                 <title>{res !== undefined ? res[1]?.menu : "MySociety"}</title>
             </Helmet>
             <Header />
-            <Container maxWidth="lg" className="container">
+            <Container maxWidth="lg" className="container mainContainer">
                 <FabMenu isAdmin={true} />
                 {children}
             </Container>
