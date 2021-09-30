@@ -2,6 +2,8 @@ import { Validator } from "./validator";
 import { formatDate, getPager, dateTimeLocal } from "./formatting";
 import * as toaster from "./toaster";
 import logout, { setCookie, getCookie } from "./cookie";
+import { config } from "./secrets";
+import { uploadImage } from "./uploader";
 export {
     Validator,
     formatDate,
@@ -10,5 +12,7 @@ export {
     dateTimeLocal,
     logout,
     setCookie,
-    getCookie
+    getCookie,
+    config,
+    uploadImage
 };

@@ -9,7 +9,7 @@ import { loggedInUserSocietyDetails } from "../../../store/selectors/autheticati
 import { addEvent } from "../../../store/dispatchers/event.dispatch";
 import { useDispatch, useSelector } from "react-redux";
 import "./event.scss";
-import { dateTimeLocal, Validator } from "../../../utils";
+import { dateTimeLocal, uploadImage, Validator } from "../../../utils";
 import { isAdding } from "../../../store/selectors/event.selector";
 import { modalType } from "../../../store/selectors/modal.selector";
 import { ModalTypes } from "../../../modals/constant";
@@ -25,6 +25,7 @@ export default function EventPopup({ item }) {
     const event = item;
     const today = new Date();
     const [error, setError] = useState(null);
+    const [uploadFromNode] = useState(false);
     const [eventForm, updateForm] = useFormGroup({
         title: {
             value: event?.title ?? "",
@@ -73,7 +74,19 @@ export default function EventPopup({ item }) {
         _id: { value: event?._id ?? "" }
     });
 
-    const upload = async (e) => {
+    const uploadUpfront = (e) => {
+        uploadImage(e.target.files[0], "event")
+            .then((response) => {
+                updateForm({
+                    target: { id: "img", value: response }
+                });
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+
+    const uploadThroughNode = (e) => {
         const formData = new FormData();
         formData.append("image", e.target.files[0]);
         uploadService
@@ -87,6 +100,14 @@ export default function EventPopup({ item }) {
             .catch((error) => {
                 console.error(error);
             });
+    };
+
+    const upload = async (e) => {
+        if (uploadFromNode) {
+            uploadThroughNode(e);
+        } else {
+            uploadUpfront(e);
+        }
     };
 
     const title = (
