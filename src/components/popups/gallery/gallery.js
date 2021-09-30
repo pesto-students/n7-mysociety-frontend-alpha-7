@@ -22,6 +22,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { loggedInUserSocietyDetails } from "../../../store/selectors/authetication.selector";
 import { isAddingGallery } from "../../../store/selectors/gallery.selector";
 import uploadService from "../../../services/upload";
+import { uploadImage } from "../../../utils";
 export default function GalleryPopup({ item }) {
     const gallery = item;
     const inputVarient = useContext(InputVarientContext);
@@ -30,7 +31,7 @@ export default function GalleryPopup({ item }) {
     const societyDetails = useSelector(loggedInUserSocietyDetails);
     const [uploading, setUploading] = useState(false);
     const isCreatingGallery = useSelector(isAddingGallery);
-
+    const [uploadFromNode] = useState(false);
     const [galleryForm, updateForm] = useFormGroup({
         images: {
             value: gallery?.images ?? [],
@@ -45,7 +46,7 @@ export default function GalleryPopup({ item }) {
         }
     });
 
-    const upload = (e) => {
+    const uploadThroughNode = (e) => {
         let images = [];
         setUploading(true);
         const formData = new FormData();
@@ -72,7 +73,56 @@ export default function GalleryPopup({ item }) {
         setUploading(false);
     };
 
-    const deleteImage = () => {};
+    const upload = (e) => {
+        if (uploadFromNode) {
+            uploadThroughNode(e);
+        } else {
+            uploaUpFront(e);
+        }
+    };
+
+    const uploaUpFront = async (e) => {
+        const images = Array.from(e.target.files).map((file) =>
+            uploadImage(file, "gallery")
+        );
+        Promise.allSettled(images).then((result) => {
+            const uploadedImagesResponse = result
+                .filter(
+                    (p) =>
+                        p.status === "fulfilled" && !(p.value instanceof Error)
+                )
+                .map((p) => p.value);
+            console.log(uploadedImagesResponse);
+            updateForm({
+                target: {
+                    id: "images",
+                    value: [
+                        ...galleryForm.images.value,
+                        ...uploadedImagesResponse
+                    ]
+                }
+            });
+        });
+    };
+
+    const deleteImage = (img) => {
+        const fileName = img.substring(img.lastIndexOf("/") + 1);
+        console.log(fileName);
+        const updatedFiles = galleryForm.images?.value?.filter(
+            (image) => image !== img
+        );
+        updateForm({
+            target: { id: "images", value: updatedFiles }
+        });
+
+        // S3UploadFile.deleteFile(fileName, config("gallery"))
+        //     .then((response) => {
+        //         updateForm({ target: { id: "images", value: updatedFiles } });
+        //     })
+        //     .catch((error) => {
+        //         console.error(error);
+        //     });
+    };
 
     const saveGallery = () => {
         let payload = {
@@ -123,7 +173,7 @@ export default function GalleryPopup({ item }) {
                                 // style={{ backgroundImage: `url(${image.url})` }}
                             >
                                 <img src={image} alt="event" />
-                                <IconButton onClick={() => deleteImage()}>
+                                <IconButton onClick={() => deleteImage(image)}>
                                     <DeleteIcon />
                                 </IconButton>
                             </div>

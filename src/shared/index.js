@@ -26,12 +26,12 @@ import SpinnerLoader from "./loader/loader";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 import { Card, CardContent, CardHeader, CardActions } from "@material-ui/core";
-import { ReactComponent as EditIcon } from "../assets/svgs/editIcon.svg";
 import { ReactComponent as DeleteIcon } from "../assets/svgs/deleteIcon.svg";
 import { ReactComponent as SocietyIcon } from "../assets/svgs/society.svg";
 import { ReactComponent as ThankYouIcon } from "../assets/svgs/thankyou.svg";
 import Snackbar from "@material-ui/core/Snackbar";
 import UserActions from "./userActions/userAction";
+import EditIcon from "@material-ui/icons/Edit";
 
 import Visibility from "@material-ui/icons/Visibility";
 import VisibilityOff from "@material-ui/icons/VisibilityOff";

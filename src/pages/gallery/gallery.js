@@ -6,7 +6,10 @@ import {
     delGallery,
     getGallery
 } from "../../store/dispatchers/gallery.dispatch";
-import { loggedInUserSocietyDetails } from "../../store/selectors/authetication.selector";
+import {
+    loggedInUserSocietyDetails,
+    isLoggedInAsAdmin
+} from "../../store/selectors/authetication.selector";
 import { IconButton, EditIcon, DeleteIcon, Typography } from "../../shared";
 import "./gallery.scss";
 import { openModal } from "../../store/dispatchers/modal.dispatch";
@@ -16,6 +19,7 @@ import { LightgalleryProvider } from "react-lightgallery";
 const Gallery = () => {
     const getGalleryDetails = useSelector(galleries);
     const societyDetails = useSelector(loggedInUserSocietyDetails);
+    const isAdmin = useSelector(isLoggedInAsAdmin);
     const dispatch = useDispatch();
     const param = {
         societyId: societyDetails?._id
@@ -71,7 +75,7 @@ const Gallery = () => {
                         </Typography>
                     </div>
 
-                    {actions(item)}
+                    {isAdmin ? actions(item) : null}
                 </div>
 
                 <LightgalleryProvider>

@@ -7,7 +7,7 @@ import {
 import { useFormGroup } from "../../hooks";
 import { useDispatch, useSelector } from "react-redux";
 import { saveUser } from "../../store/dispatchers/user.dispatch";
-import { Validator } from "../../utils";
+import { uploadImage, Validator } from "../../utils";
 import {
     loggedInUserDetails,
     loggedInUserSocietyDetails
@@ -90,6 +90,9 @@ const Profile = () => {
                 }
             }
         },
+        avatarUrl: {
+            value: userInfo?.avatarUrl ?? ""
+        },
         _id: { value: userInfo?._id ?? 0 }
     };
     const [userForm, updateForm] = useFormGroup(formGroup);
@@ -116,6 +119,18 @@ const Profile = () => {
         dispatch(saveUser(payload));
     };
 
+    const uploadProfilePic = (e) => {
+        uploadImage(e.target.files[0], "profile")
+            .then((response) => {
+                updateForm({
+                    target: { id: "avatarUrl", value: response }
+                });
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    };
+
     const actionBtns = () => {
         return (
             <div className="action-btn">
@@ -136,10 +151,10 @@ const Profile = () => {
             <div className="profileWrap">
                 <div className="avatarWrap">
                     <div className="picture">
-                        {userInfo?.avatarUrl ? (
+                        {userForm?.avatarUrl?.value ? (
                             <Avatar
                                 alt={userName}
-                                src={`${userInfo?.avatarUrl}`}
+                                src={`${userForm?.avatarUrl?.value}`}
                                 className="avatar avatarMedia"
                                 role="img"
                                 aria-label={userName}
@@ -156,13 +171,22 @@ const Profile = () => {
                             </Avatar>
                         )}
 
+                        <input
+                            type="file"
+                            style={{ display: "none" }}
+                            id="profile-image-uploader"
+                            onChange={uploadProfilePic}
+                        />
+
                         <Button
                             variant="outlined"
                             color="primary"
                             size="large"
                             className="avatarUpdate"
                         >
-                            Update
+                            <label htmlFor="profile-image-uploader">
+                                Update
+                            </label>
                         </Button>
                     </div>
                     <div className="societyDetails">
