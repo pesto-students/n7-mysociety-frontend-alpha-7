@@ -24,6 +24,7 @@ export default function DeskTopMenu({ menus }) {
     };
 
     const content = {
+        avatarUrl: userData?.avatarUrl ?? null,
         userName: userData ? `${userData?.firstName} ${userData?.lastName}` : ""
     };
     return (

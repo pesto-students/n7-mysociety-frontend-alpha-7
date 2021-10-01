@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useFormGroup } from "../../../hooks";
 import {
     AddIcon,
@@ -20,18 +20,29 @@ import "./gallery.scss";
 import { createGallery } from "../../../store/dispatchers/gallery.dispatch";
 import { useDispatch, useSelector } from "react-redux";
 import { loggedInUserSocietyDetails } from "../../../store/selectors/authetication.selector";
-import { isAddingGallery } from "../../../store/selectors/gallery.selector";
+import {
+    isAddingGallery,
+    isGalleryAddedOrUpdatedSuccessFully
+} from "../../../store/selectors/gallery.selector";
 import uploadService from "../../../services/upload";
-import { uploadImage } from "../../../utils";
+import {
+    uploadToFireBaseStore,
+    deleteFileFromFireBaseStore
+} from "../../../utils";
+import * as MODAL_ACTION from "../../../store/actions/modal.action";
 export default function GalleryPopup({ item }) {
     const gallery = item;
     const inputVarient = useContext(InputVarientContext);
     const buttonVarient = useContext(ButtonVarientContext);
     const dispatch = useDispatch();
     const societyDetails = useSelector(loggedInUserSocietyDetails);
+    const isGalerySavedSuccessFully = useSelector(
+        isGalleryAddedOrUpdatedSuccessFully
+    );
     const [uploading, setUploading] = useState(false);
     const isCreatingGallery = useSelector(isAddingGallery);
     const [uploadFromNode] = useState(false);
+    const [deletedFiles, setDeletedFiles] = useState([]);
     const [galleryForm, updateForm] = useFormGroup({
         images: {
             value: gallery?.images ?? [],
@@ -45,6 +56,27 @@ export default function GalleryPopup({ item }) {
             value: gallery?._id ?? null
         }
     });
+
+    useEffect(() => {
+        if (isGalerySavedSuccessFully) {
+            if (deletedFiles && deletedFiles.length > 0) {
+                const images = deletedFiles.map((file) => {
+                    return deleteFileFromFireBaseStore(file);
+                });
+                Promise.allSettled(images).then((result) => {
+                    const deletedImageResponse = result
+                        .filter(
+                            (p) =>
+                                p.status === "fulfilled" &&
+                                !(p.value instanceof Error)
+                        )
+                        .map((p) => p.value);
+                    console.log(deletedImageResponse);
+                });
+            }
+            dispatch({ type: MODAL_ACTION.CLOSE_MODAL });
+        }
+    }, [isGalerySavedSuccessFully]);
 
     const uploadThroughNode = (e) => {
         let images = [];
@@ -83,7 +115,7 @@ export default function GalleryPopup({ item }) {
 
     const uploaUpFront = async (e) => {
         const images = Array.from(e.target.files).map((file) =>
-            uploadImage(file, "gallery")
+            uploadToFireBaseStore(file, "gallery")
         );
         Promise.allSettled(images).then((result) => {
             const uploadedImagesResponse = result
@@ -114,6 +146,7 @@ export default function GalleryPopup({ item }) {
         updateForm({
             target: { id: "images", value: updatedFiles }
         });
+        setDeletedFiles([...deletedFiles, img]);
 
         // S3UploadFile.deleteFile(fileName, config("gallery"))
         //     .then((response) => {
@@ -136,6 +169,7 @@ export default function GalleryPopup({ item }) {
                 _id: galleryForm._id.value
             };
         }
+
         dispatch(createGallery(payload));
     };
 
@@ -146,6 +180,7 @@ export default function GalleryPopup({ item }) {
                 style={{ display: "none" }}
                 id="file-uploader"
                 onChange={upload}
+                accept="image/*"
                 multiple
             />
             <label htmlFor="file-uploader">
@@ -163,7 +198,7 @@ export default function GalleryPopup({ item }) {
                     : null
             }
         >
-            <SpinnerLoader show={uploading}>
+            <SpinnerLoader show={uploading} fullScreen={true}>
                 <div className="images">
                     {galleryForm.images?.value.map((image, index) => {
                         return (

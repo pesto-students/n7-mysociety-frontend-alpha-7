@@ -9,7 +9,11 @@ import { loggedInUserSocietyDetails } from "../../../store/selectors/autheticati
 import { addEvent } from "../../../store/dispatchers/event.dispatch";
 import { useDispatch, useSelector } from "react-redux";
 import "./event.scss";
-import { dateTimeLocal, uploadImage, Validator } from "../../../utils";
+import {
+    dateTimeLocal,
+    uploadToFireBaseStore,
+    Validator
+} from "../../../utils";
 import { isAdding } from "../../../store/selectors/event.selector";
 import { modalType } from "../../../store/selectors/modal.selector";
 import { ModalTypes } from "../../../modals/constant";
@@ -75,7 +79,7 @@ export default function EventPopup({ item }) {
     });
 
     const uploadUpfront = (e) => {
-        uploadImage(e.target.files[0], "event")
+        uploadToFireBaseStore(e.target.files[0], "event")
             .then((response) => {
                 updateForm({
                     target: { id: "img", value: response }
@@ -206,6 +210,7 @@ export default function EventPopup({ item }) {
                         label="Image"
                         id="img"
                         type="file"
+                        accept="image/*"
                         onChange={upload}
                         variant={inputVarient}
                         disabled={viewOnly}
