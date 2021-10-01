@@ -11,6 +11,7 @@ export default function SpinnerLoader({ show, children, fullScreen }) {
     const loader = (
         <div
             className="backdrop"
+            key="loader"
             style={fullScreen ? fullScreenStyle : { position: "relative" }}
         >
             <CircularProgress />

@@ -57,7 +57,8 @@ export default function modalReducer(state = initialState, action) {
                 }
             };
         case USER_ACTION.SAVE_USER_SUCCESS:
-            list = [...state.userList?.data?.docs];
+            const l = state.userList?.data?.docs ?? [];
+            list = [...l];
             const index = list.findIndex(
                 (item) => item._id === action.payload._id
             );

@@ -7,7 +7,7 @@ import {
 import { useFormGroup } from "../../hooks";
 import { useDispatch, useSelector } from "react-redux";
 import { saveUser } from "../../store/dispatchers/user.dispatch";
-import { uploadImage, Validator } from "../../utils";
+import { uploadToFireBaseStore, Validator } from "../../utils";
 import {
     loggedInUserDetails,
     loggedInUserSocietyDetails
@@ -106,7 +106,8 @@ const Profile = () => {
             mobile: userForm?.mobile?.value,
             email: userForm?.email?.value,
             gender: userForm?.gender?.value,
-            flatNo: userForm?.flatNo?.value
+            flatNo: userForm?.flatNo?.value,
+            avatarUrl: userForm?.avatarUrl?.value
         };
 
         if (userForm?._id?.value) {
@@ -120,7 +121,7 @@ const Profile = () => {
     };
 
     const uploadProfilePic = (e) => {
-        uploadImage(e.target.files[0], "profile")
+        uploadToFireBaseStore(e.target.files[0], "profile")
             .then((response) => {
                 updateForm({
                     target: { id: "avatarUrl", value: response }
@@ -175,6 +176,7 @@ const Profile = () => {
                             type="file"
                             style={{ display: "none" }}
                             id="profile-image-uploader"
+                            accept="image/*"
                             onChange={uploadProfilePic}
                         />
 

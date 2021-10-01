@@ -13,6 +13,26 @@
             display: flex;
             flex-direction: row;
             align-items: center;
+            .gallery-title {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                width: 100%;
+                .lib-date {
+                    color: var(--primary-font-color);
+                    opacity: 0.8;
+                    font-size: 10px;
+                    float: right;
+                }
+
+                & > div:first-of-type {
+                    flex: 70%;
+                }
+
+                & > div:last-of-type {
+                    flex: 30%;
+                }
+            }
         }
         .gallery-images {
             justify-content: space-around;
@@ -37,4 +57,11 @@
 
 .react_lightgallery_item {
     margin: 15px;
+}
+
+.no-record-message {
+    height: 500px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

@@ -1,7 +1,11 @@
 import React, { useEffect } from "react";
 import DefaultLayout from "../../components/layout/defaultLayout";
 import { useSelector, useDispatch } from "react-redux";
-import { galleries } from "../../store/selectors/gallery.selector";
+import {
+    galleries,
+    isGalleryLoading,
+    isDeletingGallery
+} from "../../store/selectors/gallery.selector";
 import {
     delGallery,
     getGallery
@@ -10,16 +14,25 @@ import {
     loggedInUserSocietyDetails,
     isLoggedInAsAdmin
 } from "../../store/selectors/authetication.selector";
-import { IconButton, EditIcon, DeleteIcon, Typography } from "../../shared";
+import {
+    IconButton,
+    EditIcon,
+    DeleteIcon,
+    Typography,
+    SpinnerLoader
+} from "../../shared";
 import "./gallery.scss";
 import { openModal } from "../../store/dispatchers/modal.dispatch";
 import { ModalTypes } from "../../modals/constant";
 import PhotoItem from "./photoItem";
 import { LightgalleryProvider } from "react-lightgallery";
+import * as moment from "moment";
 const Gallery = () => {
     const getGalleryDetails = useSelector(galleries);
     const societyDetails = useSelector(loggedInUserSocietyDetails);
     const isAdmin = useSelector(isLoggedInAsAdmin);
+    const isLoadingGallery = useSelector(isGalleryLoading);
+    const deletingGallery = useSelector(isDeletingGallery);
     const dispatch = useDispatch();
     const param = {
         societyId: societyDetails?._id
@@ -39,30 +52,30 @@ const Gallery = () => {
             _id: item._id,
             societyId: societyDetails?._id
         };
-        dispatch(delGallery(payload));
+        dispatch(delGallery({ payload, images: item.images }));
     };
 
     const actions = (item) => {
-        return (
-            <div className="gallery-actions">
-                <IconButton
-                    aria-label="edit"
-                    size="medium"
-                    color="secondary"
-                    onClick={() => editGallery(item)}
-                >
-                    <EditIcon />
-                </IconButton>
-                <IconButton
-                    ria-label="delete"
-                    size="medium"
-                    color="secondary"
-                    onClick={() => deleteGallery(item)}
-                >
-                    <DeleteIcon />
-                </IconButton>
-            </div>
-        );
+        return [
+            <IconButton
+                aria-label="edit"
+                size="medium"
+                color="secondary"
+                onClick={() => editGallery(item)}
+                key="edit"
+            >
+                <EditIcon />
+            </IconButton>,
+            <IconButton
+                ria-label="delete"
+                size="medium"
+                color="secondary"
+                onClick={() => deleteGallery(item)}
+                key="delete"
+            >
+                <DeleteIcon />
+            </IconButton>
+        ];
     };
 
     const lightGalleryLibrary = (item) => {
@@ -70,12 +83,20 @@ const Gallery = () => {
             <div className="gallery">
                 <div className="gallery-header">
                     <div className="gallery-title">
-                        <Typography variant="h6" color="secondary">
-                            {item.category}
-                        </Typography>
+                        <div>
+                            <Typography variant="h6" color="secondary">
+                                {item.category} {isAdmin ? actions(item) : null}
+                            </Typography>
+                        </div>
+                        <div>
+                            <Typography
+                                variant="subtitle1"
+                                className="lib-date"
+                            >
+                                {moment(item.created_at).format("YYYY-MM-DD")}
+                            </Typography>
+                        </div>
                     </div>
-
-                    {isAdmin ? actions(item) : null}
                 </div>
 
                 <LightgalleryProvider>
@@ -104,10 +125,23 @@ const Gallery = () => {
 
     return (
         <div className="wrapper">
-            <DefaultLayout>
-                {getGalleryDetails?.map((item) => {
-                    return lightGalleryLibrary(item);
-                })}
+            <DefaultLayout
+                show={isLoadingGallery || deletingGallery}
+                fullScreen={true}
+            >
+                <SpinnerLoader>
+                    {getGalleryDetails?.length > 0 ? (
+                        getGalleryDetails?.map((item) => {
+                            return lightGalleryLibrary(item);
+                        })
+                    ) : (
+                        <div className="no-record-message">
+                            <Typography variant="h3" color="primary">
+                                No records found
+                            </Typography>
+                        </div>
+                    )}
+                </SpinnerLoader>
             </DefaultLayout>
         </div>
     );
