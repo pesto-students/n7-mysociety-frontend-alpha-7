@@ -31,7 +31,7 @@ const AllMembers = () => {
         const payload = {
             limit: initalPaginator.limit,
             page: pageNumber,
-            societyId: societyDetails._id,
+            societyId: societyDetails?._id,
             getAll: true
         };
         if (currentTab === 0) {
