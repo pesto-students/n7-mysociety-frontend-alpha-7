@@ -19,13 +19,13 @@ export default function FabMenu() {
     const getModalTitle = (type) => {
         switch (type) {
             case ModalTypes.addComplain:
-                return "Add/Edit Complain";
+                return "Add Complain";
             case ModalTypes.addEvent:
-                return "Add/Edit Event";
+                return "Add Event";
             case ModalTypes.addGallery:
-                return "Add/Edit Gallery";
+                return "Add Gallery";
             case ModalTypes.addAnnouncement:
-                return "Add/Edit Announcement";
+                return "Add Announcement";
             default:
                 return "";
         }

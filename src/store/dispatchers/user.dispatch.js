@@ -1,4 +1,5 @@
 import * as USER_ACTION from "../actions/user.action";
+import * as AUTHENTICATION_ACTION from "../actions/authentication.action";
 import * as MODAL_ACTION from "../actions/modal.action";
 import userService from "../../services/user";
 import { toaster } from "../../utils";
@@ -30,7 +31,7 @@ export function getAllUsers(payload) {
     };
 }
 
-export function saveUser(payload) {
+export function saveUser(payload, userEmail = null) {
     return (dispatch) => {
         dispatch({ type: USER_ACTION.SAVE_USER });
         userService
@@ -42,6 +43,15 @@ export function saveUser(payload) {
                         type: USER_ACTION.SAVE_USER_SUCCESS,
                         payload: response?.data?.result
                     });
+                    if (
+                        userEmail &&
+                        response?.data?.result?.email === userEmail
+                    ) {
+                        dispatch({
+                            type: AUTHENTICATION_ACTION.UPDATE_USER_DETAILS_SUCCESS,
+                            payload: response?.data?.result
+                        });
+                    }
 
                     toaster.showSuccessMessage(
                         dispatch,
@@ -69,9 +79,8 @@ export function saveSociety(payload) {
             .updateSociety(payload)
             .then((response) => {
                 if (response.status === 201 || response.status === 203) {
-                    console.log(response, "response.data?.message");
                     dispatch({
-                        type: USER_ACTION.SAVE_SOCIETY_SUCCESS,
+                        type: AUTHENTICATION_ACTION.UPDATE_SOCIETY_DETAILS,
                         payload: response?.data?.result
                     });
 

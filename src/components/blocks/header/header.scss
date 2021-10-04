@@ -4,6 +4,7 @@
         display: flex;
         justify-content: center;
         margin-top: -53px;
+        margin-bottom: 20px;
         a {
             text-decoration: none;
             &.active,
@@ -53,6 +54,12 @@
 }
 
 .headerWrap {
+    background-color: var(--body-background-color);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    display: block;
+    z-index: 1;
     .societyWrap {
         display: flex;
         justify-content: center;
@@ -76,12 +83,12 @@
 
 .mobile-header {
     .MuiAppBar-root {
-        background-color: white;
+        background-color: var(--body-background-color);
 
         .societyWrap {
             height: 50px;
             min-height: 50px;
-            background-color: white;
+            background-color: var(--body-background-color);
 
             .name {
                 font-size: 18px;
@@ -106,7 +113,7 @@
         flex-direction: column;
         justify-content: center;
         margin-top: 15px;
-
+        margin-bottom: 20px;
         .singleMenu {
             display: flex;
             justify-content: flex-start;

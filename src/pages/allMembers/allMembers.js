@@ -31,7 +31,7 @@ const AllMembers = () => {
         const payload = {
             limit: initalPaginator.limit,
             page: pageNumber,
-            societyId: societyDetails._id,
+            societyId: societyDetails?._id,
             getAll: true
         };
         if (currentTab === 0) {
@@ -52,7 +52,7 @@ const AllMembers = () => {
         setTabCount(0);
     };
     const Counts = () => {
-        return <div className="count">{tabCount > 9 ? `9+` : tabCount}</div>;
+        return <div className="count">{tabCount}</div>;
     };
     const tabs = (
         <div className="tab-bar">

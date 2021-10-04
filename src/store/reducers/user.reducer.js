@@ -57,33 +57,44 @@ export default function modalReducer(state = initialState, action) {
                 }
             };
         case USER_ACTION.SAVE_USER_SUCCESS:
-            const l = state.userList?.data?.docs ?? [];
-            list = [...l];
-            const index = list.findIndex(
-                (item) => item._id === action.payload._id
-            );
-
-            if (index >= 0) {
-                list[index] = action.payload;
-            } else {
-                list.unshift(action.payload);
-            }
-            return {
-                ...state,
-                userList: {
-                    ...state.userList,
-                    data: {
-                        ...state.userList.data,
-                        docs: list,
-                        totalDocs: state.userList.data?.totalDocs + 1
+            console.log(state, "state------");
+            if (4 === 3) {
+                return {
+                    ...state,
+                    login: {
+                        ...state.login,
+                        status: ActionStatus.busy
                     }
-                },
-                lastAdded: {
-                    ...state.lastAdded,
-                    status: ActionStatus.success,
-                    data: action.payload
+                };
+            } else {
+                const l = state.userList?.data?.docs ?? [];
+                list = [...l];
+                const index = list.findIndex(
+                    (item) => item._id === action.payload._id
+                );
+
+                if (index >= 0) {
+                    list[index] = action.payload;
+                } else {
+                    list.unshift(action.payload);
                 }
-            };
+                return {
+                    ...state,
+                    userList: {
+                        ...state.userList,
+                        data: {
+                            ...state.userList.data,
+                            docs: list,
+                            totalDocs: state.userList.data?.totalDocs + 1
+                        }
+                    },
+                    lastAdded: {
+                        ...state.lastAdded,
+                        status: ActionStatus.success,
+                        data: action.payload
+                    }
+                };
+            }
         case USER_ACTION.SAVE_USER_ERROR:
             return {
                 ...state,

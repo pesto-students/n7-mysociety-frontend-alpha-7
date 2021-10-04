@@ -1,19 +1,5 @@
-import S3UploadFile from "react-s3";
 import { initializeApp } from "firebase/app";
 import * as fireBaseStorageService from "firebase/storage";
-import { config } from ".";
-export const uploadImage = (image, dirName) => {
-    return new Promise((resolve, reject) => {
-        S3UploadFile.uploadFile(image, config(dirName))
-            .then((response) => {
-                resolve(response.location);
-            })
-            .catch((error) => {
-                reject(new Error(error));
-            });
-    });
-};
-
 const fireBaseApp = (() => {
     const firebaseConfig = {
         apiKey: "AIzaSyDlBxFiqwm_zndjxH_jjGcX1zz2zdHyKxQ",

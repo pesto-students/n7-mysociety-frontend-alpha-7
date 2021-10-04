@@ -4,12 +4,14 @@ import { Typography } from "../../shared";
 
 const PhotoItem = ({ image, url, title }) => {
     return (
-        <LightgalleryItem group="any" src={image}>
-            <a href={url}>
-                <img src={image} alt="..." />
-                <Typography>{title}</Typography>
-            </a>
-        </LightgalleryItem>
+        <div className="singleItem">
+            <LightgalleryItem group="any" src={image}>
+                <a href={url}>
+                    <img src={image} alt="..." className="itemImage" />
+                    <Typography>{title}</Typography>
+                </a>
+            </LightgalleryItem>
+        </div>
     );
 };
 
