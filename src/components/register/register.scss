@@ -22,9 +22,9 @@
         .register-content {
             display: flex;
             flex-direction: column;
-            @media screen and (min-width: 768px) {
-                padding: 15px;
-            }
+            // @media screen and (min-width: 768px) {
+            //     padding: 15px;
+            // }
 
             > div {
                 width: 100%;
@@ -49,9 +49,10 @@
                     }
                 }
             }
+            .contact-details,
             .personal-details {
                 @media only screen and (min-width: 768px) {
-                    padding: 0 25px;
+                    padding: 0 15px;
                 }
             }
             .register-footer {
@@ -88,10 +89,7 @@
             & > div {
                 margin: 5px 0;
             }
-            .personal-details,
-            .contact-details {
-                padding: 0 15px;
-            }
+
             .contact-details {
                 & > div {
                     justify-content: flex-start;

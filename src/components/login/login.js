@@ -34,12 +34,12 @@ export default function Login() {
     const buttonVarient = useContext(ButtonVarientContext);
     const [passwordVisibility, setPasswordVisibility] = useState(false);
     const [loginForm, updateLoginForm] = useFormGroup({
-        username: {
+        email: {
             value: "",
             validation: {
                 required: true,
                 msgs: {
-                    required: "Username is required"
+                    required: "email is required"
                 }
             },
 
@@ -62,17 +62,17 @@ export default function Login() {
     const loggingInUser = useSelector(isUserLogging);
 
     // Start of UI
-    const username = (
-        <div className="username_input">
+    const email = (
+        <div className="email_input">
             <FormControl>
                 <TextField
                     required
-                    label="Username"
-                    id="username"
-                    value={loginForm.username.value}
+                    label="Email"
+                    id="email"
+                    value={loginForm.email.value}
                     onChange={updateLoginForm}
                     variant={inputVarient}
-                    helperText={loginForm.username.errorMessage}
+                    helperText={loginForm.email.errorMessage}
                 ></TextField>
             </FormControl>
         </div>
@@ -176,7 +176,7 @@ export default function Login() {
     //functions
     const authenticate = () => {
         const param = {
-            email: loginForm.username.value,
+            email: loginForm.email.value,
             password: loginForm.password.value
         };
         console.log(param);
@@ -192,7 +192,7 @@ export default function Login() {
             <Card className="login-box">
                 <CardContent>
                     <div className="login-content">
-                        {username}
+                        {email}
                         {password}
                         {loginButton}
                         {loginFooter}

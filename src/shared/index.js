@@ -46,6 +46,8 @@ import AssignmentTurnedInIcon from "@material-ui/icons/AssignmentTurnedIn";
 import ChevronLeftIcon from "@material-ui/icons/ChevronLeft";
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
 import Paginator from "./paginator/paginator";
+import DragAndDrop from "./dragAndDrop/dragAndDrop";
+import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 
 import {
     Accordion,
@@ -105,5 +107,7 @@ export {
     CardActions,
     Accordion,
     AccordionSummary,
-    AccordionDetails
+    AccordionDetails,
+    DragAndDrop,
+    CloudUploadIcon
 };

@@ -5,7 +5,7 @@ const initialState = {
         status: ActionStatus.None,
         data: null
     },
-    login: { status: ActionStatus.None, data: null },
+    login: { status: ActionStatus.None, data: null, isLoggedIn: false },
     forgetPassword: { status: ActionStatus.None, data: null },
     resetPassword: { status: ActionStatus.None, data: null },
     verifySociety: { status: ActionStatus.None, data: null },
@@ -57,7 +57,8 @@ export default function authentication(state = initialState, action) {
                 login: {
                     ...state.login,
                     status: ActionStatus.success,
-                    data: action.payload
+                    data: action.payload,
+                    isLoggedIn: true
                 }
             };
         case AUTHENTICATION_ACTION.UPDATE_USER_DETAILS_ERROR:
@@ -162,6 +163,13 @@ export default function authentication(state = initialState, action) {
                     ...state.verifySociety,
                     status: ActionStatus.error,
                     data: null
+                }
+            };
+        case AUTHENTICATION_ACTION.LOGOUT_USER:
+            return {
+                ...state,
+                login: {
+                    ...initialState.login
                 }
             };
         default:

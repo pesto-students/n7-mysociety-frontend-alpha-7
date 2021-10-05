@@ -1,7 +1,7 @@
 import { ActionStatus } from "../../modals/constant";
 import { getPager } from "../../utils";
 export const isEventLoading = (state) =>
-    state.event.events.state === ActionStatus.busy;
+    state.event.events.status === ActionStatus.busy;
 export const allEvents = (state) => state.event.events.data;
 
 export const pager = (state) => {

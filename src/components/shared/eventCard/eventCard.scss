@@ -9,6 +9,10 @@
     }
     &.dashboard {
         height: auto;
+
+        .actionWrap {
+            margin-top: 0;
+        }
     }
     .contentWrap {
         background: var(--font-white);
@@ -25,6 +29,9 @@
             .icon {
                 padding-top: 8px;
                 margin-right: 15px;
+            }
+            p {
+                word-break: break-all;
             }
         }
         .locationWrap {
@@ -50,6 +57,7 @@
         display: flex;
         justify-content: space-between;
         padding: 15px;
+        margin-top: 15px;
         > a {
             font-weight: 700;
         }

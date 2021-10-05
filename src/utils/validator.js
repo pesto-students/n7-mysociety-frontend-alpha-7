@@ -1,12 +1,13 @@
 export class Validator {
+    /*eslint-disable */
     static regex = {
         email: /^[a-zA-Z0-9+_.-]+@[a-zA-Z0-9.-]+$/i,
-        password:
-            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/i,
+        password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[#$@!%&*?])[A-Za-z\d#$@!%&*?]{8,30}$/i,
         numbersOnly: "",
         textOnly: "",
         mobile: /^\d{10}$/i
     };
+    /*eslint-enable */
 
     static required = (value) => {
         if (
@@ -55,7 +56,7 @@ export class Validator {
                 obj[key] = true;
                 switch (key) {
                     case "required":
-                        if (!Validator.required(value)) {
+                        if (validations[key] && !Validator.required(value)) {
                             obj[key] = false;
                         }
                         break;

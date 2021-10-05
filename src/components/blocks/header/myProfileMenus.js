@@ -4,9 +4,11 @@ import { useSelector } from "react-redux";
 import { isLoggedInAsAdmin } from "../../../store/selectors/authetication.selector";
 import React, { useState, useEffect } from "react";
 import { MenuItem } from "@material-ui/core";
-import { logout } from "../../../utils";
+import { LOGOUT_USER } from "../../../store/actions/authentication.action";
+import { useDispatch } from "react-redux";
 export default function MyProfileMenus() {
     const [currentMenus, setCurrentMenus] = useState([]);
+    const dispatch = useDispatch();
     const isAdmin = useSelector(isLoggedInAsAdmin);
     console.log(adminProfileMenus, "adminProfileMenus");
     useEffect(() => {
@@ -36,7 +38,10 @@ export default function MyProfileMenus() {
                 );
             })}
             <MenuItem>
-                <div className="singleMenu" onClick={() => logout()}>
+                <div
+                    className="singleMenu"
+                    onClick={() => dispatch({ type: LOGOUT_USER })}
+                >
                     <div className="name">Logout</div>
                 </div>
             </MenuItem>

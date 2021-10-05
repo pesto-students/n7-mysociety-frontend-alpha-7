@@ -9,11 +9,12 @@ export default function SpinnerLoader({ show, children, fullScreen }) {
         zIndex: 10000
     };
     const loader = (
-        <div
-            className="backdrop"
-            key="loader"
-            style={fullScreen ? fullScreenStyle : { position: "relative" }}
-        >
+        <div className="loader-container">
+            <div
+                className="backdrop"
+                key="loader"
+                style={fullScreen ? fullScreenStyle : { position: "relative" }}
+            ></div>
             <CircularProgress />
         </div>
     );

@@ -47,7 +47,7 @@ function Register() {
     const history = useHistory();
     const inputVarient = useContext(InputVarientContext);
     const buttonVarient = useContext(ButtonVarientContext);
-    const [registerForm, updateRegisterForm] = useFormGroup({
+    const [registerForm, updateRegisterForm, updateValidation] = useFormGroup({
         firstName: {
             value: "",
             validation: {
@@ -74,35 +74,20 @@ function Register() {
             }
         },
         societyName: {
-            value: "",
-            validation: {
-                required: true,
-                msgs: { required: "Society name is required" }
-            }
+            value: ""
         },
         societyAddress: {
-            value: "",
-            validation: {
-                required: true,
-                msgs: { required: "Society address is required" }
-            }
+            value: ""
         },
         societyId: {
-            value: "",
-            validation: { required: isAdmin ? false : true }
+            value: ""
         },
         mobile: {
-            value: "",
-            validation: {
-                required: isAdmin ? false : true,
-                pattern: Validator.regex.mobile,
-                msgs: {
-                    required: "Mobile is required",
-                    pattern: "Invalid mobile number"
-                }
-            }
+            value: ""
         },
-        flatNo: { value: "" },
+        flatNo: {
+            value: ""
+        },
         password: {
             value: "",
             validation: {
@@ -126,6 +111,81 @@ function Register() {
     useEffect(() => {
         dispatch(getAllSocieties());
     }, []);
+
+    useEffect(() => {
+        if (isAdmin) {
+            updateValidation([
+                {
+                    id: "societyName",
+                    validation: {
+                        required: true,
+                        msgs: { required: "Society name is required" }
+                    }
+                },
+                {
+                    id: "societyAddress",
+                    validation: {
+                        required: true,
+                        msgs: { required: "Society address is required" }
+                    }
+                },
+                {
+                    id: "mobile",
+                    validation: {
+                        required: false
+                    }
+                },
+                {
+                    id: "flatNo",
+                    validation: {
+                        required: false,
+                        msgs: { required: "Flat No is required" }
+                    }
+                },
+                {
+                    name: "societyId",
+                    validation: { required: false }
+                }
+            ]);
+        } else {
+            updateValidation([
+                {
+                    id: "societyName",
+                    validation: {
+                        required: false
+                    }
+                },
+                {
+                    id: "societyAddress",
+                    validation: {
+                        required: false
+                    }
+                },
+                {
+                    id: "mobile",
+                    validation: {
+                        required: true,
+                        pattern: Validator.regex.mobile,
+                        msgs: {
+                            required: "Mobile is required",
+                            pattern: "Invalid mobile number"
+                        }
+                    }
+                },
+                {
+                    id: "flatNo",
+                    validation: {
+                        required: true,
+                        msgs: { required: "Flat No is required" }
+                    }
+                },
+                {
+                    name: "societyId",
+                    validation: { required: true }
+                }
+            ]);
+        }
+    }, [isAdmin]);
 
     const isRegisterFormValid =
         Validator.isFormValid(registerForm) && !passwordMismatch;
@@ -442,14 +502,17 @@ function Register() {
         </div>
     );
 
-    const handleTabChange = (event, value) => {
-        event?.stopPropagation();
-        setCurrentTab(value);
-        if (value) {
+    useEffect(() => {
+        if (currentTab) {
             setIsAdmin(false);
         } else {
             setIsAdmin(true);
         }
+    }, [currentTab]);
+
+    const handleTabChange = (event, value) => {
+        event?.stopPropagation();
+        setCurrentTab(value);
     };
 
     const tabs = (

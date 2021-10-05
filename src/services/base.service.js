@@ -1,7 +1,8 @@
 import axios from "axios";
 import { getCookie } from "../utils";
-import { logout } from "../utils";
-const http = (function () {
+import reduxStore from "../store";
+import { LOGOUT_USER } from "../store/actions/authentication.action";
+const http = (function (store) {
     const errorHandler = (error) => {
         throw error;
     };
@@ -32,12 +33,12 @@ const http = (function () {
         (error) => {
             const { response } = error;
             if (response.status === 401 || response.status === 403) {
-                logout();
+                store.dispatch({ type: LOGOUT_USER });
             }
             return error;
         }
     );
     return httpHandler;
-})();
+})(reduxStore);
 
 export default http;
