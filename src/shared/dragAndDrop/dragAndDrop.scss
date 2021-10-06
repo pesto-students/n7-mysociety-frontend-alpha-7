@@ -4,9 +4,9 @@
 .file-drop {
     /* relatively position the container bc the contents are absolute */
     position: relative;
-    height: 135px;
+    height: 110px;
     width: 100%;
-    border: 1px dashed var(--primary-font-color);
+    border: 2px dashed var(--primary-color);
 }
 
 .file-drop > .file-drop-target {

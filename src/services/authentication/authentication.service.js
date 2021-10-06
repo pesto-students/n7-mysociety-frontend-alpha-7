@@ -12,6 +12,10 @@ class Authentication {
         return http.get("/get-all-society");
     }
 
+    getAllGuests() {
+        return http.get("/get-guest-login");
+    }
+
     getUserDetails(payload) {
         return http.get("/user", { params: payload });
     }

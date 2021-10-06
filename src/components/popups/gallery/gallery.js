@@ -190,11 +190,12 @@ export default function GalleryPopup({ item }) {
                 accept="image/*"
                 multiple
             />
-            <Button variant={buttonVarient} color="primary">
-                <label htmlFor="file-uploader">
-                    Upload
-                    <CloudUploadIcon />
-                </label>
+            <Button
+                variant={buttonVarient}
+                color="primary"
+                endIcon={<CloudUploadIcon />}
+            >
+                <label htmlFor="file-uploader">Upload</label>
             </Button>
         </React.Fragment>
     );
