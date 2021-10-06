@@ -83,7 +83,7 @@ function UserPopup({ item }) {
                         onClick={() => save("accept")}
                         size="large"
                     >
-                        Confirm as Member
+                        Confirm
                     </Button>
                 )}
             </div>

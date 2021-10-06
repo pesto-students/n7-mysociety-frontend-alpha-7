@@ -17,7 +17,10 @@ import { useDispatch, useSelector } from "react-redux";
 import { saveComplaint } from "../../../store/dispatchers/complaint.dispatch";
 import { Validator, formatDate } from "../../../utils";
 import { loggedInUserSocietyDetails } from "../../../store/selectors/authetication.selector";
-import { isComplaintSaving } from "../../../store/selectors/complaint.selector";
+import {
+    isComplaintSaving,
+    currentFilter
+} from "../../../store/selectors/complaint.selector";
 import { modalType } from "../../../store/selectors/modal.selector";
 import "./complain.scss";
 import { ModalTypes } from "../../../modals/constant";
@@ -103,7 +106,7 @@ function ComplainPopup({ item }) {
     }, []);
 
     const isComplaintValid = Validator.isFormValid(complaintForm);
-
+    const currentStatus = useSelector(currentFilter);
     const save = () => {
         let payload = {
             title: complaintForm.title.value,
@@ -123,7 +126,7 @@ function ComplainPopup({ item }) {
             };
         }
 
-        dispatch(saveComplaint(payload));
+        dispatch(saveComplaint(payload, currentStatus, societyDetails._id));
     };
 
     const complaintTitleFormControl = () => {

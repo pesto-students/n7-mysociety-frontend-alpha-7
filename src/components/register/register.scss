@@ -8,6 +8,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+
     .MuiCardContent-root {
         padding: 0;
         margin: 0;
@@ -18,13 +19,11 @@
             justify-content: center;
             align-items: center;
             padding-top: 15px;
+            margin-bottom: 20px;
         }
         .register-content {
             display: flex;
             flex-direction: column;
-            @media screen and (min-width: 768px) {
-                padding: 15px;
-            }
 
             > div {
                 width: 100%;
@@ -51,7 +50,30 @@
             }
             .personal-details {
                 @media only screen and (min-width: 768px) {
-                    padding: 0 25px;
+                    .first-name,
+                    .last-name {
+                        .MuiFormControl-root {
+                            width: 98%;
+                        }
+                    }
+                    .last-name {
+                        display: flex;
+                        justify-content: flex-end;
+                    }
+                }
+            }
+            .contact-details {
+                @media only screen and (min-width: 768px) {
+                    .mobile-input,
+                    .flat-input {
+                        .MuiFormControl-root {
+                            width: 98%;
+                        }
+                    }
+                    .flat-input {
+                        display: flex;
+                        justify-content: flex-end;
+                    }
                 }
             }
             .register-footer {
@@ -88,10 +110,7 @@
             & > div {
                 margin: 5px 0;
             }
-            .personal-details,
-            .contact-details {
-                padding: 0 15px;
-            }
+
             .contact-details {
                 & > div {
                     justify-content: flex-start;

@@ -46,7 +46,7 @@ const Announcements = () => {
         setTabCount(0);
     };
     const Counts = () => {
-        return <div className="count">{tabCount > 9 ? `9+` : tabCount}</div>;
+        return <div className="count">{tabCount}</div>;
     };
 
     const tabs = (

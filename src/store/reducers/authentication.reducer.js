@@ -57,7 +57,7 @@ export default function authentication(state = initialState, action) {
                 login: {
                     ...state.login,
                     status: ActionStatus.success,
-                    data: action.payload
+                    data: { ...state.login.data, ...action.payload }
                 }
             };
         case AUTHENTICATION_ACTION.UPDATE_USER_DETAILS_ERROR:
@@ -80,6 +80,20 @@ export default function authentication(state = initialState, action) {
                         society: {
                             ...state.login.society,
                             _id: action.payload
+                        }
+                    }
+                }
+            };
+        case AUTHENTICATION_ACTION.UPDATE_SOCIETY_DETAILS:
+            return {
+                ...state,
+                login: {
+                    ...state.login,
+                    data: {
+                        ...state.login.data,
+                        society: {
+                            ...state.login.society,
+                            ...action.payload
                         }
                     }
                 }

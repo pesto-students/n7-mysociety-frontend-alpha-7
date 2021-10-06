@@ -4,6 +4,7 @@ import { ActionStatus } from "../../modals/constant";
 const initialState = {
     complaintList: {
         status: ActionStatus.None,
+        currentFilter: "Pending",
         data: []
     },
 
@@ -25,6 +26,7 @@ export default function modalReducer(state = initialState, action) {
                 ...state,
                 complaintList: {
                     ...state.complaintList,
+                    currentFilter: action.status,
                     status: ActionStatus.busy
                 }
             };
@@ -33,6 +35,7 @@ export default function modalReducer(state = initialState, action) {
             return {
                 ...state,
                 complaintList: {
+                    ...state.complaintList,
                     status: ActionStatus.success,
                     data: action.payload
                 }
@@ -42,6 +45,7 @@ export default function modalReducer(state = initialState, action) {
             return {
                 ...state,
                 complaintList: {
+                    ...state.complaintList,
                     status: ActionStatus.error,
                     data: null
                 }
@@ -57,26 +61,8 @@ export default function modalReducer(state = initialState, action) {
                 }
             };
         case COMPLAINT_ACTION.SAVE_COMPLAINT_SUCCESS:
-            list = [...state.complaintList?.data?.docs];
-            const index = list.findIndex(
-                (item) => item._id === action.payload._id
-            );
-
-            if (index >= 0) {
-                list[index] = action.payload;
-            } else {
-                list.unshift(action.payload);
-            }
             return {
                 ...state,
-                complaintList: {
-                    ...state.complaintList,
-                    data: {
-                        ...state.complaintList.data,
-                        docs: list,
-                        totalDocs: state.complaintList.data?.totalDocs + 1
-                    }
-                },
                 lastAdded: {
                     ...state.lastAdded,
                     status: ActionStatus.success,

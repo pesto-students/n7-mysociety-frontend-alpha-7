@@ -2,9 +2,13 @@ import * as COMPLAINT_ACTION from "../actions/complaint.action";
 import * as MODAL_ACTION from "../actions/modal.action";
 import complaintService from "../../services/complaint";
 import { toaster } from "../../utils";
+import { initalPaginator } from "../../modals/constant";
 export function getAllComplaints(payload) {
     return (dispatch) => {
-        dispatch({ type: COMPLAINT_ACTION.GET_ALL_COMPLAINT });
+        dispatch({
+            type: COMPLAINT_ACTION.GET_ALL_COMPLAINT,
+            status: payload.status
+        });
         complaintService
             .getAllComplaints(payload)
             .then((response) => {
@@ -30,7 +34,7 @@ export function getAllComplaints(payload) {
     };
 }
 
-export function saveComplaint(payload) {
+export function saveComplaint(payload, status, societyId) {
     return (dispatch) => {
         dispatch({ type: COMPLAINT_ACTION.SAVE_COMPLAINT });
         complaintService
@@ -41,6 +45,13 @@ export function saveComplaint(payload) {
                         type: COMPLAINT_ACTION.SAVE_COMPLAINT_SUCCESS,
                         payload: response?.data?.result
                     });
+                    dispatch(
+                        getAllComplaints({
+                            ...initalPaginator,
+                            status: status,
+                            societyId: societyId
+                        })
+                    );
                     toaster.showSuccessMessage(
                         dispatch,
                         response.response?.data?.message

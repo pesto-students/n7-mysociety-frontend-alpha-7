@@ -85,30 +85,24 @@ const Gallery = () => {
                     <div className="gallery-title">
                         <div>
                             <Typography variant="h6" color="secondary">
-                                {item.category} {isAdmin ? actions(item) : null}
+                                {item.category}
                             </Typography>
-                        </div>
-                        <div>
                             <Typography
-                                variant="subtitle1"
+                                variant="subtitle2"
+                                component="p"
                                 className="lib-date"
                             >
-                                {moment(item.created_at).format("YYYY-MM-DD")}
+                                {moment(item.updated_at).format(
+                                    "YYYY-MM-DD h:m A"
+                                )}
                             </Typography>
                         </div>
+                        <div>{isAdmin ? actions(item) : null}</div>
                     </div>
                 </div>
 
                 <LightgalleryProvider>
-                    <div
-                        style={{
-                            display: "flex",
-                            alignItems: "center",
-                            justifyContent: "center",
-                            flexWrap: "wrap"
-                        }}
-                        className="gallery-images"
-                    >
+                    <div className="gallery-images">
                         {item.images.map((p, idx) => (
                             <PhotoItem
                                 key={idx}

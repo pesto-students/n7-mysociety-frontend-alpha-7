@@ -15,3 +15,5 @@ export const isAdding = (state) =>
 
 export const isDeleting = (state) =>
     state.event.lastDeleted.status === ActionStatus.busy;
+
+export const currentFilter = (state) => state.event?.events.currentFilter;
