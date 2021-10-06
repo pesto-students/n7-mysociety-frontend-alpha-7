@@ -26,7 +26,7 @@ import SpinnerLoader from "./loader/loader";
 import CircularProgress from "@material-ui/core/CircularProgress";
 
 import { Card, CardContent, CardHeader, CardActions } from "@material-ui/core";
-import { ReactComponent as DeleteIcon } from "../assets/svgs/deleteIcon.svg";
+import DeleteIcon from "@material-ui/icons/Delete";
 import { ReactComponent as SocietyIcon } from "../assets/svgs/society.svg";
 import { ReactComponent as ThankYouIcon } from "../assets/svgs/thankyou.svg";
 import Snackbar from "@material-ui/core/Snackbar";
@@ -55,6 +55,11 @@ import {
     AccordionDetails
 } from "@material-ui/core";
 
+import { ReactComponent as TemperatureHigh } from "../assets/svgs/temperatureHigh.svg";
+import { ReactComponent as TemperatureLow } from "../assets/svgs/temperatureLow.svg";
+import { ReactComponent as TemperatureMedium } from "../assets/svgs/temperatureMedium.svg";
+
+import Tooltip from "@material-ui/core/Tooltip";
 export {
     MsModal,
     TextField,
@@ -109,5 +114,9 @@ export {
     AccordionSummary,
     AccordionDetails,
     DragAndDrop,
-    CloudUploadIcon
+    CloudUploadIcon,
+    TemperatureHigh,
+    TemperatureLow,
+    TemperatureMedium,
+    Tooltip
 };

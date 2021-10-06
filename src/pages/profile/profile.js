@@ -117,7 +117,7 @@ const Profile = () => {
             };
         }
         console.log(payload, "payload");
-        dispatch(saveUser(payload));
+        dispatch(saveUser(payload, userInfo?.email));
     };
 
     const uploadProfilePic = (e) => {
@@ -245,6 +245,7 @@ const Profile = () => {
                                         name="gender"
                                         onChange={updateForm}
                                         defaultValue="male"
+                                        className="genderGroup"
                                     >
                                         <FormControlLabel
                                             value="male"

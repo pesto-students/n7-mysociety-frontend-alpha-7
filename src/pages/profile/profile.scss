@@ -73,6 +73,11 @@
                 input {
                     width: 350px;
                 }
+                .genderGroup {
+                    input {
+                        width: auto;
+                    }
+                }
             }
             &.second {
                 margin-top: 29px;

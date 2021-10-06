@@ -31,3 +31,6 @@ export const isComplaintSaving = (state) =>
 export const loading = (state) =>
     state.complaint?.complaintList.status === ActionStatus.busy ||
     state.complaint?.lastDeleted?.status === ActionStatus.busy;
+
+export const currentFilter = (state) =>
+    state.complaint?.complaintList.currentFilter;

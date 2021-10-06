@@ -2,7 +2,10 @@
     .cardHeaderWrap {
         display: flex;
         justify-content: space-between;
-        align-items: flex-start;
+        align-items: center;
+        .complaintPriority {
+            margin-right: 15px;
+        }
     }
     .MuiCardHeader-title {
         color: var(--secondary-font-color);

@@ -4,7 +4,11 @@ import {
     CardContent,
     CardHeader,
     UserActions,
-    Button
+    Button,
+    TemperatureLow,
+    TemperatureHigh,
+    TemperatureMedium,
+    Tooltip
 } from "../../shared";
 import { isLoggedInAsAdmin } from "../../store/selectors/authetication.selector";
 import { useSelector, useDispatch } from "react-redux";
@@ -13,6 +17,7 @@ import { formatDate } from "../../utils";
 import { ModalTypes } from "../../modals/constant";
 import { limitSting } from "../../helpers/functions";
 import { openModal } from "../../store/dispatchers/modal.dispatch";
+
 import "./complainCard.scss";
 export default function ComplainCard({ complaint, isDashboard }) {
     const isAdmin = useSelector(isLoggedInAsAdmin);
@@ -71,17 +76,36 @@ export default function ComplainCard({ complaint, isDashboard }) {
             {complaint?.status}
         </span>
     );
-
+    const complaintPriority = (
+        <div className="complaintPriority">
+            {complaint.priority === "High" && (
+                <Tooltip title="High Priority">
+                    <TemperatureHigh />
+                </Tooltip>
+            )}
+            {complaint.priority === "Medium" && (
+                <Tooltip title="Medium Priority">
+                    <TemperatureMedium />
+                </Tooltip>
+            )}
+            {complaint.priority === "Low" && (
+                <Tooltip title="Low Priority">
+                    <TemperatureLow />
+                </Tooltip>
+            )}
+        </div>
+    );
     return (
         <Card className="complain-card">
             <div className="cardHeaderWrap">
                 <CardHeader
                     title={limitSting(complaint.title, 35)}
                 ></CardHeader>
+                {complaintPriority}
                 {!isAdmin ? (
                     <UserActions
                         canEdit={!isAdmin}
-                        show={!isDashboard}
+                        show={complaint?.status === "Pending"}
                         onEdit={editComplaint}
                     />
                 ) : null}
