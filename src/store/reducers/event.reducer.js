@@ -3,6 +3,7 @@ import * as EVENT_ACTION from "../actions/event.action";
 const initialState = {
     events: {
         status: ActionStatus.none,
+        currentFilter: "todays",
         data: []
     },
     lastAdded: {
@@ -22,6 +23,7 @@ export default function eventReducer(state = initialState, action) {
                 ...state,
                 events: {
                     ...state.events,
+                    currentFilter: action.filterType,
                     status: ActionStatus.busy
                 }
             };
@@ -51,7 +53,7 @@ export default function eventReducer(state = initialState, action) {
                 }
             };
         case EVENT_ACTION.ADD_EVENT_SUCCESS:
-            list = [...state.events?.data?.docs];
+            /* list = [...state.events?.data?.docs];
             const index = list.findIndex(
                 (item) => item._id === action.payload._id
             );
@@ -60,7 +62,7 @@ export default function eventReducer(state = initialState, action) {
                 list[index] = action.payload;
             } else {
                 list.unshift(action.payload);
-            }
+            }*/
             return {
                 ...state,
                 events: {

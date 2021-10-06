@@ -14,7 +14,10 @@ import {
     uploadToFireBaseStore,
     Validator
 } from "../../../utils";
-import { isAdding } from "../../../store/selectors/event.selector";
+import {
+    isAdding,
+    currentFilter
+} from "../../../store/selectors/event.selector";
 import { modalType } from "../../../store/selectors/modal.selector";
 import { ModalTypes } from "../../../modals/constant";
 import uploadService from "../../../services/upload";
@@ -30,6 +33,7 @@ export default function EventPopup({ item }) {
     const today = new Date();
     const [error, setError] = useState(null);
     const [uploadFromNode] = useState(false);
+    const currentStatus = useSelector(currentFilter);
     const [eventForm, updateForm] = useFormGroup({
         title: {
             value: event?.title ?? "",
@@ -285,7 +289,7 @@ export default function EventPopup({ item }) {
                 _id: eventForm._id.value
             };
         }
-        dispatch(addEvent(payload));
+        dispatch(addEvent(payload, currentStatus, societyDetails._id));
     };
 
     return (

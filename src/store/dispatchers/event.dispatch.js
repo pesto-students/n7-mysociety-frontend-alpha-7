@@ -2,10 +2,14 @@ import * as EVENT_ACTION from "../actions/event.action";
 import * as MODAL_ACTION from "../actions/modal.action";
 import eventService from "../../services/event";
 import { toaster } from "../../utils";
+import { initalPaginator } from "../../modals/constant";
 
 export function getAllEvents(payload) {
     return (dispatch) => {
-        dispatch({ type: EVENT_ACTION.GET_EVENTS });
+        dispatch({
+            type: EVENT_ACTION.GET_EVENTS,
+            filterType: payload.filterType
+        });
         eventService
             .getEvents(payload)
             .then((response) => {
@@ -32,7 +36,7 @@ export function getAllEvents(payload) {
     };
 }
 
-export function addEvent(payload) {
+export function addEvent(payload, filterType, societyId) {
     return (dispatch) => {
         dispatch({ type: EVENT_ACTION.ADD_EVENT });
         eventService
@@ -43,6 +47,13 @@ export function addEvent(payload) {
                         type: EVENT_ACTION.ADD_EVENT_SUCCESS,
                         payload: response?.data?.result
                     });
+                    dispatch(
+                        getAllEvents({
+                            ...initalPaginator,
+                            filterType: filterType,
+                            societyId: societyId
+                        })
+                    );
                     toaster.showSuccessMessage(
                         dispatch,
                         response.data?.message
