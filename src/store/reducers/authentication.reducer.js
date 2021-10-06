@@ -57,7 +57,6 @@ export default function authentication(state = initialState, action) {
                 login: {
                     ...state.login,
                     status: ActionStatus.success,
-                    data: action.payload,
                     isLoggedIn: true,
                     data: { ...state.login.data, ...action.payload }
                 }
