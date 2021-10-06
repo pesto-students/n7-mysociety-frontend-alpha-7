@@ -28,6 +28,7 @@ export const isUserLogging = (state) =>
     state.authentication?.login?.status === ActionStatus.busy;
 
 export const societies = (state) => state.authentication.societies.data;
+export const guests = (state) => state.authentication.guests.data;
 
 export const isLoggedInAsAdmin = (state) =>
     state.authentication?.login?.data?.role === "admin";

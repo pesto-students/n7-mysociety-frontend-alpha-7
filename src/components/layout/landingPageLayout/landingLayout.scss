@@ -13,8 +13,11 @@
         flex: 45%;
         background-color: var(--font-white);
         img {
-            width: 50%;
-            height: 50%;
+            width: 100%;
+            height: auto;
+        }
+        @media only screen and (max-width: 768px) {
+            display: none;
         }
     }
     .right-part {

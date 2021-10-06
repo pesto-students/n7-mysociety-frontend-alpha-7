@@ -122,6 +122,32 @@ export function getAllSocieties() {
     };
 }
 
+export function getAllGuests() {
+    return (dispatch) => {
+        dispatch({ type: AUTHENTICATION_ACTION.GET_ALL_GUESTS });
+        authenticationService
+            .getAllGuests()
+            .then((response) => {
+                if (response.status === 200) {
+                    dispatch({
+                        type: AUTHENTICATION_ACTION.GET_ALL_GUESTS_SUCCESS,
+                        payload: response.data?.results[0]
+                    });
+                } else {
+                    dispatch({
+                        type: AUTHENTICATION_ACTION.GET_ALL_GUESTS_ERROR
+                    });
+                }
+            })
+            .catch((error) => {
+                dispatch({
+                    type: AUTHENTICATION_ACTION.GET_ALL_GUESTS_ERROR
+                });
+                showErrorMessage(dispatch, error.response?.data?.message);
+            });
+    };
+}
+
 export function updateSocietyId(societyId) {
     return (dispatch) => {
         dispatch({
