@@ -14,11 +14,17 @@ import "./fonts/Righteous/Righteous-Regular.ttf";
 import { MsModal, Snackbar, SpinnerLoader, WindowCloseIcon } from "./shared";
 import { useSelector, useDispatch } from "react-redux";
 import { snack, showModal } from "./store/selectors/modal.selector";
-import { isFetchingLoggedInUserDetails } from "./store/selectors/authetication.selector";
+import {
+    isFetchingLoggedInUserDetails,
+    isLoggedOut
+} from "./store/selectors/authetication.selector";
 import { CLOSE_TOASTER } from "./store/actions/modal.action";
 import { getCookie } from "./utils";
 import { updateLoggedInUserDetails } from "./store/dispatchers/authentication.dispatch";
+import { useHistory } from "react-router";
 function App() {
+    const history = useHistory();
+    const isLoggedOutSuccess = useSelector(isLoggedOut);
     const snackBarData = useSelector(snack);
     const autoHideDuration = 5000;
     const dispatch = useDispatch();
@@ -33,6 +39,12 @@ function App() {
             dispatch(updateLoggedInUserDetails(getCookie("society-id")));
         }
     }, []);
+
+    useEffect(() => {
+        if (isLoggedOutSuccess) {
+            history && history.push("/");
+        }
+    }, [isLoggedOutSuccess]);
 
     if (snackBarData.show) {
         setTimeout(() => {
@@ -63,7 +75,7 @@ function App() {
 
     const displayModal = useSelector(showModal);
     return (
-        <SpinnerLoader show={isLoadingUserDetails}>
+        <SpinnerLoader show={isLoadingUserDetails} fullScreen={true}>
             <ThemeProvider theme={theme}>
                 <InputVarientContext.Provider value="standard">
                     <ButtonVarientContext.Provider value="contained">

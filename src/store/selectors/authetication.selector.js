@@ -1,9 +1,11 @@
 import { ActionStatus } from "../../modals/constant";
+import { getCookie } from "../../utils";
 export const isRegistered = (state) =>
     state.authentication.register.status === ActionStatus.success;
 
 export const isLoggedIn = (state) =>
-    state.authentication.login.status === ActionStatus.success;
+    state.authentication.login.status === ActionStatus.success &&
+    state.authentication.login.isLoggedIn === true;
 
 export const isFetchingLoggedInUserDetails = (state) =>
     state.authentication?.login?.status === ActionStatus.busy;
@@ -37,3 +39,7 @@ export const isResetPasswordDone = (state) =>
 
 export const isSocietyVerificationDone = (state) =>
     state.authentication.verifySociety.status === ActionStatus.success;
+
+export const isLoggedOut = (state) =>
+    state.authentication.login.isLoggedIn === false &&
+    !getCookie("x-auth-token");

@@ -1,21 +1,28 @@
 import { useState } from "react";
 import { Validator } from "../../utils";
 export default function useFormFields(initialState) {
-    const [fields, setValues] = useState(initialState);
-
-    const updateFormControl = (value, state) => {
-        const obj = {
+    const updateFormControl = (value, state, validation = null) => {
+        let obj = {
             ...state,
             value
         };
-        if (state?.validation) {
-            const validations = Validator.runValidator(value, state.validation);
+        if (validation) {
+            obj = {
+                ...obj,
+                validation: {
+                    ...obj.validation,
+                    ...validation
+                }
+            };
+        }
+        if (obj?.validation) {
+            const validations = Validator.runValidator(value, obj.validation);
             const key = Object.keys(validations).find(
                 (key) => validations[key] === false
             );
             if (key) {
                 obj.error = true;
-                obj.errorMessage = state.validation?.msgs?.[key] ?? "invalid";
+                obj.errorMessage = obj.validation?.msgs?.[key] ?? "invalid";
             } else {
                 obj.error = false;
                 obj.errorMessage = "";
@@ -24,6 +31,19 @@ export default function useFormFields(initialState) {
 
         return obj;
     };
+
+    const getUpdatedInitialState = (state) => {
+        let updatedInitialState = { ...state };
+        Object.keys(state).forEach((key) => {
+            updatedInitialState = {
+                ...updatedInitialState,
+                [key]: updateFormControl(state[key]?.value, state[key])
+            };
+        });
+        return updatedInitialState;
+    };
+
+    const [fields, setValues] = useState(getUpdatedInitialState(initialState));
 
     return [
         fields,
@@ -35,6 +55,21 @@ export default function useFormFields(initialState) {
                     event.target.value,
                     fields[nameOrId]
                 )
+            });
+        },
+        function (controls) {
+            const obj = {};
+            controls.forEach((control) => {
+                const nameOrId = control.id || control.name;
+                obj[nameOrId] = updateFormControl(
+                    fields[nameOrId].value,
+                    fields[nameOrId],
+                    control.validation
+                );
+            });
+            setValues({
+                ...fields,
+                ...obj
             });
         }
     ];

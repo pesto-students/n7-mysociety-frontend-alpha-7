@@ -1,7 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { useFormGroup } from "../../../hooks";
 import {
-    AddIcon,
     FormControl,
     //Select,
     //MenuItem,
@@ -10,7 +9,10 @@ import {
     Button,
     SpinnerLoader,
     IconButton,
-    DeleteIcon
+    DeleteIcon,
+    DragAndDrop,
+    CloudUploadIcon,
+    Typography
 } from "../../../shared";
 import {
     InputVarientContext,
@@ -115,7 +117,7 @@ export default function GalleryPopup({ item }) {
 
     const uploaUpFront = async (e) => {
         const images = Array.from(e.target.files).map((file) =>
-            uploadToFireBaseStore(file, "gallery")
+            uploadToFireBaseStore(file, societyDetails._id)
         );
         Promise.allSettled(images).then((result) => {
             const uploadedImagesResponse = result
@@ -173,8 +175,13 @@ export default function GalleryPopup({ item }) {
         dispatch(createGallery(payload));
     };
 
-    const addMoreContainer = (
-        <div className="add-more-images">
+    const uploadDroppedFiles = (files) => {
+        console.log(files);
+        uploaUpFront({ target: { files } });
+    };
+
+    const uploadBtn = (
+        <React.Fragment className="upload-btn">
             <input
                 type="file"
                 style={{ display: "none" }}
@@ -183,10 +190,13 @@ export default function GalleryPopup({ item }) {
                 accept="image/*"
                 multiple
             />
-            <label htmlFor="file-uploader">
-                <AddIcon />
-            </label>
-        </div>
+            <Button variant={buttonVarient} color="primary">
+                <label htmlFor="file-uploader">
+                    Upload
+                    <CloudUploadIcon />
+                </label>
+            </Button>
+        </React.Fragment>
     );
 
     const uploadImageBoxes = (
@@ -199,24 +209,36 @@ export default function GalleryPopup({ item }) {
             }
         >
             <SpinnerLoader show={uploading} fullScreen={true}>
-                <div className="images">
-                    {galleryForm.images?.value.map((image, index) => {
-                        return (
-                            <div
-                                className="image-box"
-                                key={index}
-                                // style={{ backgroundImage: `url(${image.url})` }}
-                            >
-                                <img src={image} alt="event" />
-                                <IconButton onClick={() => deleteImage(image)}>
-                                    <DeleteIcon />
-                                </IconButton>
-                            </div>
-                        );
-                    })}
-                </div>
+                <DragAndDrop
+                    getDroppedFiles={(files) => uploadDroppedFiles(files)}
+                >
+                    {galleryForm?.images?.value?.length > 0 ? (
+                        <div className="images">
+                            {galleryForm.images?.value.map((image, index) => {
+                                return (
+                                    <div
+                                        className="image-box"
+                                        key={index}
+                                        // style={{ backgroundImage: `url(${image.url})` }}
+                                    >
+                                        <img src={image} alt="event" />
+                                        <IconButton
+                                            onClick={() => deleteImage(image)}
+                                        >
+                                            <DeleteIcon />
+                                        </IconButton>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    ) : (
+                        <Typography variant="subtitle" color="primary">
+                            Drag and Drop files here
+                        </Typography>
+                    )}
+                </DragAndDrop>
             </SpinnerLoader>
-            {addMoreContainer}
+            {/* {addMoreContainer} */}
         </div>
     );
 
@@ -229,6 +251,7 @@ export default function GalleryPopup({ item }) {
             >
                 save
             </Button>
+            {uploadBtn}
         </div>
     );
 

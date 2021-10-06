@@ -24,6 +24,9 @@
         .register-content {
             display: flex;
             flex-direction: column;
+            // @media screen and (min-width: 768px) {
+            //     padding: 15px;
+            // }
 
             > div {
                 width: 100%;
@@ -48,32 +51,10 @@
                     }
                 }
             }
+            .contact-details,
             .personal-details {
                 @media only screen and (min-width: 768px) {
-                    .first-name,
-                    .last-name {
-                        .MuiFormControl-root {
-                            width: 98%;
-                        }
-                    }
-                    .last-name {
-                        display: flex;
-                        justify-content: flex-end;
-                    }
-                }
-            }
-            .contact-details {
-                @media only screen and (min-width: 768px) {
-                    .mobile-input,
-                    .flat-input {
-                        .MuiFormControl-root {
-                            width: 98%;
-                        }
-                    }
-                    .flat-input {
-                        display: flex;
-                        justify-content: flex-end;
-                    }
+                    padding: 0 15px;
                 }
             }
             .register-footer {

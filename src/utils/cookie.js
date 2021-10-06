@@ -38,12 +38,6 @@ export const setCookie = (cName, cValue) => {
 };
 
 const handleLogout = () => {
-    clearCookies()
-        .then(() => {
-            window.location = "/";
-        })
-        .catch((error) => {
-            console.error(error);
-        });
+    clearCookies();
 };
 export default handleLogout;

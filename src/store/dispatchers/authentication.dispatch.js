@@ -49,10 +49,16 @@ export function loginUser(payload) {
                         type: AUTHENTICATION_ACTION.LOGIN_USER_SUCCESS,
                         payload: response.data
                     });
-                    dispatch({ type: "SET_TOKEN" });
+                    //dispatch({ type: "SET_TOKEN" });
                     showSuccessMessage(dispatch, "Logged in successfully");
                 } else {
-                    showErrorMessage(dispatch, "Error in login");
+                    showErrorMessage(
+                        dispatch,
+                        response?.response?.data?.message
+                    );
+                    dispatch({
+                        type: AUTHENTICATION_ACTION.LOGIN_USER_FAILURE
+                    });
                 }
             })
             .catch((error) => {

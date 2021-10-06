@@ -23,12 +23,18 @@ import { openModal } from "../../../store/dispatchers/modal.dispatch";
 import { deleteEvent } from "../../../store/dispatchers/event.dispatch";
 import { ModalTypes } from "../../../modals/constant";
 import { useSelector } from "react-redux";
-import { loggedInUserSocietyDetails } from "../../../store/selectors/authetication.selector";
-const EventCard = ({ event, isDashboardView, isAdmin }) => {
+import {
+    isLoggedInAsAdmin,
+    loggedInUserSocietyDetails
+} from "../../../store/selectors/authetication.selector";
+const EventCard = ({ event, isDashboardView }) => {
+    const isAdmin = useSelector(isLoggedInAsAdmin);
     const dispatch = useDispatch();
     const [showAdminAction, setShowAdminAction] = useState(false);
     const { img, title, venue, desc, fromDateTime, toDateTime } = event;
-    const diffTime = Math.abs(fromDateTime - toDateTime);
+    const diffTime = Math.abs(
+        new Date(fromDateTime).getTime() - new Date(toDateTime).getTime()
+    );
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
     const isoDate = `${new Date(fromDateTime)
         .toISOString()
@@ -184,7 +190,7 @@ const EventCard = ({ event, isDashboardView, isAdmin }) => {
                                         color="textPrimary"
                                         component="p"
                                     >
-                                        {venue}
+                                        {limitSting(venue, 50)}
                                     </Typography>
                                 </div>
                             </div>

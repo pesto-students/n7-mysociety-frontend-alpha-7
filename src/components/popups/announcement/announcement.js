@@ -42,11 +42,11 @@ export default function AnnocumentPopup({ item }) {
             value: item?.desc ?? "",
             validation: {
                 required: true,
-                //minLength: 50,
+                minLength: 50,
 
                 msgs: {
-                    required: "description required"
-                    //minLength: "minlength should be 50"
+                    required: "description required",
+                    minLength: "minlength should be 50"
                 }
             }
         },
