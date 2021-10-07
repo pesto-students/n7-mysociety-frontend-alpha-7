@@ -12,6 +12,10 @@ const initialState = {
     societies: {
         status: ActionStatus.None,
         data: []
+    },
+    guests: {
+        status: ActionStatus.None,
+        data: []
     }
 };
 export default function authentication(state = initialState, action) {
@@ -121,6 +125,32 @@ export default function authentication(state = initialState, action) {
                 ...state,
                 societies: {
                     ...state.societies,
+                    status: ActionStatus.error,
+                    data: null
+                }
+            };
+        case AUTHENTICATION_ACTION.GET_ALL_GUESTS:
+            return {
+                ...state,
+                guests: {
+                    ...state.guests,
+                    status: ActionStatus.busy
+                }
+            };
+        case AUTHENTICATION_ACTION.GET_ALL_GUESTS_SUCCESS:
+            return {
+                ...state,
+                guests: {
+                    ...state.guests,
+                    status: ActionStatus.success,
+                    data: action.payload
+                }
+            };
+        case AUTHENTICATION_ACTION.GET_ALL_GUESTS_ERROR:
+            return {
+                ...state,
+                guests: {
+                    ...state.guests,
                     status: ActionStatus.error,
                     data: null
                 }

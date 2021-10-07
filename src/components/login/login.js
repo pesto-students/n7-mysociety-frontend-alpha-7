@@ -20,10 +20,14 @@ import {
 import "./login.scss";
 import { Link, useHistory } from "react-router-dom";
 import { getCookie, Validator } from "../../utils";
-import { loginUser } from "../../store/dispatchers/authentication.dispatch";
+import {
+    loginUser,
+    getAllGuests
+} from "../../store/dispatchers/authentication.dispatch";
 import {
     isLoggedIn,
-    isUserLogging
+    isUserLogging,
+    guests
 } from "../../store/selectors/authetication.selector";
 import { useDispatch, useSelector } from "react-redux";
 export default function Login() {
@@ -33,6 +37,7 @@ export default function Login() {
     const inputVarient = useContext(InputVarientContext);
     const buttonVarient = useContext(ButtonVarientContext);
     const [passwordVisibility, setPasswordVisibility] = useState(false);
+    const allGuests = useSelector(guests);
     const [loginForm, updateLoginForm] = useFormGroup({
         email: {
             value: "",
@@ -61,6 +66,9 @@ export default function Login() {
     });
     const loggingInUser = useSelector(isUserLogging);
 
+    useEffect(() => {
+        dispatch(getAllGuests());
+    }, []);
     // Start of UI
     const email = (
         <div className="email_input" data-testid="email_id_input">
@@ -122,16 +130,40 @@ export default function Login() {
     const isLoginFormValid = Validator.isFormValid(loginForm);
 
     const loginButton = (
-        <div className="action-btn" data-testid="login_btn_div">
-            <Button
-                color="primary"
-                variant={buttonVarient}
-                onClick={() => authenticate()}
-                disabled={!isLoginFormValid}
-                data-testid="login_btn"
-            >
-                Login
-            </Button>
+        <div className="loginBtnWrap" data-testid="login_btn_div">
+            <div className="action-btn">
+                <Button
+                    color="primary"
+                    variant={buttonVarient}
+                    onClick={() => authenticate()}
+                    disabled={!isLoginFormValid}
+                    data-testid="login_btn"
+                >
+                    Login
+                </Button>
+            </div>
+            {allGuests && allGuests?.active && (
+                <div className="guestLogin">
+                    <Link to="#" onClick={() => authenticate("guestAdmin")}>
+                        <Typography
+                            variant="subtitle2"
+                            color="secondary"
+                            className="link_tp"
+                        >
+                            Guest Admin Login
+                        </Typography>
+                    </Link>
+                    <Link to="#" onClick={() => authenticate("guestMember")}>
+                        <Typography
+                            variant="subtitle2"
+                            color="secondary"
+                            className="link_tp"
+                        >
+                            Guest Member Login
+                        </Typography>
+                    </Link>
+                </div>
+            )}
         </div>
     );
 
@@ -168,26 +200,37 @@ export default function Login() {
     // End of UI
 
     useEffect(() => {
-        if (isLoggedInSuccessFully) {
+        if (isLoggedInSuccessFully && getCookie("x-auth-token")) {
             history.push("/dashboard");
         }
     }, [isLoggedInSuccessFully]);
 
-    useEffect(() => {
-        if (getCookie("x-auth-token")) {
-            history.push("/dashboard");
-        }
-    }, []);
-
     //functions
-    const authenticate = () => {
-        const param = {
+    const authenticate = (loginType = null) => {
+        var param = {
             email: loginForm.email.value,
             password: loginForm.password.value
         };
-        console.log(param);
-
-        if (isLoginFormValid) {
+        if (loginType === null) {
+            if (isLoginFormValid) {
+                dispatch(loginUser(param));
+            }
+        } else {
+            if (loginType === "guestAdmin" && allGuests && allGuests?.active) {
+                param = {
+                    email: allGuests?.adminEmail,
+                    password: allGuests?.adminPass
+                };
+            } else if (
+                loginType === "guestMember" &&
+                allGuests &&
+                allGuests?.active
+            ) {
+                param = {
+                    email: allGuests?.memberEmail,
+                    password: allGuests?.memberPass
+                };
+            }
             dispatch(loginUser(param));
         }
     };

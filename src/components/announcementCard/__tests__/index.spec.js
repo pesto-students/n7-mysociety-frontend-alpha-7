@@ -37,24 +37,3 @@ describe("AnnouncementCard", () => {
         expect(screen.getByTestId("read_more_btn")).toBeInTheDocument();
     });
 });
-
-describe("Dashboard view", () => {
-    beforeEach(() => {
-        render(
-            <Provider store={store}>
-                <Router>
-                    <AnnouncementCard
-                        annoucement={Announcement}
-                        isDashboard={true}
-                    />
-                </Router>
-            </Provider>
-        );
-    });
-
-    it("should not display description", () => {
-        expect(
-            screen.getByTestId("announcement_description")
-        ).not.toBeInTheDocument();
-    });
-});
