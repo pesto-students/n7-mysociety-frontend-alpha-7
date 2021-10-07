@@ -102,6 +102,7 @@ const EventCard = ({ event, isDashboardView }) => {
                 title={title}
                 className="eventImage"
                 style={{ height: "216px" }}
+                data-testid="event_image"
             />
             <CardContent className="contentWrap">
                 {isAdmin && (
@@ -210,6 +211,7 @@ const EventCard = ({ event, isDashboardView }) => {
                                     color="textPrimary"
                                     component="p"
                                     className="aboutDes"
+                                    data-testid="event_description"
                                 >
                                     {limitSting(desc, 115)}
                                 </Typography>

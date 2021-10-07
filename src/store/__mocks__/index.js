@@ -22,7 +22,8 @@ export const globalStore = {
                     address: "Regular society 1",
                     mobile: "0201020300"
                 }
-            }
+            },
+            isLoggedIn: true
         },
         forgetPassword: {
             data: null
