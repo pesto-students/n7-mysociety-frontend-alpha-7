@@ -24,7 +24,7 @@ export default function AnnouncementCard({ annoucement, isDashboard }) {
     const societyDetails = useSelector(loggedInUserSocietyDetails);
     const dispatch = useDispatch();
     const dates = (
-        <div className="dates">
+        <div className="dates" data-testid="posted_on_date">
             <div className="posted-on">
                 <label>Posted On:</label>
             </div>
@@ -63,9 +63,10 @@ export default function AnnouncementCard({ annoucement, isDashboard }) {
     };
 
     return (
-        <Card className="annoucement-card">
+        <Card className="annoucement-card" data-testid="announcement_card">
             <div className="cardHeaderWrap">
                 <CardHeader
+                    data-testid="announcement_title"
                     title={limitSting(annoucement.title, 35)}
                 ></CardHeader>
                 {isAdmin ? (
@@ -73,7 +74,10 @@ export default function AnnouncementCard({ annoucement, isDashboard }) {
                 ) : null}
             </div>
             <CardContent>
-                <div className="description">
+                <div
+                    className="description"
+                    data-testid="announcement_description"
+                >
                     {limitSting(annoucement.desc, 250)}
                 </div>
                 <div className="date-action">
@@ -83,6 +87,7 @@ export default function AnnouncementCard({ annoucement, isDashboard }) {
                             variant={buttonVarient}
                             color="primary"
                             onClick={() => onReadMore()}
+                            data-testid="read_more_btn"
                         >
                             Read More
                         </Button>

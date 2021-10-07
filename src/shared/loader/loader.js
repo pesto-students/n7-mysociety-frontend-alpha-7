@@ -20,7 +20,10 @@ export default function SpinnerLoader({ show, children, fullScreen }) {
         </div>
     );
 
-    const childrenWithLoader = [loader, children];
+    const childrenWithLoader = [
+        <React.Fragment key="loader">{loader}</React.Fragment>,
+        <React.Fragment key="childrens">{children}</React.Fragment>
+    ];
 
     return (
         <React.Fragment>

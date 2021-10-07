@@ -1,4 +1,4 @@
-const clearCookies = () => {
+export const clearCookies = () => {
     return new Promise((resolve, reject) => {
         try {
             const c = document.cookie.split(";");

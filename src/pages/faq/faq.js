@@ -4,7 +4,7 @@ import faqService from "../../services/faq";
 import FaqItem from "./faqItem";
 import { SpinnerLoader } from "../../shared";
 import "./faq.scss";
-const FAQ = () => {
+export default function FAQ() {
     const [faqs, setFaqs] = useState([]);
     const [isFaqLoading, setFaqLoader] = useState(false);
     const toggle = (faq) => {
@@ -29,12 +29,15 @@ const FAQ = () => {
                 setFaqs([]);
                 setFaqLoader(false);
             });
+        return () => {
+            setFaqs([]);
+        };
     }, []);
     return (
         <div className="wrapper">
             <DefaultLayout>
                 <SpinnerLoader show={isFaqLoading} fullScreen={true}>
-                    <div className="faqs">
+                    <div className="faqs" data-testid="all_faqs_items">
                         {faqs.map((faq) => {
                             return (
                                 <FaqItem
@@ -49,6 +52,4 @@ const FAQ = () => {
             </DefaultLayout>
         </div>
     );
-};
-
-export default FAQ;
+}
