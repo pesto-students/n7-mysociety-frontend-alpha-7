@@ -63,12 +63,14 @@ export default function Login() {
 
     // Start of UI
     const email = (
-        <div className="email_input">
+        <div className="email_input" data-testid="email_id_input">
             <FormControl>
                 <TextField
+                    data-testid="email_input"
                     required
                     label="Email"
                     id="email"
+                    type="email"
                     value={loginForm.email.value}
                     onChange={updateLoginForm}
                     variant={inputVarient}
@@ -79,9 +81,10 @@ export default function Login() {
     );
 
     const password = (
-        <div className="password_input">
+        <div className="password_input" data-testid="user_password_input">
             <FormControl>
                 <TextField
+                    data-testid="password_input"
                     required
                     label="Password"
                     id="password"
@@ -119,12 +122,13 @@ export default function Login() {
     const isLoginFormValid = Validator.isFormValid(loginForm);
 
     const loginButton = (
-        <div className="action-btn">
+        <div className="action-btn" data-testid="login_btn_div">
             <Button
                 color="primary"
                 variant={buttonVarient}
                 onClick={() => authenticate()}
                 disabled={!isLoginFormValid}
+                data-testid="login_btn"
             >
                 Login
             </Button>
@@ -132,7 +136,7 @@ export default function Login() {
     );
 
     const loginFooter = (
-        <div className="login-footer">
+        <div className="login-footer" data-testid="login_box_footer_div">
             <div>
                 <Typography variant="subtitle1">
                     Want to be a part of society or register your society?
@@ -163,9 +167,11 @@ export default function Login() {
 
     // End of UI
 
-    if (isLoggedInSuccessFully) {
-        history.push("/dashboard");
-    }
+    useEffect(() => {
+        if (isLoggedInSuccessFully) {
+            history.push("/dashboard");
+        }
+    }, [isLoggedInSuccessFully]);
 
     useEffect(() => {
         if (getCookie("x-auth-token")) {

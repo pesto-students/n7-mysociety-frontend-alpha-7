@@ -34,6 +34,7 @@
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test --coverage --updateSnapshot --watchAll",
+        "testlogin": "react-scrips test -t 'login' --coverage --updateSnapshot --watchAll",
         "eject": "react-scripts eject",
         "lint": "eslint --ext .js,.jsx src --color",
         "format": "prettier --write \"src/**/*.{js,jsx,scss,css,json}\"",
@@ -85,6 +86,7 @@
         "eslint-plugin-sonar": "^0.6.1",
         "eslint-plugin-sonarjs": "^0.10.0",
         "moment": "^2.29.1",
+        "msw": "^0.35.0",
         "prettier": "^2.4.0",
         "prettier-eslint": "^13.0.0",
         "prettier-eslint-cli": "^5.0.1"
