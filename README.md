@@ -75,8 +75,8 @@ TBD
 
 <table>
   <tr>
-    <td align="center"><a href="https://www.linkedin.com/in/maheshvora/" target="_blank"><img src="" width="100px;" alt=""/><br /><sub><b>Mahesh Vora</b></sub></a><br /><a href="" title="Code">💻</a></td>
-    <td align="center"><a href="href="https://www.linkedin.com/in/sachin-waghmare/""><img src="" width="100px;" alt=""/><br /><sub><b>Sachin Waghmare</b></sub></a><br /><a href="" title="Code">💻</a></td>
-    <td align="center"><a href="https://www.linkedin.com/in/avinashjsdev/"><img src="" width="100px;" alt=""/><br /><sub><b>Avinash Kumar</b></sub></a><br /><a href="" title="Code">💻</a></td>
+    <td align="center"><a href="https://www.linkedin.com/in/maheshvora" target="_blank"><img src="" width="100px;" alt=""/><br /><sub><b>Mahesh Vora</b></sub></a><br /><a href="" title="Code">💻</a></td>
+    <td align="center"><a href="https://www.linkedin.com/in/sachin-waghmare" target="_blank"><img src="" width="100px;" alt=""/><br /><sub><b>Sachin Waghmare</b></sub></a><br /><a href="" title="Code">💻</a></td>
+    <td align="center"><a href="https://www.linkedin.com/in/avinashjsdev" target="_blank"><img src="" width="100px;" alt=""/><br /><sub><b>Avinash Kumar</b></sub></a><br /><a href="" title="Code">💻</a></td>
   </tr>
 </table>
