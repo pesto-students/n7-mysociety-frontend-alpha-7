@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { Validator } from "../../utils";
 export default function useFormFields(initialState) {
-    const updateFormControl = (value, state, validation = null) => {
+    const updateFormControl = (
+        value,
+        state,
+        validation = null,
+        updatedByUser = false
+    ) => {
         let obj = {
             ...state,
             value
@@ -15,6 +20,9 @@ export default function useFormFields(initialState) {
                 }
             };
         }
+        if (updatedByUser) {
+            obj["touched"] = true;
+        }
         if (obj?.validation) {
             const validations = Validator.runValidator(value, obj.validation);
             const key = Object.keys(validations).find(
@@ -22,7 +30,9 @@ export default function useFormFields(initialState) {
             );
             if (key) {
                 obj.error = true;
-                obj.errorMessage = obj.validation?.msgs?.[key] ?? "invalid";
+                if (updatedByUser) {
+                    obj.errorMessage = obj.validation?.msgs?.[key] ?? "invalid";
+                }
             } else {
                 obj.error = false;
                 obj.errorMessage = "";
@@ -53,7 +63,9 @@ export default function useFormFields(initialState) {
                 ...fields,
                 [nameOrId]: updateFormControl(
                     event.target.value,
-                    fields[nameOrId]
+                    fields[nameOrId],
+                    fields[nameOrId].validation,
+                    true
                 )
             });
         },
