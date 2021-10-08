@@ -71,7 +71,7 @@ TBD
 
 ## Screenshots
 
-![Example screenshot](./src/assets/dashboard.jpg)
+![Example screenshot](./src/assets/dashboard.png)
 
 ## Contributors ✨
 
