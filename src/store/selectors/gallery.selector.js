@@ -7,7 +7,7 @@ export const isAddingGallery = (state) =>
     state.gallery.lastAdded.status === ActionStatus.busy;
 
 export const isGalleryAddedOrUpdatedSuccessFully = (state) =>
-    state.gallery.lastAdded.status === ActionStatus.busy;
+    state.gallery.lastAdded.status === ActionStatus.success;
 
 export const isDeleteGallerySuccessFully = (state) =>
     state.gallery.lastDeleted.status === ActionStatus.busy;

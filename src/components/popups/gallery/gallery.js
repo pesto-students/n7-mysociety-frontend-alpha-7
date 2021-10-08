@@ -32,6 +32,7 @@ import {
     deleteFileFromFireBaseStore
 } from "../../../utils";
 import * as MODAL_ACTION from "../../../store/actions/modal.action";
+import { CLEAR_LAST_ADDED_STATUS } from "../../../store/actions/gallery.action";
 export default function GalleryPopup({ item }) {
     const gallery = item;
     const inputVarient = useContext(InputVarientContext);
@@ -77,6 +78,7 @@ export default function GalleryPopup({ item }) {
                 });
             }
             dispatch({ type: MODAL_ACTION.CLOSE_MODAL });
+            dispatch({ type: CLEAR_LAST_ADDED_STATUS });
         }
     }, [isGalerySavedSuccessFully]);
 
@@ -119,24 +121,30 @@ export default function GalleryPopup({ item }) {
         const images = Array.from(e.target.files).map((file) =>
             uploadToFireBaseStore(file, societyDetails._id)
         );
-        Promise.allSettled(images).then((result) => {
-            const uploadedImagesResponse = result
-                .filter(
-                    (p) =>
-                        p.status === "fulfilled" && !(p.value instanceof Error)
-                )
-                .map((p) => p.value);
-            console.log(uploadedImagesResponse);
-            updateForm({
-                target: {
-                    id: "images",
-                    value: [
-                        ...galleryForm.images.value,
-                        ...uploadedImagesResponse
-                    ]
-                }
+        setUploading(true);
+        Promise.allSettled(images)
+            .then((result) => {
+                const uploadedImagesResponse = result
+                    .filter(
+                        (p) =>
+                            p.status === "fulfilled" &&
+                            !(p.value instanceof Error)
+                    )
+                    .map((p) => p.value);
+                updateForm({
+                    target: {
+                        id: "images",
+                        value: [
+                            ...galleryForm.images.value,
+                            ...uploadedImagesResponse
+                        ]
+                    }
+                });
+                setUploading(false);
+            })
+            .catch(() => {
+                setUploading(false);
             });
-        });
     };
 
     const deleteImage = (img) => {
@@ -199,7 +207,6 @@ export default function GalleryPopup({ item }) {
             </Button>
         </React.Fragment>
     );
-
     const uploadImageBoxes = (
         <div
             className="uploaded-images"
@@ -209,7 +216,7 @@ export default function GalleryPopup({ item }) {
                     : null
             }
         >
-            <SpinnerLoader show={uploading} fullScreen={true}>
+            <SpinnerLoader show={uploading} partial={true}>
                 <DragAndDrop
                     getDroppedFiles={(files) => uploadDroppedFiles(files)}
                 >

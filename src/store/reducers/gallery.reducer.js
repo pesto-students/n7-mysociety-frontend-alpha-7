@@ -89,6 +89,14 @@ const galleryReducer = (state = initialState, action) => {
                     lastAdded: null
                 }
             };
+        case GALLERY_ACTION.CLEAR_LAST_ADDED_STATUS:
+            return {
+                ...state,
+                lastAdded: {
+                    ...state.lastAdded,
+                    status: ActionStatus.none
+                }
+            };
 
         default:
             return { ...state };
