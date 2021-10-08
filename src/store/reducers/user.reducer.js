@@ -56,6 +56,22 @@ export default function modalReducer(state = initialState, action) {
                     status: ActionStatus.busy
                 }
             };
+        case USER_ACTION.SAVE_SOCIETY:
+            return {
+                ...state,
+                lastAdded: {
+                    ...state.lastAdded,
+                    status: ActionStatus.busy
+                }
+            };
+        case USER_ACTION.SAVE_SOCIETY_SUCCESS:
+            return {
+                ...state,
+                lastAdded: {
+                    ...state.lastAdded,
+                    status: ActionStatus.success
+                }
+            };
         case USER_ACTION.SAVE_USER_SUCCESS:
             console.log(state, "state------");
             if (4 === 3) {

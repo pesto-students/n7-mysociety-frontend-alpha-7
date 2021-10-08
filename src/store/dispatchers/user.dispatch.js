@@ -80,6 +80,10 @@ export function saveSociety(payload) {
             .then((response) => {
                 if (response.status === 201 || response.status === 203) {
                     dispatch({
+                        type: USER_ACTION.SAVE_SOCIETY_SUCCESS
+                    });
+
+                    dispatch({
                         type: AUTHENTICATION_ACTION.UPDATE_SOCIETY_DETAILS,
                         payload: response?.data?.result
                     });

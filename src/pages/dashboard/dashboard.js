@@ -188,7 +188,7 @@ const Dashboard = () => {
                     </div>
                 )}
                 {listOfEvents?.docs &&
-                    listOfEvents?.docs.length >= eventParam.limit && (
+                    listOfEvents?.totalDocs > eventParam.limit && (
                         <div className="showMore">
                             <Link to="/events">Show More</Link>
                         </div>
