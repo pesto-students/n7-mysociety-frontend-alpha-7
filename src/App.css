@@ -49,6 +49,14 @@
     }
 }
 
+.error-message .MuiSnackbarContent-root {
+    background-color: var(--primary-color);
+}
+
+.success-message .MuiSnackbarContent-root {
+    background-color: lightgreen;
+}
+
 :root {
     --background-color: #eae7dc;
     --body-background-color: #f9f9f9;
@@ -57,4 +65,30 @@
     --primary-color: #e85a4f;
     --secondary-color: #8e8d8a;
     --font-white: #ffffff;
+}
+/* 
+* ::-webkit-scrollbar {
+    width: 0 !important;
+}
+
+*::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: #f5f5f5;
+}
+
+*::-webkit-scrollbar {
+    width: 6px;
+    height: 5px;
+    background-color: #f5f5f5;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: var(--primary-color);
+} */
+
+.MuiFormHelperText-root {
+    color: red !important;
+}
+.link_tp {
+    text-decoration: underline;
 }

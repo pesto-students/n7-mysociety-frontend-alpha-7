@@ -1,0 +1,120 @@
+.data-container {
+    flex-direction: color;
+
+    & > div {
+        flex: 30%;
+        margin: 0 10px;
+
+        .header-title {
+            display: flex;
+            justify-content: space-between;
+            padding: 15px 15px 15px 0px;
+            border-bottom: 2px solid var(--primary-color);
+            .counts {
+                color: var(--font-white);
+                background: var(--primary-color);
+                width: auto;
+                min-width: 18px;
+                height: 30px;
+                text-align: center;
+                border-radius: 25px;
+                line-height: 29px;
+                padding: 0px 6px;
+            }
+        }
+    }
+    .firstRow,
+    .secondRow {
+        display: flex;
+        justify-content: space-between;
+        > div {
+            min-width: 32%;
+            margin: 0px 15px 10px 0px;
+        }
+        .dashboard {
+            .no-record-message {
+                height: 200px;
+            }
+        }
+        .complaint.dashboard {
+            .list {
+                .complain-card {
+                    margin-top: 20px;
+                    .MuiCardContent-root {
+                        padding-top: 0px;
+                        .dates {
+                            label {
+                                color: var(--primary-font-color);
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .events.dashboard {
+            .list {
+                .eventCardWrap {
+                    margin-top: 20px;
+                }
+            }
+        }
+        .announcement.dashboard {
+            .list {
+                .annoucement-card {
+                    max-width: 422px;
+                    margin-top: 20px;
+                }
+            }
+        }
+    }
+
+    .announcement,
+    .events,
+    .memories,
+    .newMembers,
+    .complaint {
+        padding: 15px 0;
+        .showMore {
+            text-align: center;
+            padding: 10px 20px;
+            > a {
+                color: var(--secondary-font-color);
+            }
+        }
+    }
+    .announcement,
+    .events {
+        .complaint {
+            .list {
+                margin-top: 15px;
+                max-height: 500px;
+                overflow-y: auto;
+                &::-webkit-scrollbar {
+                    width: 0 !important;
+                }
+            }
+            .annoucement-card,
+            .complain-card {
+                margin: 10px 0 !important;
+            }
+        }
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .dashboard .firstRow {
+        flex-direction: row;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-start;
+    }
+}
+
+@media only screen and (max-width: 768px) {
+    .dashboard .firstRow {
+        > div {
+            margin: 0px;
+            max-width: 100%;
+        }
+    }
+}

@@ -1,31 +1,50 @@
 .complain-card {
+    .cardHeaderWrap {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .complaintPriority {
+            margin-right: 15px;
+        }
+    }
     .MuiCardHeader-title {
         color: var(--secondary-font-color);
         font-size: 18px;
         font-weight: bold;
     }
 
-    .description {
-        font-size: 14px;
-        padding: 0 0 15px 0;
-    }
-    .dates {
-        display: flex;
-        @media only screen and (min-width: 768px) {
-            flex-direction: row;
-        }
-        @media only screen and (max-width: 768px) {
-            flex-direction: column;
-        }
-        label {
-            color: var(--secondary-font-color);
-            font-weight: bold;
+    .MuiCardContent-root {
+        height: 100%;
+        padding-top: 0px;
+        .description {
             font-size: 14px;
+            padding: 0 0 15px 0;
+            height: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            height: 45%;
+            padding: 5px;
         }
-        > div {
-            flex: 50%;
-            > span {
-                margin-left: 10px;
+        .dates {
+            display: flex;
+            padding: 10px 5px;
+
+            @media only screen and (min-width: 768px) {
+                flex-direction: row;
+            }
+            @media only screen and (max-width: 768px) {
+                flex-direction: column;
+            }
+            label {
+                color: var(--secondary-font-color);
+                font-weight: bold;
+                font-size: 14px;
+            }
+            > div {
+                flex: 50%;
+                > span {
+                    margin-left: 10px;
+                }
             }
         }
     }
@@ -33,16 +52,64 @@
     .admin-action {
         display: flex;
         flex-direction: row;
-        > div {
-            flex: 50%;
-        }
-
+        align-items: center;
         .admin-action-btn {
             display: flex;
             justify-content: flex-end;
         }
         .dates {
             display: flex;
+            flex-direction: column;
+
+            & > div {
+                display: flex;
+                flex-direction: row;
+
+                & > div {
+                    align-items: center;
+                    @media only screen and (max-width: 768px) {
+                        &:first-of-type {
+                            flex: 60%;
+                        }
+                    }
+                    @media only screen and (min-width: 768px) {
+                        &:first-of-type {
+                            flex: 50%;
+                        }
+                    }
+                }
+            }
+
+            @media only screen and (max-width: 768px) {
+                font-size: 12px;
+            }
+        }
+
+        & > div {
+            flex: 50%;
+        }
+        .status {
+            color: var(--font-white);
+            padding: 4px 14px;
+            border-radius: 25px;
+            &.Pending {
+                background-color: var(--primary-color);
+            }
+            &.Resolved {
+                background-color: green;
+            }
+            &.Rejected {
+                background-color: red;
+            }
+        }
+    }
+}
+.dashboard {
+    .firstRow {
+        @media only screen and (min-width: 768px) {
+            flex-direction: row;
+        }
+        @media only screen and (max-width: 768px) {
             flex-direction: column;
         }
     }

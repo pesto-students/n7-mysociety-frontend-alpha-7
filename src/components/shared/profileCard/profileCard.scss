@@ -26,6 +26,7 @@
         .profileName {
             margin-top: 8px;
             text-align: center;
+            text-transform: capitalize;
         }
         .infoWrap {
             padding: 0;
@@ -51,5 +52,30 @@
                 }
             }
         }
+    }
+}
+.isDashboard {
+    max-width: 100%;
+    margin-top: 20px;
+}
+.newMemberWrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    .info {
+        .userName {
+            font-weight: bold;
+            text-transform: capitalize;
+        }
+        .createdAt {
+            display: flex;
+            align-items: center;
+            font-weight: bold;
+            > span {
+                margin-right: 10px;
+            }
+        }
+    }
+    .actionWrap {
     }
 }

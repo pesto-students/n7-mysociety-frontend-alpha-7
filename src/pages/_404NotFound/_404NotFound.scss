@@ -1,0 +1,18 @@
+._404 {
+    .MuiContainer-root {
+        height: 450px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+
+        .MuiTypography-h1 {
+            color: var(--secondary-font-color);
+            letter-spacing: 15px;
+        }
+        .MuiTypography-h4 {
+            color: var(--primary-font-color);
+            letter-spacing: 3px;
+        }
+    }
+}

@@ -1,12 +1,12 @@
 import React from "react";
 import DefaultLayout from "../components/layout/defaultLayout";
 
-const Announcements = () => {
+const Logout = () => {
     return (
         <div className="wrapper">
-            <DefaultLayout>Announcements View call here...</DefaultLayout>
+            <DefaultLayout>Logout View call here...</DefaultLayout>
         </div>
     );
 };
 
-export default Announcements;
+export default Logout;

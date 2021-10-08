@@ -1,0 +1,22 @@
+.thank-you-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    .thank-you-message {
+        width: 75%;
+        text-align: center;
+        color: var(--primary-font-color) !important;
+
+        a {
+            color: var(--secondary-font-color) !important;
+            margin: 0 3px;
+        }
+    }
+
+    .thank-you-label {
+        color: var(--primary-font-color) !important;
+        margin: 25px 0;
+    }
+}

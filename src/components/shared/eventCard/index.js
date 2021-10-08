@@ -17,15 +17,28 @@ import { encodeDataToURL, limitSting } from "../../../helpers/functions";
 import DeleteIcon from "@material-ui/icons/Delete";
 import EditIcon from "@material-ui/icons/Edit";
 import moment from "moment";
+import { useDispatch } from "react-redux";
 import { CSSTransition } from "react-transition-group";
-const EventCard = ({ content, isDashboardView, isAdmin }) => {
+import { openModal } from "../../../store/dispatchers/modal.dispatch";
+import { deleteEvent } from "../../../store/dispatchers/event.dispatch";
+import { ModalTypes } from "../../../modals/constant";
+import { useSelector } from "react-redux";
+import {
+    isLoggedInAsAdmin,
+    loggedInUserSocietyDetails
+} from "../../../store/selectors/authetication.selector";
+const EventCard = ({ event, isDashboardView }) => {
+    const isAdmin = useSelector(isLoggedInAsAdmin);
+    const dispatch = useDispatch();
     const [showAdminAction, setShowAdminAction] = useState(false);
-    const { image, title, location, about, fromDate, toDate } = content;
-    const diffTime = Math.abs(fromDate - toDate);
+    const { img, title, venue, desc, fromDateTime, toDateTime } = event;
+    const diffTime = Math.abs(
+        new Date(fromDateTime).getTime() - new Date(toDateTime).getTime()
+    );
     const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    const isoDate = `${fromDate
+    const isoDate = `${new Date(fromDateTime)
         .toISOString()
-        .replace(/-|:|\.\d\d\d/g, "")}/${toDate
+        .replace(/-|:|\.\d\d\d/g, "")}/${new Date(toDateTime)
         .toISOString()
         .replace(/-|:|\.\d\d\d/g, "")}`;
 
@@ -33,22 +46,40 @@ const EventCard = ({ content, isDashboardView, isAdmin }) => {
         action: "TEMPLATE",
         text: title,
         dates: isoDate,
-        details: about,
-        location: location,
+        details: desc,
+        venue: venue,
         trp: false
     };
 
-    const displayDate = (format, type, date, toDate = null) => {
+    const societyDetails = useSelector(loggedInUserSocietyDetails);
+
+    const editEvent = () => {
+        dispatch(openModal(ModalTypes.addEvent, "Edit Event", event));
+    };
+
+    const openView = () => {
+        dispatch(openModal(ModalTypes.event, "View Event", event));
+    };
+
+    const delEvent = () => {
+        const payload = {
+            _id: event._id,
+            societyId: societyDetails._id
+        };
+        dispatch(deleteEvent(payload));
+    };
+
+    const displayDate = (format, type, date, toDateTime = null) => {
         return (
             <Typography
                 variant={type === "date" ? "h6" : "subtitle2"}
                 color="textPrimary"
                 component="p"
             >
-                {date && toDate
-                    ? `${moment(date).format(format)} - ${moment(toDate).format(
-                          format
-                      )}`
+                {date && toDateTime
+                    ? `${moment(date).format(format)} - ${moment(
+                          toDateTime
+                      ).format(format)}`
                     : date
                     ? moment(date).format(format)
                     : ""}
@@ -57,7 +88,7 @@ const EventCard = ({ content, isDashboardView, isAdmin }) => {
     };
     return (
         <Card
-            className="eventCardWrap"
+            className={`eventCardWrap ${isDashboardView ? "dashboard" : ""}`}
             elevation={1}
             onMouseEnter={() => {
                 setShowAdminAction(true);
@@ -67,9 +98,11 @@ const EventCard = ({ content, isDashboardView, isAdmin }) => {
             }}
         >
             <CardMedia
-                image={image ? image : eventPlaceholder}
+                image={img ? img : eventPlaceholder}
                 title={title}
                 className="eventImage"
+                style={{ height: "216px" }}
+                data-testid="event_image"
             />
             <CardContent className="contentWrap">
                 {isAdmin && (
@@ -82,9 +115,10 @@ const EventCard = ({ content, isDashboardView, isAdmin }) => {
                     >
                         <CardActions className="adminAction">
                             <IconButton
-                                aria-label="delete"
+                                aria-label="edit"
                                 size="medium"
                                 color="secondary"
+                                onClick={() => editEvent()}
                             >
                                 <EditIcon />
                             </IconButton>
@@ -92,6 +126,7 @@ const EventCard = ({ content, isDashboardView, isAdmin }) => {
                                 aria-label="delete"
                                 size="medium"
                                 color="secondary"
+                                onClick={() => delEvent()}
                             >
                                 <DeleteIcon />
                             </IconButton>
@@ -101,12 +136,12 @@ const EventCard = ({ content, isDashboardView, isAdmin }) => {
                 {title && (
                     <div className="titleWrap">
                         <Typography
-                            variant="h5"
+                            variant="h6"
                             color="textSecondary"
-                            component="h5"
+                            component="h6"
                             className="eventTitle"
                         >
-                            {title}
+                            {limitSting(title, 25)}
                         </Typography>
                     </div>
                 )}
@@ -115,26 +150,39 @@ const EventCard = ({ content, isDashboardView, isAdmin }) => {
                     <CalenderIcon className="icon" />
                     {diffDays <= 1 ? (
                         <div>
-                            {displayDate("ddd, MMM DD, YYYY", "date", fromDate)}
-                            {displayDate("h:mm A", "time", fromDate, toDate)}
+                            {displayDate(
+                                "ddd, MMM DD, YYYY",
+                                "date",
+                                fromDateTime
+                            )}
+                            {displayDate(
+                                "h:mm A",
+                                "time",
+                                fromDateTime,
+                                toDateTime
+                            )}
                         </div>
                     ) : (
                         <div className="diffDateWrap">
                             <div>
-                                {displayDate("ddd, MMM DD", "date", fromDate)}
-                                {displayDate("h:mm A", "time", fromDate)}
+                                {displayDate(
+                                    "ddd, MMM DD",
+                                    "date",
+                                    fromDateTime
+                                )}
+                                {displayDate("h:mm A", "time", fromDateTime)}
                             </div>
                             <span>-</span>
                             <div>
-                                {displayDate("ddd, MMM DD", "date", toDate)}
-                                {displayDate("h:mm A", "time", toDate)}
+                                {displayDate("ddd, MMM DD", "date", toDateTime)}
+                                {displayDate("h:mm A", "time", toDateTime)}
                             </div>
                         </div>
                     )}
                 </div>
                 {!isDashboardView && (
                     <React.Fragment>
-                        {location && (
+                        {venue && (
                             <div className="locationWrap">
                                 <MapPin className="icon" />
                                 <div>
@@ -143,12 +191,12 @@ const EventCard = ({ content, isDashboardView, isAdmin }) => {
                                         color="textPrimary"
                                         component="p"
                                     >
-                                        {location}
+                                        {limitSting(venue, 50)}
                                     </Typography>
                                 </div>
                             </div>
                         )}
-                        {about && (
+                        {desc && (
                             <React.Fragment>
                                 <Typography
                                     variant="subtitle1"
@@ -163,38 +211,39 @@ const EventCard = ({ content, isDashboardView, isAdmin }) => {
                                     color="textPrimary"
                                     component="p"
                                     className="aboutDes"
+                                    data-testid="event_description"
                                 >
-                                    {limitSting(about, 115)}
+                                    {limitSting(desc, 115)}
                                 </Typography>
                             </React.Fragment>
                         )}
                     </React.Fragment>
                 )}
-
-                <CardActions className="actionWrap">
-                    <Button
-                        href={`http://www.google.com/calendar/render?${encodeDataToURL(
-                            calendarParam
-                        )}`}
-                        target="_blank"
-                        rel="nofollow"
-                        color="secondary"
-                        role="button"
-                        aria-label="Add to Calendar"
-                    >
-                        Add To Calendar
-                    </Button>
-                    <Button
-                        variant="contained"
-                        color="secondary"
-                        role="button"
-                        aria-label="View Detail"
-                        className="viewDetail"
-                    >
-                        View Detail
-                    </Button>
-                </CardActions>
             </CardContent>
+            <CardActions className="actionWrap">
+                <Button
+                    href={`http://www.google.com/calendar/render?${encodeDataToURL(
+                        calendarParam
+                    )}`}
+                    target="_blank"
+                    rel="nofollow"
+                    color="secondary"
+                    role="button"
+                    aria-label="Add to Calendar"
+                >
+                    Add To Calendar
+                </Button>
+                <Button
+                    variant="contained"
+                    color="secondary"
+                    role="button"
+                    aria-label="View Detail"
+                    className="viewDetail"
+                    onClick={() => openView()}
+                >
+                    View Detail
+                </Button>
+            </CardActions>
         </Card>
     );
 };
@@ -207,12 +256,12 @@ const EventCard = ({ content, isDashboardView, isAdmin }) => {
  */
 EventCard.propTypes = {
     content: shape({
-        image: string,
+        img: string,
         title: string,
-        location: string,
-        about: string,
-        fromDate: date,
-        toDate: date
+        venue: string,
+        desc: string,
+        fromDateTime: date,
+        toDateTime: date
     }),
     isDashboardView: bool,
     isAdmin: bool

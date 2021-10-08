@@ -1,0 +1,91 @@
+.user {
+    padding: 0 30px;
+    .profileWrap {
+        display: flex;
+        padding: 40px 0px;
+        flex-direction: column;
+        width: 800px;
+        margin: 0 auto;
+        .avatarWrap {
+            display: flex;
+            flex-direction: row;
+            align-items: flex-start;
+            justify-content: space-between;
+            .picture {
+                margin: 20px;
+                text-align: center;
+                min-width: 350px;
+                .avatar {
+                    height: 125px;
+                    width: 125px;
+                    display: flex;
+                    border-radius: 50%;
+                    margin: 0 auto;
+                    > span {
+                        font-size: 60px;
+                    }
+                }
+                .avatarUpdate {
+                    padding: 6px 30px;
+                    border-radius: 5px;
+                    margin-top: 14px !important;
+                }
+            }
+            .societyDetails {
+                min-width: 350px;
+                .infoWrap {
+                    .single {
+                        display: flex;
+                        margin: 20px 0px;
+                        flex-direction: column;
+                        .title {
+                            margin-right: 15px;
+                            color: var(--primary-color);
+                            min-width: 95px;
+                        }
+                        .value {
+                            margin-top: 15px;
+                            color: var(--secondary-color);
+                        }
+                    }
+                }
+            }
+        }
+    }
+    .otherDetails {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        .infoWrap {
+            .single {
+                display: flex;
+                margin: 20px 20px;
+                flex-direction: column;
+                .title {
+                    margin-right: 15px;
+                    color: var(--primary-color);
+                    min-width: 95px;
+                }
+                .value {
+                    margin-top: 15px;
+                    color: var(--secondary-color);
+                }
+                input {
+                    width: 350px;
+                }
+                .genderGroup {
+                    input {
+                        width: auto;
+                    }
+                }
+            }
+            &.second {
+                margin-top: 29px;
+            }
+        }
+    }
+    .actionWrap {
+        margin-top: 30px;
+        text-align: center;
+    }
+}

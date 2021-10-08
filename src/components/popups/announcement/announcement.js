@@ -1,19 +1,58 @@
 import React, { useContext } from "react";
-import { FormControl, TextField, Button } from "../../../shared";
+import {
+    FormControl,
+    TextField,
+    Button,
+    SpinnerLoader,
+    Typography
+} from "../../../shared";
 import {
     InputVarientContext,
     ButtonVarientContext
 } from "../../../contexts/variant.context";
 import { useFormGroup } from "../../../hooks";
+import { useDispatch, useSelector } from "react-redux";
+import { saveAnnouncement } from "../../../store/dispatchers/announcement.dispatch";
+import { Validator } from "../../../utils";
+import { loggedInUserSocietyDetails } from "../../../store/selectors/authetication.selector";
+import { isAnnouncementSaving } from "../../../store/selectors/announcement.selector";
+import { modalType } from "../../../store/selectors/modal.selector";
 import "./announcement.scss";
+import { ModalTypes } from "../../../modals/constant";
 export default function AnnocumentPopup({ item }) {
+    const dispatch = useDispatch();
     const inputVarient = useContext(InputVarientContext);
     const buttonVarient = useContext(ButtonVarientContext);
+    const societyDetails = useSelector(loggedInUserSocietyDetails);
+    const savingAnnouncement = useSelector(isAnnouncementSaving);
+    const modal = useSelector(modalType);
+    const viewOnly = modal === ModalTypes.announcement;
 
     const [annoucementForm, updateAnnouncementForm] = useFormGroup({
-        title: item?.title ?? "",
-        description: item?.description ?? ""
+        title: {
+            value: item?.title ?? "",
+            validation: {
+                required: true,
+                msgs: {
+                    required: "title required"
+                }
+            }
+        },
+        desc: {
+            value: item?.desc ?? "",
+            validation: {
+                required: true,
+                minLength: 50,
+
+                msgs: {
+                    required: "description required",
+                    minLength: "minlength should be 50"
+                }
+            }
+        },
+        _id: { value: item?._id ?? 0 }
     });
+    const isAnnouncementValid = Validator.isFormValid(annoucementForm);
 
     const title = (
         <div className="title-input">
@@ -21,9 +60,12 @@ export default function AnnocumentPopup({ item }) {
                 <TextField
                     label="Title"
                     id="title"
-                    value={annoucementForm.title}
+                    required
+                    value={annoucementForm.title.value}
                     onChange={updateAnnouncementForm}
                     variant={inputVarient}
+                    helperText={annoucementForm.title.errorMessage}
+                    disabled={viewOnly}
                 ></TextField>
             </FormControl>
         </div>
@@ -34,31 +76,76 @@ export default function AnnocumentPopup({ item }) {
             <FormControl>
                 <TextField
                     label="Description"
-                    id="description"
+                    id="desc"
                     maxRows={4}
-                    minRows={4}
+                    minRows={8}
                     multiline
-                    value={annoucementForm.description}
+                    value={annoucementForm.desc.value}
                     onChange={updateAnnouncementForm}
                     variant={inputVarient}
+                    helperText={annoucementForm.desc.errorMessage}
+                    disabled={viewOnly}
+                    required
                 ></TextField>
             </FormControl>
         </div>
     );
 
+    const save = () => {
+        let payload = {
+            title: annoucementForm.title.value,
+            desc: annoucementForm.desc.value,
+            societyId: societyDetails._id
+        };
+
+        if (annoucementForm?._id?.value) {
+            payload = {
+                ...payload,
+                _id: annoucementForm._id.value
+            };
+        }
+
+        dispatch(saveAnnouncement(payload));
+    };
+
     const saveButton = (
         <div className="action-btn">
-            <Button variant={buttonVarient} color="primary">
+            <Button
+                variant={buttonVarient}
+                color="primary"
+                onClick={() => save()}
+                disabled={!isAnnouncementValid}
+            >
                 Save
             </Button>
         </div>
     );
 
-    return (
+    const viewOnlyDiv = (
+        <div className="annocement-modal-content">
+            {/* <div className="view-only-title">
+                <Typography variant="subtitle1" color="secondary">
+                    {annoucementForm.title.value}
+                </Typography>
+            </div> */}
+            <div className="view-only-description">
+                <Typography variant="subtitle2">
+                    {annoucementForm.desc.value}
+                </Typography>
+            </div>
+        </div>
+    );
+
+    const editableDiv = (
         <div className="annocement-modal-content">
             {title}
             {description}
-            {saveButton}
+            {!viewOnly ? saveButton : null}
         </div>
+    );
+    return (
+        <SpinnerLoader show={savingAnnouncement} fullScreen={true}>
+            {viewOnly ? viewOnlyDiv : editableDiv}
+        </SpinnerLoader>
     );
 }

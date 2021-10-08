@@ -13,7 +13,8 @@ import {
     Announcement,
     Event,
     Gallery,
-    Complain
+    Complain,
+    User
 } from "../../components/popups";
 import "./msModal.scss";
 import { ModalTypes } from "../../modals/constant";
@@ -59,6 +60,8 @@ export default function MsModal() {
                 return Complain;
             case ModalTypes.addGallery:
                 return Gallery;
+            case ModalTypes.addUser:
+                return User;
             default:
                 return null;
         }
@@ -66,7 +69,6 @@ export default function MsModal() {
 
     const ModalComponent = getModalComponent();
 
-    console.log(data);
     const preventBackDropClose = (event, reason) => {
         if (reason !== "backdropClick") {
             dispatch({ type: MODAL_ACTION.CLOSE_MODAL });
@@ -89,8 +91,8 @@ export default function MsModal() {
                         <CloseIcon onClick={() => closePopup()} />
                     </div>
                 </div>
-                <div>
-                    <ModalComponent item={data} />{" "}
+                <div className="modalBody">
+                    <ModalComponent item={data} />
                 </div>
             </div>
         </Modal>

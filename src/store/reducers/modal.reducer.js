@@ -3,7 +3,13 @@ import * as MODAL_ACTION from "../actions/modal.action";
 const initialState = {
     isOpened: false,
     type: null,
-    data: null
+    data: null,
+    modalHeader: null,
+
+    snackbar: {
+        show: false,
+        message: null
+    }
 };
 export default function modalReducer(state = initialState, action) {
     switch (action.type) {
@@ -12,7 +18,8 @@ export default function modalReducer(state = initialState, action) {
                 ...state,
                 isOpened: true,
                 type: action.payload.type,
-                data: action.payload.data
+                data: action.payload.data,
+                modalHeader: action.payload.modalHeader
             };
 
         case MODAL_ACTION.CLOSE_MODAL:
@@ -20,8 +27,31 @@ export default function modalReducer(state = initialState, action) {
                 ...state,
                 isOpened: false,
                 type: null,
-                data: null
+                data: null,
+                modalHeader: null
             };
+
+        case MODAL_ACTION.SHOW_TOASTER: {
+            return {
+                ...state,
+                snackbar: {
+                    show: true,
+                    message: action.payload?.message ?? "",
+                    type: action.payload?.type
+                }
+            };
+        }
+
+        case MODAL_ACTION.CLOSE_TOASTER: {
+            return {
+                ...state,
+                snackbar: {
+                    show: false,
+                    message: null,
+                    type: null
+                }
+            };
+        }
 
         default:
             return { ...state };

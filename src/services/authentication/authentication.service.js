@@ -1,11 +1,34 @@
-import { BaseService } from "../base.service";
-class Authentication extends BaseService {
-    loginUser() {
-        return this.http.get();
+import http from "../base.service";
+class Authentication {
+    loginUser(payload) {
+        return http.post("/auth/signin", payload);
     }
 
-    registerUser() {
-        return this.http.get();
+    registerUser(payload) {
+        return http.post("/auth/signup", payload);
+    }
+
+    getAllSocietities() {
+        return http.get("/get-all-society");
+    }
+
+    getAllGuests() {
+        return http.get("/get-guest-login");
+    }
+
+    getUserDetails(payload) {
+        return http.get("/user", { params: payload });
+    }
+    forgetPassword(payload) {
+        return http.post("/auth/forget-password", payload);
+    }
+
+    verifySociety(payload) {
+        return http.post("/auth/verify-society", payload);
+    }
+
+    resetPassword(payload) {
+        return http.post("/auth/reset-password", payload);
     }
 }
 

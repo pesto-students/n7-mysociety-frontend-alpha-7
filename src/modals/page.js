@@ -8,37 +8,70 @@ import { ReactComponent as ComplaintIcon } from "../assets/svgs/complaint.svg";
 import { ReactComponent as FAQIcon } from "../assets/svgs/faq.svg";
 
 export const links = [
-    { menu: "Dashboard", path: "/", component: Pages.Dashboard },
-    { menu: "Dashboard", path: "/dashboard", component: Pages.Dashboard },
+    { path: "/", component: Pages.Authentication, menu: "MySociety" },
+    { path: "/user", component: Pages.Authentication },
+    { path: "/user/:action", component: Pages.Authentication },
+    { path: "/verify/:action/:token", component: Pages.Verification },
+    { path: "/thankyou", component: Pages.ThankYou },
+    {
+        menu: "Dashboard",
+        path: "/dashboard",
+        component: Pages.Dashboard,
+        isProtected: true
+    },
     {
         menu: "Announcements",
         path: "/announcements",
-        component: Pages.Announcements
+        component: Pages.Announcements,
+        isProtected: true
     },
     {
         menu: "Events",
         path: "/events",
-        component: Pages.Events
+        component: Pages.Events,
+        isProtected: true
     },
     {
         menu: "Gallery",
         path: "/gallery",
-        component: Pages.Gallery
+        component: Pages.Gallery,
+        isProtected: true
     },
     {
         menu: "Complaints",
         path: "/complaints",
-        component: Pages.Complaints
+        component: Pages.Complaints,
+        isProtected: true
     },
     {
         menu: "FAQ",
         path: "/faq",
-        component: Pages.FAQ
+        component: Pages.FAQ,
+        isProtected: true
     },
     {
-        menu: "members",
-        path: "/members",
-        component: Pages.Members
+        menu: "Profile",
+        path: "/profile",
+        component: Pages.Profile,
+        isProtected: true
+    },
+    {
+        menu: "All Members",
+        path: "/all-members",
+        component: Pages.AllMembers,
+        isProtected: true
+    },
+    {
+        menu: "Society Profile",
+        path: "/society-profile",
+        component: Pages.SocietyProfile,
+        isProtected: true
+    },
+    {
+        menu: "Logout",
+        path: "/logout",
+        component: Pages.Logout,
+        isMenu: true
     }
 ];
 
@@ -70,7 +103,37 @@ export const menus = [
     },
     {
         name: "FAQ's",
-        path: "/FAQ",
+        path: "/faq",
         icon: <FAQIcon />
+    }
+];
+
+export const adminProfileMenus = [
+    {
+        menu: "Profile",
+        path: "/profile",
+        component: Pages.Profile,
+        isMenu: true
+    },
+    {
+        menu: "All Members",
+        path: "/all-members",
+        component: Pages.AllMembers,
+        isMenu: true
+    },
+    {
+        menu: "Society Profile",
+        path: "/society-profile",
+        component: Pages.SocietyProfile,
+        isMenu: true
+    }
+];
+
+export const memberProfileMenus = [
+    {
+        menu: "Profile",
+        path: "/profile",
+        component: Pages.Profile,
+        isMenu: true
     }
 ];

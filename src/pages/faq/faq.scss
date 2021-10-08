@@ -1,0 +1,57 @@
+.faqs {
+    @media only screen and (max-width: 768px) {
+        padding: 15px;
+    }
+    .MuiAccordionSummary-root,
+    .MuiAccordionSummary-root,
+    .MuiAccordionSummary-content,
+    .MuiAccordionSummary-content {
+        padding: 0 !important;
+        margin: 0 !important;
+        display: block;
+    }
+    .MuiAccordionSummary-root.Mui-expanded {
+        min-height: auto;
+    }
+
+    .faq-item {
+        margin: 10px 0;
+        border-radius: 15px;
+        margin-bottom: 31px;
+        &.Mui-expanded {
+            .faq-header {
+                border-radius: 15px 15px 0px 0px;
+            }
+        }
+        &.MuiAccordion-root:before {
+            content: none !important;
+        }
+        .faq-header {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            background: var(--background-color);
+            justify-content: space-around;
+            border-radius: 15px;
+            & div {
+                &:first-of-type {
+                    padding-left: 30px;
+                    width: 90%;
+                    @media screen and (max-width: 768px) {
+                        padding: 15px;
+                    }
+                }
+
+                button {
+                    svg {
+                        color: var(--primary-color);
+                    }
+                }
+            }
+        }
+
+        .MuiAccordionDetails-root {
+            padding: 30px;
+        }
+    }
+}
