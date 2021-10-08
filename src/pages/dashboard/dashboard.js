@@ -198,7 +198,7 @@ const Dashboard = () => {
     );
 
     const newMembers = (
-        <div className="newMembers">
+        <div className="newMembers dashboard">
             <div>
                 {getHeaderTitle("New Member Requests", listOfUsers.totalDocs)}
             </div>
