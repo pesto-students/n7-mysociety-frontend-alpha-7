@@ -58,10 +58,15 @@ export class Validator {
                     case "required":
                         if (validations[key] && !Validator.required(value)) {
                             obj[key] = false;
+                        } else {
+                            console.log(key, validations[key]);
                         }
                         break;
                     case "pattern":
-                        if (!Validator.pattern(value, validations[key])) {
+                        if (
+                            value &&
+                            !Validator.pattern(value, validations[key])
+                        ) {
                             obj[key] = false;
                         }
                         break;

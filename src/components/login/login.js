@@ -65,7 +65,7 @@ export default function Login() {
         }
     });
     const loggingInUser = useSelector(isUserLogging);
-
+    console.log(loggingInUser);
     useEffect(() => {
         dispatch(getAllGuests());
     }, []);

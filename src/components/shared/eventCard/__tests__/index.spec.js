@@ -103,13 +103,5 @@ describe("Dashboard view", () => {
             expect(error).toBeInstanceOf(Error);
             expect(error.message).toContain("Unable to find an element");
         }
-
-        // try {
-        //     // if the element is found, the following expect will fail the test
-        //     expect(getByTestId("event_description")).not.toBeVisible();
-        // } catch (error) {
-        //     // otherwise, the expect will throw, and the following expect will pass the test
-        //     expect(true).toBeTruthy();
-        // }
     });
 });

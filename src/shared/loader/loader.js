@@ -1,22 +1,21 @@
 import React from "react";
 import { CircularProgress } from "../../shared";
 import "./loader.scss";
-export default function SpinnerLoader({ show, children, fullScreen }) {
+export default function SpinnerLoader({ show, children, fullScreen, partial }) {
     const fullScreenStyle = {
         position: "fixed",
         left: 0,
         right: 0,
-        zIndex: 10000
+        zIndex: 10000,
+        background: "rgba(0, 0, 0, 0.6)"
     };
     const loader = (
-        <div className="loader-container">
-            <div
-                className="backdrop"
-                key="loader"
-                style={fullScreen ? fullScreenStyle : { position: "relative" }}
-            >
-                <CircularProgress />
-            </div>
+        <div
+            className="loader-container backdrop"
+            key="loader"
+            style={fullScreen ? fullScreenStyle : { position: "relative" }}
+        >
+            <CircularProgress />
         </div>
     );
 
@@ -25,9 +24,22 @@ export default function SpinnerLoader({ show, children, fullScreen }) {
         <React.Fragment key="childrens">{children}</React.Fragment>
     ];
 
+    const partialLoader = (
+        <div className="loader-container backdrop" key="loader">
+            <CircularProgress style={{ position: "fixed" }} />
+            {children}
+        </div>
+    );
+
     return (
         <React.Fragment>
-            {show ? (fullScreen ? childrenWithLoader : loader) : children}
+            {show
+                ? partial
+                    ? partialLoader
+                    : fullScreen
+                    ? childrenWithLoader
+                    : loader
+                : children}
         </React.Fragment>
     );
 }

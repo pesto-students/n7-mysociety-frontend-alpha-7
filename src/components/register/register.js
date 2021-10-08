@@ -132,7 +132,10 @@ function Register() {
                 {
                     id: "mobile",
                     validation: {
-                        required: false
+                        required: false,
+                        msgs: {
+                            required: "Mobile is requred"
+                        }
                     }
                 },
                 {
@@ -517,11 +520,6 @@ function Register() {
 
     const tabs = (
         <div className="tab-bar">
-            <div>
-                <Typography varient="h5" color="secondary">
-                    Who are you?
-                </Typography>
-            </div>
             <Tabs value={currentTab} onChange={(e, v) => handleTabChange(e, v)}>
                 <Tab index={0} label="Admin" />
                 <Tab index={1} label="Member" />
