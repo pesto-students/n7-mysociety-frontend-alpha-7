@@ -1,7 +1,7 @@
 ### MySociety Frondend
 
 ![Author](https://img.shields.io/badge/Author-N7ALPHA-orange?style=for-the-badge&logo=appveyor)
-![GitHub repo size](https://img.shields.io/badge/REPO%20SIZE-7.42MB-orange?style=for-the-badge&logo=appveyor)
+![GitHub repo size](https://img.shields.io/badge/REPO%20SIZE-162MB-orange?style=for-the-badge&logo=appveyor)
 ![Contributors](https://img.shields.io/badge/Contributors-3-orange?style=for-the-badge&logo=appveyor)
 ![Forks](https://img.shields.io/badge/FORKS-0-orange?style=for-the-badge&logo=appveyor)
 ![Stargazers](https://img.shields.io/badge/STARS-0-orange?style=for-the-badge&logo=appveyor)
@@ -21,9 +21,11 @@
 
 ## Introduction
 
--Live demo [_here_](https://mysocietyclient.netlify.app).
+My society web application enables society users to be in sync for all day-to-day activities towards society, such as Announcements, Events, complaints, etc in addition to other features such as FAQs, galleries of past festivals, and events held in society.
 
 Frontend and Backend are hosted on Netlify.
+
+-Live demo [_here_](https://mysocietyclient.netlify.app).
 
 ## Technologies
 
