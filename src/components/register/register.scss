@@ -53,8 +53,18 @@
             }
             .contact-details,
             .personal-details {
-                @media only screen and (min-width: 768px) {
-                    padding: 0 15px;
+                > .first-name,
+                > .last-name,
+                > .mobile-input,
+                > .flat-input {
+                    > .MuiFormControl-root {
+                        width: 90%;
+                    }
+                }
+                > .last-name,
+                > .flat-input {
+                    display: flex;
+                    justify-content: flex-end;
                 }
             }
             .register-footer {
