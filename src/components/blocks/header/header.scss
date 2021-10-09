@@ -84,7 +84,11 @@
 .mobile-header {
     .MuiAppBar-root {
         background-color: var(--body-background-color);
-
+        .MuiToolbar-root {
+            display: flex;
+            position: relative;
+            align-items: flex-start;
+        }
         .societyWrap {
             height: 50px;
             min-height: 50px;
