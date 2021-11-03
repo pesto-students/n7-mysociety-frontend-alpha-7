@@ -1,7 +1,7 @@
-### MySociety Frondend
+### MySociety Frontend
 
 ![Author](https://img.shields.io/badge/Author-N7ALPHA-orange?style=for-the-badge&logo=appveyor)
-![GitHub repo size](https://img.shields.io/badge/REPO%20SIZE-162MB-orange?style=for-the-badge&logo=appveyor)
+![GitHub repo size](https://img.shields.io/badge/REPO%20SIZE-16.2MB-orange?style=for-the-badge&logo=appveyor)
 ![Contributors](https://img.shields.io/badge/Contributors-3-orange?style=for-the-badge&logo=appveyor)
 ![Forks](https://img.shields.io/badge/FORKS-0-orange?style=for-the-badge&logo=appveyor)
 ![Stargazers](https://img.shields.io/badge/STARS-0-orange?style=for-the-badge&logo=appveyor)
